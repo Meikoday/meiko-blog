@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
+    <url>/cn/0000011b-okay/</url>
+    <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
+<p>许多小伙伴在使用电脑的时候，经常会连接打印机使用，但是不少用户最近连接共享打印机后提示“windows无法连接到打印机0x0000011b”错误。其实这是微软最新更新的补丁为用户带来打印机漏洞问题。小编为大家带来了最新的解决方法，有需要的赶快来看看吧。</p>
+<p><img src="/img/baocuotupian.webp" alt="报错提示"></p>
+<h2 id="替换系统文件并修改注册表-已经集成为小工具"><a href="#替换系统文件并修改注册表-已经集成为小工具" class="headerlink" title="替换系统文件并修改注册表(已经集成为小工具)"></a>替换系统文件并修改注册表(已经集成为小工具)</h2><p>使用大神制作的Fix Print Spooler工具，一键替换系统文件，并且修改注册表，无需卸载更新补丁，直接可以使用。<strong>请在共享的主机上使用此软件</strong>。</p>
+<p><img src="/img/xiufu.webp" alt="修复完成"></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://wwid.lanzouw.com/iCcBp2io330b">云高速下载地址</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>打印机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Alpine Linux 更改时区</title>
     <url>/cn/Alpine-Linux-set-time/</url>
     <content><![CDATA[<p><strong>检查当前时区</strong> </p>
@@ -69,23 +86,6 @@
       </categories>
       <tags>
         <tag>CVE-2022-2068</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
-    <url>/cn/0000011b-okay/</url>
-    <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
-<p>许多小伙伴在使用电脑的时候，经常会连接打印机使用，但是不少用户最近连接共享打印机后提示“windows无法连接到打印机0x0000011b”错误。其实这是微软最新更新的补丁为用户带来打印机漏洞问题。小编为大家带来了最新的解决方法，有需要的赶快来看看吧。</p>
-<p><img src="/img/baocuotupian.webp" alt="报错提示"></p>
-<h2 id="替换系统文件并修改注册表-已经集成为小工具"><a href="#替换系统文件并修改注册表-已经集成为小工具" class="headerlink" title="替换系统文件并修改注册表(已经集成为小工具)"></a>替换系统文件并修改注册表(已经集成为小工具)</h2><p>使用大神制作的Fix Print Spooler工具，一键替换系统文件，并且修改注册表，无需卸载更新补丁，直接可以使用。<strong>请在共享的主机上使用此软件</strong>。</p>
-<p><img src="/img/xiufu.webp" alt="修复完成"></p>
-<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://wwid.lanzouw.com/iCcBp2io330b">云高速下载地址</a></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>打印机</tag>
       </tags>
   </entry>
   <entry>
@@ -285,6 +285,54 @@
       </tags>
   </entry>
   <entry>
+    <title>自建fpr服务器</title>
+    <url>/cn/fpr-server/</url>
+    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
+
+<p>一键卸载frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后,配置frps.ini并重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
+
+<p>配置参考</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
+
+<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>修改frpc.ini配置程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
+
+<p>启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
+
+<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
+
+<p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>添加以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
+
+<p>保存并重启</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>fpr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>centos一键安装Docker和Docker-Compose</title>
     <url>/cn/centos-setup-Docker-Docker-Compose/</url>
     <content><![CDATA[<p>centos一键安装docker脚本</p>
@@ -432,54 +480,6 @@
       </categories>
       <tags>
         <tag>ipv6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自建fpr服务器</title>
-    <url>/cn/fpr-server/</url>
-    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
-
-<p>一键卸载frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后,配置frps.ini并重启服务</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
-
-<p>配置参考</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
-
-<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>修改frpc.ini配置程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
-
-<p>启动客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
-
-<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
-
-<p>添加可执行权限</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>添加以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
-
-<p>保存并重启</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>fpr</tag>
       </tags>
   </entry>
   <entry>
