@@ -228,8 +228,8 @@ btf.addGlobalFn('pjaxComplete', () => {
   const loadDisqusjs = async(el, path) => {
     if (window.disqusJsLoad) initDisqusjs(el, path)
     else {
-      await btf.getCSS('/pluginsSrc/disqusjs/dist/browser/styles/disqusjs.css')
-      await btf.getScript('/pluginsSrc/disqusjs/dist/browser/disqusjs.es2015.umd.min.js')
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqusjs.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3/dist/disqus.js')
       initDisqusjs(el, path)
       window.disqusJsLoad = true
     }
