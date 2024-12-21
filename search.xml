@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
+    <url>/cn/0000011b-okay/</url>
+    <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
+<p>许多小伙伴在使用电脑的时候，经常会连接打印机使用，但是不少用户最近连接共享打印机后提示“windows无法连接到打印机0x0000011b”错误。其实这是微软最新更新的补丁为用户带来打印机漏洞问题。小编为大家带来了最新的解决方法，有需要的赶快来看看吧。</p>
+<p><img src="/img/baocuotupian.webp" alt="报错提示"></p>
+<h2 id="替换系统文件并修改注册表-已经集成为小工具"><a href="#替换系统文件并修改注册表-已经集成为小工具" class="headerlink" title="替换系统文件并修改注册表(已经集成为小工具)"></a>替换系统文件并修改注册表(已经集成为小工具)</h2><p>使用大神制作的Fix Print Spooler工具，一键替换系统文件，并且修改注册表，无需卸载更新补丁，直接可以使用。<strong>请在共享的主机上使用此软件</strong>。</p>
+<p><img src="/img/xiufu.webp" alt="修复完成"></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://wwid.lanzouw.com/iCcBp2io330b">云高速下载地址</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>打印机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Alpine Linux 更改时区</title>
     <url>/cn/Alpine-Linux-set-time/</url>
     <content><![CDATA[<p><strong>检查当前时区</strong> </p>
@@ -42,23 +59,6 @@
       </categories>
       <tags>
         <tag>Alpine</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
-    <url>/cn/0000011b-okay/</url>
-    <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
-<p>许多小伙伴在使用电脑的时候，经常会连接打印机使用，但是不少用户最近连接共享打印机后提示“windows无法连接到打印机0x0000011b”错误。其实这是微软最新更新的补丁为用户带来打印机漏洞问题。小编为大家带来了最新的解决方法，有需要的赶快来看看吧。</p>
-<p><img src="/img/baocuotupian.webp" alt="报错提示"></p>
-<h2 id="替换系统文件并修改注册表-已经集成为小工具"><a href="#替换系统文件并修改注册表-已经集成为小工具" class="headerlink" title="替换系统文件并修改注册表(已经集成为小工具)"></a>替换系统文件并修改注册表(已经集成为小工具)</h2><p>使用大神制作的Fix Print Spooler工具，一键替换系统文件，并且修改注册表，无需卸载更新补丁，直接可以使用。<strong>请在共享的主机上使用此软件</strong>。</p>
-<p><img src="/img/xiufu.webp" alt="修复完成"></p>
-<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://wwid.lanzouw.com/iCcBp2io330b">云高速下载地址</a></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>打印机</tag>
       </tags>
   </entry>
   <entry>
@@ -119,57 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS安装Node.js</title>
-    <url>/cn/CentOS-setup-Node.js/</url>
-    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
-
-<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3.解压源码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4.进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
-
-<p>5.配置脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
-
-<p>6.编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
-<p>7.部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>8.安装完成测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
-
-<p>则安装完成</p>
-<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>启用 devtoolset-10</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
-
-<p>验证 g++ 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
-
-<p>输出g++10.0则成功</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kali Uniscan-使用教程</title>
     <url>/cn/Kali-Uniscan-jichu/</url>
     <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
@@ -221,6 +170,57 @@
       </categories>
       <tags>
         <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装Node.js</title>
+    <url>/cn/CentOS-setup-Node.js/</url>
+    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3.解压源码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4.进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
+
+<p>5.配置脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>6.编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
+<p>7.部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>8.安装完成测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>则安装完成</p>
+<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>启用 devtoolset-10</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
+
+<p>验证 g++ 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
+
+<p>输出g++10.0则成功</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
@@ -359,6 +359,39 @@
       </tags>
   </entry>
   <entry>
+    <title>自建KMS激活服务器</title>
+    <url>/cn/kms-server/</url>
+    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
+<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
+
+<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
+
+<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kms</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</title>
     <url>/cn/pve-set-desk/</url>
     <content><![CDATA[<p>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</p>
@@ -393,39 +426,6 @@
       </categories>
       <tags>
         <tag>pve</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自建KMS激活服务器</title>
-    <url>/cn/kms-server/</url>
-    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
-<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
-
-<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
-
-<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>kms</tag>
       </tags>
   </entry>
   <entry>
