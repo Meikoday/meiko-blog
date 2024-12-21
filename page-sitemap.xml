@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://192.168.64.129/</loc>
+        <loc>https://www.meiko.ink/</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
@@ -10,7 +10,7 @@
     
     
     <url>
-        <loc>http://192.168.64.129/about/</loc>
+        <loc>https://www.meiko.ink/about/</loc>
         <lastmod>2024-12-21T11:39:48.102Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -19,7 +19,7 @@
     
     
     <url>
-        <loc>http://192.168.64.129/tags/</loc>
+        <loc>https://www.meiko.ink/tags/</loc>
         <lastmod>2024-12-21T07:23:35.537Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -28,7 +28,7 @@
     
     
     <url>
-        <loc>http://192.168.64.129/categories/</loc>
+        <loc>https://www.meiko.ink/categories/</loc>
         <lastmod>2024-12-21T06:47:17.969Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

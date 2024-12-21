@@ -3,12 +3,12 @@
 
 
     <sitemap>
-        <loc>http://192.168.64.129/post-sitemap.xml</loc>
+        <loc>https://www.meiko.ink/post-sitemap.xml</loc>
         <lastmod>2024-12-21T11:37:26.720Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://192.168.64.129/page-sitemap.xml</loc>
+        <loc>https://www.meiko.ink/page-sitemap.xml</loc>
         <lastmod>2024-12-21T11:39:48.102Z</lastmod>
     </sitemap>
 

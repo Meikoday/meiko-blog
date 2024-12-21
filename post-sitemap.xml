@@ -2,14 +2,14 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://192.168.64.129/</loc>
+        <loc>https://www.meiko.ink/</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
 
     <url>
-        <loc>http://192.168.64.129/cn/CentOS7-repo-new/</loc>
+        <loc>https://www.meiko.ink/cn/CentOS7-repo-new/</loc>
         <lastmod>2024-12-21T11:37:26.720Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -17,7 +17,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/centos-setup-python3x/</loc>
+        <loc>https://www.meiko.ink/cn/centos-setup-python3x/</loc>
         <lastmod>2024-12-21T11:36:20.125Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -25,7 +25,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/docker-socks5-authentication/</loc>
+        <loc>https://www.meiko.ink/cn/docker-socks5-authentication/</loc>
         <lastmod>2024-12-21T11:34:58.554Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -33,7 +33,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/android-https-data/</loc>
+        <loc>https://www.meiko.ink/cn/android-https-data/</loc>
         <lastmod>2024-12-21T11:32:59.931Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -41,7 +41,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/python-to-SOCKS5-for-local-HTTP/</loc>
+        <loc>https://www.meiko.ink/cn/python-to-SOCKS5-for-local-HTTP/</loc>
         <lastmod>2024-12-21T11:31:43.728Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -49,7 +49,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/CentOS-setup-Node.js/</loc>
+        <loc>https://www.meiko.ink/cn/CentOS-setup-Node.js/</loc>
         <lastmod>2024-12-21T11:28:24.021Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -57,7 +57,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/add-ipv6-address/</loc>
+        <loc>https://www.meiko.ink/cn/add-ipv6-address/</loc>
         <lastmod>2024-12-21T11:26:51.277Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -65,7 +65,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/pve-error-disk-partition-500/</loc>
+        <loc>https://www.meiko.ink/cn/pve-error-disk-partition-500/</loc>
         <lastmod>2024-12-21T11:23:18.418Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -73,7 +73,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/pve-set-desk/</loc>
+        <loc>https://www.meiko.ink/cn/pve-set-desk/</loc>
         <lastmod>2024-12-21T11:23:01.849Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -81,7 +81,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/Alpine-Linux-set-time/</loc>
+        <loc>https://www.meiko.ink/cn/Alpine-Linux-set-time/</loc>
         <lastmod>2024-12-21T11:22:10.888Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -89,7 +89,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/CVE-2022-2068-OpenSSL/</loc>
+        <loc>https://www.meiko.ink/cn/CVE-2022-2068-OpenSSL/</loc>
         <lastmod>2024-12-21T11:08:07.324Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -97,7 +97,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/centos-setup-Docker-Docker-Compose/</loc>
+        <loc>https://www.meiko.ink/cn/centos-setup-Docker-Docker-Compose/</loc>
         <lastmod>2024-12-21T11:06:41.849Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -105,7 +105,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/Docker-OpenVPN-server/</loc>
+        <loc>https://www.meiko.ink/cn/Docker-OpenVPN-server/</loc>
         <lastmod>2024-12-21T11:04:05.226Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -113,7 +113,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/Kali-Uniscan-jichu/</loc>
+        <loc>https://www.meiko.ink/cn/Kali-Uniscan-jichu/</loc>
         <lastmod>2024-12-21T11:03:02.464Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -121,7 +121,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/Ubuntu-Docker-Docker-Compose/</loc>
+        <loc>https://www.meiko.ink/cn/Ubuntu-Docker-Docker-Compose/</loc>
         <lastmod>2024-12-21T10:59:43.502Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -129,7 +129,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/0000011b-okay/</loc>
+        <loc>https://www.meiko.ink/cn/0000011b-okay/</loc>
         <lastmod>2024-12-21T10:18:35.232Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -137,7 +137,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/kms-server/</loc>
+        <loc>https://www.meiko.ink/cn/kms-server/</loc>
         <lastmod>2024-12-21T10:18:35.099Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -145,7 +145,7 @@
     </url>
 
     <url>
-        <loc>http://192.168.64.129/cn/fpr-server/</loc>
+        <loc>https://www.meiko.ink/cn/fpr-server/</loc>
         <lastmod>2024-12-21T10:18:34.967Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
