@@ -119,6 +119,57 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOS安装Node.js</title>
+    <url>/cn/CentOS-setup-Node.js/</url>
+    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3.解压源码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4.进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
+
+<p>5.配置脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>6.编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
+<p>7.部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>8.安装完成测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>则安装完成</p>
+<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>启用 devtoolset-10</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
+
+<p>验证 g++ 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
+
+<p>输出g++10.0则成功</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kali Uniscan-使用教程</title>
     <url>/cn/Kali-Uniscan-jichu/</url>
     <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
@@ -234,57 +285,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS安装Node.js</title>
-    <url>/cn/CentOS-setup-Node.js/</url>
-    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
-
-<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3.解压源码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4.进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
-
-<p>5.配置脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
-
-<p>6.编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
-<p>7.部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>8.安装完成测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
-
-<p>则安装完成</p>
-<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>启用 devtoolset-10</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
-
-<p>验证 g++ 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
-
-<p>输出g++10.0则成功</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>centos一键安装Docker和Docker-Compose</title>
     <url>/cn/centos-setup-Docker-Docker-Compose/</url>
     <content><![CDATA[<p>centos一键安装docker脚本</p>
@@ -381,148 +381,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Docker 部署 Socks5 加密代理服务器</title>
-    <url>/cn/docker-socks5-authentication/</url>
-    <content><![CDATA[<h2 id="使用-Docker-部署-Socks5-加密代理服务器"><a href="#使用-Docker-部署-Socks5-加密代理服务器" class="headerlink" title="使用 Docker 部署 Socks5 加密代理服务器"></a>使用 Docker 部署 Socks5 加密代理服务器</h2><p>在现代网络中，代理服务器的使用越来越普遍，特别是对于需要跨网络访问的用户。本文将介绍如何使用 Docker 部署一个简单的 Socks5 代理服务器。我们将使用 <code>xkuma/socks5</code> 这个 Docker 镜像。</p>
-<h4 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h4><p>在开始之前，请确保你的系统已经安装了以下软件：</p>
-<ul>
-<li>Docker</li>
-<li>Docker Compose (可选)</li>
-</ul>
-<h4 id="第一步：拉取-Docker-镜像"><a href="#第一步：拉取-Docker-镜像" class="headerlink" title="第一步：拉取 Docker 镜像"></a>第一步：拉取 Docker 镜像</h4><p>首先，我们需要拉取 <code>xkuma/socks5</code> 镜像。在终端中运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull xkuma/socks5</span><br></pre></td></tr></table></figure>
-
-<h4 id="第二步：运行-Docker-容器"><a href="#第二步：运行-Docker-容器" class="headerlink" title="第二步：运行 Docker 容器"></a>第二步：运行 Docker 容器</h4><p>接下来，我们使用以下命令启动一个 Docker 容器：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 你选择的端口:1080 -e PROXY_USER=你的用户名 -e PROXY_PASSWORD=你的密码 -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
-
-<p>让我们详细解释一下这个命令：</p>
-<ul>
-<li><code>docker run -d</code>: 以分离模式运行 Docker 容器。</li>
-<li><code>-p 你选择的端口:1080</code>: 将容器的 1080 端口映射到主机的端口。你可以选择任何未被占用的端口。</li>
-<li><code>-e PROXY_USER=你的用户名</code>: 设置代理服务器的用户名。</li>
-<li><code>-e PROXY_PASSWORD=你的密码</code>: 设置代理服务器的密码。</li>
-<li><code>-e PROXY_SERVER=0.0.0.0:1080</code>: 指定代理服务器地址和端口，这里默认使用 0.0.0.0 和 1080 端口。</li>
-<li><code>xkuma/socks5</code>: 使用的 Docker 镜像名称。</li>
-</ul>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>假设我们希望在主机的 2080 端口运行代理服务器，用户名为 <code>myuser</code>，密码为 <code>mypassword</code>，可以使用以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 2080:1080 -e PROXY_USER=myuser -e PROXY_PASSWORD=mypassword -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
-
-<h4 id="第三步：验证代理服务器"><a href="#第三步：验证代理服务器" class="headerlink" title="第三步：验证代理服务器"></a>第三步：验证代理服务器</h4><p>运行容器后，你可以通过配置浏览器或者其他应用的 Socks5 代理设置，验证代理服务器是否工作正常。代理地址为 <code>localhost</code>，端口为你在 <code>docker run</code> 命令中指定的端口（本例中为 2080）。</p>
-<h4 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h4><ul>
-<li><strong>端口被占用</strong>：如果出现端口被占用的错误，请选择一个未被占用的端口。</li>
-<li><strong>无法连接到代理</strong>：确保防火墙没有阻止相应端口的流量。</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过以上步骤，已经成功地使用 Docker 部署了一个 Socks5 代理服务器。这个方法简单高效，适用于需要快速搭建代理服务的场景。</p>
-<p>如果你有任何问题或建议，请在下方留言，我们会尽快回复你。感谢阅读！</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
-<li><a href="https://docs.docker.com/">Docker 官方文档</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>socks5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自建fpr服务器</title>
-    <url>/cn/fpr-server/</url>
-    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
-
-<p>一键卸载frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后,配置frps.ini并重启服务</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
-
-<p>配置参考</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
-
-<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>修改frpc.ini配置程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
-
-<p>启动客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
-
-<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
-
-<p>添加可执行权限</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>添加以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
-
-<p>保存并重启</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>fpr</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Docker快速部署OpenVPN服务器</title>
-    <url>/cn/Docker-OpenVPN-server/</url>
-    <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
-<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
-
-<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-        <tag>OpenVPN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>为没有IPV6的服务器添加pv6教程</title>
     <url>/cn/add-ipv6-address/</url>
     <content><![CDATA[<p><em><strong>为没有IPV6的服务器添加pv6教程</strong></em></p>
@@ -577,6 +435,148 @@
       </tags>
   </entry>
   <entry>
+    <title>自建fpr服务器</title>
+    <url>/cn/fpr-server/</url>
+    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
+
+<p>一键卸载frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后,配置frps.ini并重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
+
+<p>配置参考</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
+
+<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>修改frpc.ini配置程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
+
+<p>启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
+
+<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
+
+<p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>添加以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
+
+<p>保存并重启</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>fpr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Docker 部署 Socks5 加密代理服务器</title>
+    <url>/cn/docker-socks5-authentication/</url>
+    <content><![CDATA[<h2 id="使用-Docker-部署-Socks5-加密代理服务器"><a href="#使用-Docker-部署-Socks5-加密代理服务器" class="headerlink" title="使用 Docker 部署 Socks5 加密代理服务器"></a>使用 Docker 部署 Socks5 加密代理服务器</h2><p>在现代网络中，代理服务器的使用越来越普遍，特别是对于需要跨网络访问的用户。本文将介绍如何使用 Docker 部署一个简单的 Socks5 代理服务器。我们将使用 <code>xkuma/socks5</code> 这个 Docker 镜像。</p>
+<h4 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h4><p>在开始之前，请确保你的系统已经安装了以下软件：</p>
+<ul>
+<li>Docker</li>
+<li>Docker Compose (可选)</li>
+</ul>
+<h4 id="第一步：拉取-Docker-镜像"><a href="#第一步：拉取-Docker-镜像" class="headerlink" title="第一步：拉取 Docker 镜像"></a>第一步：拉取 Docker 镜像</h4><p>首先，我们需要拉取 <code>xkuma/socks5</code> 镜像。在终端中运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：运行-Docker-容器"><a href="#第二步：运行-Docker-容器" class="headerlink" title="第二步：运行 Docker 容器"></a>第二步：运行 Docker 容器</h4><p>接下来，我们使用以下命令启动一个 Docker 容器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 你选择的端口:1080 -e PROXY_USER=你的用户名 -e PROXY_PASSWORD=你的密码 -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<p>让我们详细解释一下这个命令：</p>
+<ul>
+<li><code>docker run -d</code>: 以分离模式运行 Docker 容器。</li>
+<li><code>-p 你选择的端口:1080</code>: 将容器的 1080 端口映射到主机的端口。你可以选择任何未被占用的端口。</li>
+<li><code>-e PROXY_USER=你的用户名</code>: 设置代理服务器的用户名。</li>
+<li><code>-e PROXY_PASSWORD=你的密码</code>: 设置代理服务器的密码。</li>
+<li><code>-e PROXY_SERVER=0.0.0.0:1080</code>: 指定代理服务器地址和端口，这里默认使用 0.0.0.0 和 1080 端口。</li>
+<li><code>xkuma/socks5</code>: 使用的 Docker 镜像名称。</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>假设我们希望在主机的 2080 端口运行代理服务器，用户名为 <code>myuser</code>，密码为 <code>mypassword</code>，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 2080:1080 -e PROXY_USER=myuser -e PROXY_PASSWORD=mypassword -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步：验证代理服务器"><a href="#第三步：验证代理服务器" class="headerlink" title="第三步：验证代理服务器"></a>第三步：验证代理服务器</h4><p>运行容器后，你可以通过配置浏览器或者其他应用的 Socks5 代理设置，验证代理服务器是否工作正常。代理地址为 <code>localhost</code>，端口为你在 <code>docker run</code> 命令中指定的端口（本例中为 2080）。</p>
+<h4 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h4><ul>
+<li><strong>端口被占用</strong>：如果出现端口被占用的错误，请选择一个未被占用的端口。</li>
+<li><strong>无法连接到代理</strong>：确保防火墙没有阻止相应端口的流量。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过以上步骤，已经成功地使用 Docker 部署了一个 Socks5 代理服务器。这个方法简单高效，适用于需要快速搭建代理服务的场景。</p>
+<p>如果你有任何问题或建议，请在下方留言，我们会尽快回复你。感谢阅读！</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://docs.docker.com/">Docker 官方文档</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>socks5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Docker快速部署OpenVPN服务器</title>
+    <url>/cn/Docker-OpenVPN-server/</url>
+    <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
+<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
+
+<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>OpenVPN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</title>
     <url>/cn/python-to-SOCKS5-for-local-HTTP/</url>
     <content><![CDATA[<h1 id="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"><a href="#使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。" class="headerlink" title="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"></a>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</h1><p>为解决 <a href="https://chromewebstore.google.com/detail/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a> 无法连接带密码认证的 SOCKS5 服务器的问题，我们可以使用 Python 编写一个脚本来连接 SOCKS5 服务器，并在本地转发为 HTTP 服务器。</p>
@@ -614,6 +614,36 @@
       <tags>
         <tag>python</tag>
         <tag>SOCKS5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在CentOS上安装Python 3.x 的教程</title>
+    <url>/cn/centos-setup-python3x/</url>
+    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
+<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
+<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
+<p>可以更改 URL，下载其他版本的 Python，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
+<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
+<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
+<p>执行配置脚本，指定安装路径和其他选项：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
+<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -675,36 +705,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在CentOS上安装Python 3.x 的教程</title>
-    <url>/cn/centos-setup-python3x/</url>
-    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
-<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
-<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
-<p>可以更改 URL，下载其他版本的 Python，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
-<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
-<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
-<p>执行配置脚本，指定安装路径和其他选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
-<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
-<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
