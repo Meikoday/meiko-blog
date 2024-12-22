@@ -18,6 +18,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Alpine Linux 更改时区</title>
+    <url>/cn/Alpine-Linux-set-time/</url>
+    <content><![CDATA[<p><strong>检查当前时区</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 08:54:26 +0000</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置新的时区</strong> </p>
+<p>需要安装一个名为<strong>tzdata</strong>的依赖库，只需要它提供的时区配置文件。一旦安装完成，时区配置文件将被写入到 <code>/usr/share/zoneinfo</code> 路径下。一旦时区配置文件被写入，可以卸载tzdata依赖库，因为它不再需要。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk add tzdata</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看可用的时区</strong> </p>
+<p>可以使用以下命令来查看<strong>tzdata</strong>包含的可用时区列表：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls /usr/share/zoneinfo</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cssCopy codeAfrica        CET           Egypt         GMT+0         Iran          MST7MDT       Poland        UTC           zone.tab</span><br><span class="line">America       CST6CDT       Eire          GMT-0         Israel        Mexico        Portugal      Universal     zone1970.tab</span><br><span class="line">Antarctica    Canada        Etc           GMT0          Jamaica       NZ            ROC           W-SU</span><br><span class="line">Arctic        Chile         Europe        Greenwich     Japan         NZ-CHAT       ROK           WET</span><br><span class="line">Asia          Cuba          Factory       HST           Kwajalein     Navajo        Singapore     Zulu</span><br><span class="line">Atlantic      EET           GB            Hongkong      Libya         PRC           Turkey        iso3166.tab</span><br><span class="line">Australia     EST           GB-Eire       Iceland       MET           PST8PDT       UCT           posixrules</span><br><span class="line">Brazil        EST5EDT       GMT           Indian        MST           Pacific       US            right</span><br></pre></td></tr></table></figure>
+
+<p><strong>复制所需时区文件</strong> </p>
+<p>如果 <code>/etc/localtime</code> 文件已经存在，建议先备份后再删除原文件。然后将新的时区文件复制到 <code>/etc/localtime</code>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<p><strong>指定新的时区</strong> </p>
+<p>要指定新的时区，将所需的时区名称写入 <code>/etc/timezone</code> 文件中，例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt;  /etc/timezone</span><br></pre></td></tr></table></figure>
+
+<p><strong>再次检查时区设置</strong> 运行以下命令以确保时区已成功更改：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 16:54:47 +0800</span><br></pre></td></tr></table></figure>
+
+<p><strong>卸载tzdata依赖</strong> </p>
+<p>一旦时区配置文件已经被写入 <code>/usr/share/zoneinfo</code>，就可以卸载<strong>tzdata</strong>依赖库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk del tzdata</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Alpine</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
     <url>/cn/CVE-2022-2068-OpenSSL/</url>
     <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
@@ -75,50 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Alpine Linux 更改时区</title>
-    <url>/cn/Alpine-Linux-set-time/</url>
-    <content><![CDATA[<p><strong>检查当前时区</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
-
-<p>输出示例：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 08:54:26 +0000</span><br></pre></td></tr></table></figure>
-
-<p><strong>设置新的时区</strong> </p>
-<p>需要安装一个名为<strong>tzdata</strong>的依赖库，只需要它提供的时区配置文件。一旦安装完成，时区配置文件将被写入到 <code>/usr/share/zoneinfo</code> 路径下。一旦时区配置文件被写入，可以卸载tzdata依赖库，因为它不再需要。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk add tzdata</span><br></pre></td></tr></table></figure>
-
-<p><strong>查看可用的时区</strong> </p>
-<p>可以使用以下命令来查看<strong>tzdata</strong>包含的可用时区列表：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls /usr/share/zoneinfo</span><br></pre></td></tr></table></figure>
-
-<p>输出示例：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cssCopy codeAfrica        CET           Egypt         GMT+0         Iran          MST7MDT       Poland        UTC           zone.tab</span><br><span class="line">America       CST6CDT       Eire          GMT-0         Israel        Mexico        Portugal      Universal     zone1970.tab</span><br><span class="line">Antarctica    Canada        Etc           GMT0          Jamaica       NZ            ROC           W-SU</span><br><span class="line">Arctic        Chile         Europe        Greenwich     Japan         NZ-CHAT       ROK           WET</span><br><span class="line">Asia          Cuba          Factory       HST           Kwajalein     Navajo        Singapore     Zulu</span><br><span class="line">Atlantic      EET           GB            Hongkong      Libya         PRC           Turkey        iso3166.tab</span><br><span class="line">Australia     EST           GB-Eire       Iceland       MET           PST8PDT       UCT           posixrules</span><br><span class="line">Brazil        EST5EDT       GMT           Indian        MST           Pacific       US            right</span><br></pre></td></tr></table></figure>
-
-<p><strong>复制所需时区文件</strong> </p>
-<p>如果 <code>/etc/localtime</code> 文件已经存在，建议先备份后再删除原文件。然后将新的时区文件复制到 <code>/etc/localtime</code>。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-
-<p><strong>指定新的时区</strong> </p>
-<p>要指定新的时区，将所需的时区名称写入 <code>/etc/timezone</code> 文件中，例如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt;  /etc/timezone</span><br></pre></td></tr></table></figure>
-
-<p><strong>再次检查时区设置</strong> 运行以下命令以确保时区已成功更改：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
-
-<p>输出示例：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 16:54:47 +0800</span><br></pre></td></tr></table></figure>
-
-<p><strong>卸载tzdata依赖</strong> </p>
-<p>一旦时区配置文件已经被写入 <code>/usr/share/zoneinfo</code>，就可以卸载<strong>tzdata</strong>依赖库：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk del tzdata</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>Alpine</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CentOS安装Node.js</title>
     <url>/cn/CentOS-setup-Node.js/</url>
     <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
@@ -167,6 +167,60 @@
       <tags>
         <tag>centos</tag>
         <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kali Uniscan-使用教程</title>
+    <url>/cn/Kali-Uniscan-jichu/</url>
+    <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
+<h2 id="安装-Uniscan"><a href="#安装-Uniscan" class="headerlink" title="安装 Uniscan"></a>安装 Uniscan</h2><p>Kali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：</p>
+<ol>
+<li><p>克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/poerschke/Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入 Uniscan 目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需的 Perl 模块：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">install Moose</span><br><span class="line">cpan install threads</span><br><span class="line">cpan install Thread::Queue</span><br><span class="line">cpan install LWP::UserAgent</span><br><span class="line">cpan install LWP::Protocol::https</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="使用-Uniscan-执行-Web-扫描"><a href="#使用-Uniscan-执行-Web-扫描" class="headerlink" title="使用 Uniscan 执行 Web 扫描"></a>使用 Uniscan 执行 Web 扫描</h2><p>以下是 Uniscan 的一些基本用法：</p>
+<ol>
+<li><p>显示帮助信息：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -h</span><br><span class="line">使用方法：uniscan [选项]</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  -u, --url &lt;url&gt;          目标 URL（例如：http://example.com/）</span><br><span class="line">  -h, --<span class="built_in">help</span>               显示帮助信息</span><br><span class="line">  -qd, --dir-scan          执行目录扫描</span><br><span class="line">  -qf, --file-scan         执行文件扫描</span><br><span class="line">  -qr, --rfi-scan          检查</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行目录扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qd</span><br></pre></td></tr></table></figure>
+
+<p><code>-u</code> 参数用于指定目标 URL，而 <code>-qd</code> 参数表示执行目录扫描。</p>
+</li>
+<li><p>执行文件扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qf</span><br></pre></td></tr></table></figure>
+
+<p><code>-qf</code> 参数表示执行文件扫描。</p>
+</li>
+<li><p>检查远程文件包含漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qr</span><br></pre></td></tr></table></figure>
+
+<p><code>-qr</code> 参数表示检查远程文件包含漏洞。</p>
+</li>
+<li><p>检查跨站脚本漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qx</span><br></pre></td></tr></table></figure>
+
+<p><code>-qx</code> 参数表示检查跨站脚本漏洞。</p>
+</li>
+<li><p>同时执行多种扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qdfrx</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将同时执行目录扫描、文件扫描、远程文件包含漏洞检查和跨站脚本漏洞检查。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kali</tag>
       </tags>
   </entry>
   <entry>
@@ -228,60 +282,6 @@
       <tags>
         <tag>Ubuntu</tag>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali Uniscan-使用教程</title>
-    <url>/cn/Kali-Uniscan-jichu/</url>
-    <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
-<h2 id="安装-Uniscan"><a href="#安装-Uniscan" class="headerlink" title="安装 Uniscan"></a>安装 Uniscan</h2><p>Kali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：</p>
-<ol>
-<li><p>克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/poerschke/Uniscan</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入 Uniscan 目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd Uniscan</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装所需的 Perl 模块：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">install Moose</span><br><span class="line">cpan install threads</span><br><span class="line">cpan install Thread::Queue</span><br><span class="line">cpan install LWP::UserAgent</span><br><span class="line">cpan install LWP::Protocol::https</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="使用-Uniscan-执行-Web-扫描"><a href="#使用-Uniscan-执行-Web-扫描" class="headerlink" title="使用 Uniscan 执行 Web 扫描"></a>使用 Uniscan 执行 Web 扫描</h2><p>以下是 Uniscan 的一些基本用法：</p>
-<ol>
-<li><p>显示帮助信息：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -h</span><br><span class="line">使用方法：uniscan [选项]</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  -u, --url &lt;url&gt;          目标 URL（例如：http://example.com/）</span><br><span class="line">  -h, --<span class="built_in">help</span>               显示帮助信息</span><br><span class="line">  -qd, --dir-scan          执行目录扫描</span><br><span class="line">  -qf, --file-scan         执行文件扫描</span><br><span class="line">  -qr, --rfi-scan          检查</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行目录扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qd</span><br></pre></td></tr></table></figure>
-
-<p><code>-u</code> 参数用于指定目标 URL，而 <code>-qd</code> 参数表示执行目录扫描。</p>
-</li>
-<li><p>执行文件扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qf</span><br></pre></td></tr></table></figure>
-
-<p><code>-qf</code> 参数表示执行文件扫描。</p>
-</li>
-<li><p>检查远程文件包含漏洞：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qr</span><br></pre></td></tr></table></figure>
-
-<p><code>-qr</code> 参数表示检查远程文件包含漏洞。</p>
-</li>
-<li><p>检查跨站脚本漏洞：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qx</span><br></pre></td></tr></table></figure>
-
-<p><code>-qx</code> 参数表示检查跨站脚本漏洞。</p>
-</li>
-<li><p>同时执行多种扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qdfrx</span><br></pre></td></tr></table></figure>
-
-<p>上述命令将同时执行目录扫描、文件扫描、远程文件包含漏洞检查和跨站脚本漏洞检查。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>kali</tag>
       </tags>
   </entry>
   <entry>
@@ -647,29 +647,6 @@
       </tags>
   </entry>
   <entry>
-    <title>解决PVE擦除磁盘时的错误提示 &quot;disk/partition &#39;/dev/sdc&#39; has a holder (500)</title>
-    <url>/cn/pve-error-disk-partition-500/</url>
-    <content><![CDATA[<h2 id="解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”"><a href="#解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”" class="headerlink" title="解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”"></a>解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”</h2><p><img src="/img/pve5001.png" alt="disk/partition &#39;/dev/sdc&#39; has a holder (500)"></p>
-<p>根据图片可以看出 <code>/dev/sdb</code> 变成了 LVM，web控制台无法删除，使用 <code>dd</code> 命令格式化。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/pve5002.png" alt="格式化完成"></p>
-<p>如果等待格式化太久，可以运行命令后等待几秒钟直接 <code>Ctrl+C</code> 终止即可。</p>
-<p>然后需要重启 PVE 服务器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/pve5003.png" alt="重启服务器"></p>
-<p>重启完成之后就能进入 web 控制台擦除磁盘了</p>
-<p><img src="/img/pve5004.png" alt="擦除完成"></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>pve</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安卓7.1以上模拟器抓取HTTPS数据</title>
     <url>/cn/android-https-data/</url>
     <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
@@ -728,6 +705,29 @@
       </categories>
       <tags>
         <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决PVE擦除磁盘时的错误提示 &quot;disk/partition &#39;/dev/sdc&#39; has a holder (500)</title>
+    <url>/cn/pve-error-disk-partition-500/</url>
+    <content><![CDATA[<h2 id="解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”"><a href="#解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”" class="headerlink" title="解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”"></a>解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”</h2><p><img src="/img/pve5001.png" alt="disk/partition &#39;/dev/sdc&#39; has a holder (500)"></p>
+<p>根据图片可以看出 <code>/dev/sdb</code> 变成了 LVM，web控制台无法删除，使用 <code>dd</code> 命令格式化。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5002.png" alt="格式化完成"></p>
+<p>如果等待格式化太久，可以运行命令后等待几秒钟直接 <code>Ctrl+C</code> 终止即可。</p>
+<p>然后需要重启 PVE 服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5003.png" alt="重启服务器"></p>
+<p>重启完成之后就能进入 web 控制台擦除磁盘了</p>
+<p><img src="/img/pve5004.png" alt="擦除完成"></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>pve</tag>
       </tags>
   </entry>
 </search>
