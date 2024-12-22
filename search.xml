@@ -119,6 +119,57 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOS安装Node.js</title>
+    <url>/cn/CentOS-setup-Node.js/</url>
+    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3.解压源码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4.进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
+
+<p>5.配置脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>6.编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
+<p>7.部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>8.安装完成测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>则安装完成</p>
+<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>启用 devtoolset-10</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
+
+<p>验证 g++ 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
+
+<p>输出g++10.0则成功</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kali Uniscan-使用教程</title>
     <url>/cn/Kali-Uniscan-jichu/</url>
     <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
@@ -260,39 +311,6 @@
       </tags>
   </entry>
   <entry>
-    <title>自建KMS激活服务器</title>
-    <url>/cn/kms-server/</url>
-    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
-<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
-
-<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
-
-<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>kms</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自建fpr服务器</title>
     <url>/cn/fpr-server/</url>
     <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
@@ -338,6 +356,39 @@
       </categories>
       <tags>
         <tag>fpr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自建KMS激活服务器</title>
+    <url>/cn/kms-server/</url>
+    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
+<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
+
+<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
+
+<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kms</tag>
       </tags>
   </entry>
   <entry>
@@ -478,57 +529,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS安装Node.js</title>
-    <url>/cn/CentOS-setup-Node.js/</url>
-    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
-
-<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3.解压源码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4.进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
-
-<p>5.配置脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
-
-<p>6.编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
-<p>7.部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>8.安装完成测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
-
-<p>则安装完成</p>
-<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>启用 devtoolset-10</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
-
-<p>验证 g++ 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
-
-<p>输出g++10.0则成功</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Docker快速部署OpenVPN服务器</title>
     <url>/cn/Docker-OpenVPN-server/</url>
     <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
@@ -577,36 +577,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在CentOS上安装Python 3.x 的教程</title>
-    <url>/cn/centos-setup-python3x/</url>
-    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
-<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
-<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
-<p>可以更改 URL，下载其他版本的 Python，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
-<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
-<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
-<p>执行配置脚本，指定安装路径和其他选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
-<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
-<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</title>
     <url>/cn/python-to-SOCKS5-for-local-HTTP/</url>
     <content><![CDATA[<h1 id="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"><a href="#使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。" class="headerlink" title="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"></a>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</h1><p>为解决 <a href="https://chromewebstore.google.com/detail/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a> 无法连接带密码认证的 SOCKS5 服务器的问题，我们可以使用 Python 编写一个脚本来连接 SOCKS5 服务器，并在本地转发为 HTTP 服务器。</p>
@@ -644,6 +614,36 @@
       <tags>
         <tag>python</tag>
         <tag>SOCKS5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在CentOS上安装Python 3.x 的教程</title>
+    <url>/cn/centos-setup-python3x/</url>
+    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
+<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
+<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
+<p>可以更改 URL，下载其他版本的 Python，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
+<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
+<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
+<p>执行配置脚本，指定安装路径和其他选项：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
+<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
