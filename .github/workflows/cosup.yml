@@ -1,4 +1,4 @@
-name: 上传文件到腾讯云cos存储
+name: 上传文件到腾讯云cos存储并刷新cdn缓存
 
 on:
   push:
@@ -19,7 +19,6 @@ jobs:
       - name: 克隆 coscmd 仓库
         run: |
           git clone https://github.com/Meikoday/coscmd.git
-          cd coscmd
 
       - name: 使用 pip 安装 coscmd
         run: |
@@ -37,8 +36,8 @@ jobs:
       - name: 下载cdn刷新脚本
         run: |
           git clone https://github.com/Meikoday/tencentcloud-auto-tools
-          cd tencentcloud-auto-tools
 
       - name: 执行腾讯云CDN刷新
         run: |
+          cd tencentcloud-auto-tools
           python tencentcloud_PurgePathCache.py -id ${{ secrets.SECRET_ID }} -key ${{ secrets.SECRET_KEY }}
