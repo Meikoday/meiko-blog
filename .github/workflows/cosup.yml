@@ -16,10 +16,6 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v2
 
-      - name: 安装依赖
-        run: |
-          sudo apt-get install -y python3-pip git
-
       - name: 克隆 coscmd 仓库
         run: |
           git clone https://github.com/Meikoday/coscmd.git
@@ -37,8 +33,12 @@ jobs:
       - name: 上传文件
         run: |
           coscmd upload -rfs --delete ./ / --ignore "./.git/*,./.github/*,./coscmd/*"
-      - name: 执行自动刷新cdn开始
+
+      - name: 下载cdn刷新脚本
         run: |
           git clone https://github.com/Meikoday/tencentcloud-auto-tools
           cd tencentcloud-auto-tools
+
+      - name: 执行腾讯云CDN刷新
+        run: |
           python tencentcloud_PurgePathCache.py -id ${{ secrets.SECRET_ID }} -key ${{ secrets.SECRET_KEY }}
