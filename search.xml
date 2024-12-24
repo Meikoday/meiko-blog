@@ -18,6 +18,33 @@
       </tags>
   </entry>
   <entry>
+    <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
+    <url>/cn/CVE-2022-2068-OpenSSL/</url>
+    <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
+<p><img src="https://cdn.meiko.ink/img/image-20230428102017208.png" alt="image-20230428102017208"></p>
+<h2 id="修复方案：更新至最新版"><a href="#修复方案：更新至最新版" class="headerlink" title="修复方案：更新至最新版"></a>修复方案：更新至最新版</h2><p>1、检查系统中 OpenSSL 的版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version -a</span><br></pre></td></tr></table></figure>
+
+<p>2、下载 OpenSSL 的最新版本，您可以从 OpenSSL 官方网站（<a href="https://www.openssl.org/source/%EF%BC%89%E4%B8%8B%E8%BD%BD">https://www.openssl.org/source/）下载</a> OpenSSL 的最新版本，选择与您系统匹配的版本进行下载。</p>
+<p>3、编译并安装 OpenSSL，在下载完成后，您可以按照以下步骤编译并安装 OpenSSL：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf openssl-x.x.x.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-x.x.x</span><br><span class="line">./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>4、配置系统环境变量</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/openssl/lib</span><br></pre></td></tr></table></figure>
+
+<p>5、验证 OpenSSL 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+
+<p>完成以上步骤后，OpenSSL 版本将会得到升级，从而修复 CVE-2022-2068 漏洞。需要注意的是，在升级前应备份您的数据，以防意外数据丢失。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>CVE-2022-2068</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Alpine Linux 更改时区</title>
     <url>/cn/Alpine-Linux-set-time/</url>
     <content><![CDATA[<p><strong>检查当前时区</strong> </p>
@@ -59,33 +86,6 @@
       </categories>
       <tags>
         <tag>Alpine</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
-    <url>/cn/CVE-2022-2068-OpenSSL/</url>
-    <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
-<p><img src="https://cdn.meiko.ink/img/image-20230428102017208.png" alt="image-20230428102017208"></p>
-<h2 id="修复方案：更新至最新版"><a href="#修复方案：更新至最新版" class="headerlink" title="修复方案：更新至最新版"></a>修复方案：更新至最新版</h2><p>1、检查系统中 OpenSSL 的版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version -a</span><br></pre></td></tr></table></figure>
-
-<p>2、下载 OpenSSL 的最新版本，您可以从 OpenSSL 官方网站（<a href="https://www.openssl.org/source/%EF%BC%89%E4%B8%8B%E8%BD%BD">https://www.openssl.org/source/）下载</a> OpenSSL 的最新版本，选择与您系统匹配的版本进行下载。</p>
-<p>3、编译并安装 OpenSSL，在下载完成后，您可以按照以下步骤编译并安装 OpenSSL：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf openssl-x.x.x.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-x.x.x</span><br><span class="line">./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>4、配置系统环境变量</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/openssl/lib</span><br></pre></td></tr></table></figure>
-
-<p>5、验证 OpenSSL 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
-
-<p>完成以上步骤后，OpenSSL 版本将会得到升级，从而修复 CVE-2022-2068 漏洞。需要注意的是，在升级前应备份您的数据，以防意外数据丢失。</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>CVE-2022-2068</tag>
       </tags>
   </entry>
   <entry>
@@ -655,6 +655,29 @@
       </tags>
   </entry>
   <entry>
+    <title>解决PVE擦除磁盘时的错误提示 &quot;disk/partition &#39;/dev/sdc&#39; has a holder (500)</title>
+    <url>/cn/pve-error-disk-partition-500/</url>
+    <content><![CDATA[<h2 id="解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”"><a href="#解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”" class="headerlink" title="解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”"></a>解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”</h2><p><img src="/img/pve5001.png" alt="disk/partition &#39;/dev/sdc&#39; has a holder (500)"></p>
+<p>根据图片可以看出 <code>/dev/sdb</code> 变成了 LVM，web控制台无法删除，使用 <code>dd</code> 命令格式化。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5002.png" alt="格式化完成"></p>
+<p>如果等待格式化太久，可以运行命令后等待几秒钟直接 <code>Ctrl+C</code> 终止即可。</p>
+<p>然后需要重启 PVE 服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5003.png" alt="重启服务器"></p>
+<p>重启完成之后就能进入 web 控制台擦除磁盘了</p>
+<p><img src="/img/pve5004.png" alt="擦除完成"></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>pve</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安卓7.1以上模拟器抓取HTTPS数据</title>
     <url>/cn/android-https-data/</url>
     <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
@@ -713,29 +736,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决PVE擦除磁盘时的错误提示 &quot;disk/partition &#39;/dev/sdc&#39; has a holder (500)</title>
-    <url>/cn/pve-error-disk-partition-500/</url>
-    <content><![CDATA[<h2 id="解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”"><a href="#解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”" class="headerlink" title="解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”"></a>解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”</h2><p><img src="/img/pve5001.png" alt="disk/partition &#39;/dev/sdc&#39; has a holder (500)"></p>
-<p>根据图片可以看出 <code>/dev/sdb</code> 变成了 LVM，web控制台无法删除，使用 <code>dd</code> 命令格式化。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/pve5002.png" alt="格式化完成"></p>
-<p>如果等待格式化太久，可以运行命令后等待几秒钟直接 <code>Ctrl+C</code> 终止即可。</p>
-<p>然后需要重启 PVE 服务器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/pve5003.png" alt="重启服务器"></p>
-<p>重启完成之后就能进入 web 控制台擦除磁盘了</p>
-<p><img src="/img/pve5004.png" alt="擦除完成"></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>pve</tag>
       </tags>
   </entry>
 </search>
