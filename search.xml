@@ -437,12 +437,6 @@
       </tags>
   </entry>
   <entry>
-    <title>test12</title>
-    <url>/cn/test12/</url>
-    <content><![CDATA[<p>测试</p>
-]]></content>
-  </entry>
-  <entry>
     <title>为没有IPV6的服务器添加pv6教程</title>
     <url>/cn/add-ipv6-address/</url>
     <content><![CDATA[<p><em><strong>为没有IPV6的服务器添加pv6教程</strong></em></p>
