@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>使用Docker快速部署OpenVPN服务器 | 小陈点滴记忆</title><meta name="author" content="Meiko"><meta name="copyright" content="Meiko"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作： 拉取openvpn镜像1docker pull chenji1506&#x2F;openvpn:2.4.8  复制 创建目录1mkdir -pv &#x2F;data&#x2F;openvpn&#x2F;conf  复制 生成配置文件1.1.1.1是本机的公网IP 1docker run -v &#x2F;data&#x2F;openvpn:&#x2F;etc&#x2F;openvpn --">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Docker快速部署OpenVPN服务器">
+<meta property="og:url" content="https://www.meiko.ink/cn/Docker-OpenVPN-server/index.html">
+<meta property="og:site_name" content="小陈点滴记忆">
+<meta property="og:description" content="本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作： 拉取openvpn镜像1docker pull chenji1506&#x2F;openvpn:2.4.8  复制 创建目录1mkdir -pv &#x2F;data&#x2F;openvpn&#x2F;conf  复制 生成配置文件1.1.1.1是本机的公网IP 1docker run -v &#x2F;data&#x2F;openvpn:&#x2F;etc&#x2F;openvpn --">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.meiko.ink/img/meiko.webp">
+<meta property="article:published_time" content="2023-04-18T15:29:00.000Z">
+<meta property="article:modified_time" content="2024-12-21T11:04:05.000Z">
+<meta property="article:author" content="Meiko">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="OpenVPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.meiko.ink/img/meiko.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.meiko.ink/cn/Docker-OpenVPN-server/index.html"><link rel="preconnect"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="oKMqShdxR_Z7DXSOVfYEpTBjzcejhVSAaJTTe3xK06E"/><meta name="baidu-site-verification" content="codeva-H0l7pZwKwR"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=10075939417"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', '10075939417')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', '10075939417', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用Docker快速部署OpenVPN服务器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/meiko.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小陈点滴记忆</span></a><a class="nav-page-title" href="/"><span class="site-name">使用Docker快速部署OpenVPN服务器</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">使用Docker快速部署OpenVPN服务器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-18T15:29:00.000Z" title="发表于 2023-04-18 15:29:00">2023-04-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-21T11:04:05.000Z" title="更新于 2024-12-21 11:04:05">2024-12-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">554</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
+<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
+
+<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.meiko.ink">Meiko</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.meiko.ink/cn/Docker-OpenVPN-server/">https://www.meiko.ink/cn/Docker-OpenVPN-server/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://www.meiko.ink" target="_blank">小陈点滴记忆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/OpenVPN/">OpenVPN</a></div><div class="post-share"><div class="social-share" data-image="/img/meiko.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/cn/centos-setup-Docker-Docker-Compose/" title="centos一键安装Docker和Docker-Compose"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">centos一键安装Docker和Docker-Compose</div></div><div class="info-2"><div class="info-item-1">centos一键安装docker脚本 1curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun 安装 Docker Compose 下载 Docker Compose  1sudo curl -L &quot;https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose 需要注意的是，上述命令中的 2.17.2 是当前最新版本号，您可以根据需要自行更改。 2. 添加执行权限 1sudo chmod +x /usr/local/bin/docker-compose   测试 Docker Compose 是否安装成功运行以下命令：  1docker-compose --version 如果一切正常，您应该会看到 Docker Compose 的版本号输出。 至此，您已经成功安装了 Docker...</div></div></div></a><a class="pagination-related" href="/cn/Kali-Uniscan-jichu/" title="Kali Uniscan-使用教程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Kali Uniscan-使用教程</div></div><div class="info-2"><div class="info-item-1">Kali Uniscan - 使用教程Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。 安装 UniscanKali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：  克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全： 1git clone https://github.com/poerschke/Uniscan  进入 Uniscan 目录： 1cd Uniscan  安装所需的 Perl 模块： 12345install Moosecpan install threadscpan install Thread::Queuecpan install LWP::UserAgentcpan install...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/cn/Ubuntu-Docker-Docker-Compose/" title="Ubuntu安装Docker和Docker-Compose"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-01</div><div class="info-item-2">Ubuntu安装Docker和Docker-Compose</div></div><div class="info-2"><div class="info-item-1">安装 Docker 卸载旧版本 如果您之前安装过旧版本的 Docker，可以先卸载：  1sudo apt-get remove docker docker-engine docker.io containerd runc   安装必要的工具  12sudo apt-get updatesudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release   添加 Docker 官方 GPG key  1curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg   设置 Docker 安装源  123echo \&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg]...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/meiko.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Meiko</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Meikoday"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:admin@meiko.ink" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E5%8F%96openvpn%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">拉取openvpn镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">创建目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">生成配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">生成密钥文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6"><span class="toc-number">5.</span> <span class="toc-text">生成客户端证书</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">导出客户端配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8openvpn"><span class="toc-number">7.</span> <span class="toc-text">启动openvpn</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#openvpn%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text">openvpn用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%84%9A%E6%9C%AC"><span class="toc-number">8.1.</span> <span class="toc-text">添加用户脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E8%84%9A%E6%9C%AC"><span class="toc-number">8.2.</span> <span class="toc-text">删除用户脚本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-number">9.</span> <span class="toc-text">添加用户</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/hello-hexo" title="hexo迁移完成">hexo迁移完成</a><time datetime="2024-12-22T21:48:00.000Z" title="发表于 2024-12-22 21:48:00">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/CentOS7-repo-new" title="CentOS 7 停止维护后如何更换可用yum 源">CentOS 7 停止维护后如何更换可用yum 源</a><time datetime="2024-09-18T02:50:00.000Z" title="发表于 2024-09-18 02:50:00">2024-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/centos-setup-python3x" title="在CentOS上安装Python 3.x 的教程">在CentOS上安装Python 3.x 的教程</a><time datetime="2024-07-30T20:54:00.000Z" title="发表于 2024-07-30 20:54:00">2024-07-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/docker-socks5-authentication" title="使用 Docker 部署 Socks5 加密代理服务器">使用 Docker 部署 Socks5 加密代理服务器</a><time datetime="2024-06-16T17:11:00.000Z" title="发表于 2024-06-16 17:11:00">2024-06-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/android-https-data" title="安卓7.1以上模拟器抓取HTTPS数据">安卓7.1以上模拟器抓取HTTPS数据</a><time datetime="2024-06-14T15:09:00.000Z" title="发表于 2024-06-14 15:09:00">2024-06-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Meiko</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img class="icp-icon"><span>蜀ICP备18036396号-2</span></a><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"Jyka4amc5HZ5aSmE",ck:"Jyka4amc5HZ5aSmE",autoTrack:true,hashMode:true})</script><script>!(function(c,i,e,b){var h=i.createElement("script"),f=i.getElementsByTagName("script")[0];h.type="text/javascript";h.crossorigin=true;h.onload=function(){new c[b]["Monitor"]().init({id:"KE5wznkCAr7OALk7",sendSuspicious:true,sendSpaPv:true});};f.parentNode.insertBefore(h,f);h.src=e;})(window,document,"https://sdk.51.la/perf/js-sdk-perf.min.js","LingQue");</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="/pluginsSrc/instant.page/instantpage.js" type="module"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline-blog.meiko.ink/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('/pluginsSrc/@waline/client/dist/waline.css')
+        .then(() => import('/pluginsSrc/@waline/client/dist/waline.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="/pluginsSrc/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

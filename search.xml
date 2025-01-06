@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
+    <url>/cn/0000011b-okay/</url>
+    <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
+<p>许多小伙伴在使用电脑的时候，经常会连接打印机使用，但是不少用户最近连接共享打印机后提示“windows无法连接到打印机0x0000011b”错误。其实这是微软最新更新的补丁为用户带来打印机漏洞问题。小编为大家带来了最新的解决方法，有需要的赶快来看看吧。</p>
+<p><img src="/img/baocuotupian.webp" alt="报错提示"></p>
+<h2 id="替换系统文件并修改注册表-已经集成为小工具"><a href="#替换系统文件并修改注册表-已经集成为小工具" class="headerlink" title="替换系统文件并修改注册表(已经集成为小工具)"></a>替换系统文件并修改注册表(已经集成为小工具)</h2><p>使用大神制作的Fix Print Spooler工具，一键替换系统文件，并且修改注册表，无需卸载更新补丁，直接可以使用。<strong>请在共享的主机上使用此软件</strong>。</p>
+<p><img src="/img/xiufu.webp" alt="修复完成"></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://wwid.lanzouw.com/iCcBp2io330b">云高速下载地址</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>打印机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Alpine Linux 更改时区</title>
+    <url>/cn/Alpine-Linux-set-time/</url>
+    <content><![CDATA[<p><strong>检查当前时区</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 08:54:26 +0000</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置新的时区</strong> </p>
+<p>需要安装一个名为<strong>tzdata</strong>的依赖库，只需要它提供的时区配置文件。一旦安装完成，时区配置文件将被写入到 <code>/usr/share/zoneinfo</code> 路径下。一旦时区配置文件被写入，可以卸载tzdata依赖库，因为它不再需要。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk add tzdata</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看可用的时区</strong> </p>
+<p>可以使用以下命令来查看<strong>tzdata</strong>包含的可用时区列表：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls /usr/share/zoneinfo</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cssCopy codeAfrica        CET           Egypt         GMT+0         Iran          MST7MDT       Poland        UTC           zone.tab</span><br><span class="line">America       CST6CDT       Eire          GMT-0         Israel        Mexico        Portugal      Universal     zone1970.tab</span><br><span class="line">Antarctica    Canada        Etc           GMT0          Jamaica       NZ            ROC           W-SU</span><br><span class="line">Arctic        Chile         Europe        Greenwich     Japan         NZ-CHAT       ROK           WET</span><br><span class="line">Asia          Cuba          Factory       HST           Kwajalein     Navajo        Singapore     Zulu</span><br><span class="line">Atlantic      EET           GB            Hongkong      Libya         PRC           Turkey        iso3166.tab</span><br><span class="line">Australia     EST           GB-Eire       Iceland       MET           PST8PDT       UCT           posixrules</span><br><span class="line">Brazil        EST5EDT       GMT           Indian        MST           Pacific       US            right</span><br></pre></td></tr></table></figure>
+
+<p><strong>复制所需时区文件</strong> </p>
+<p>如果 <code>/etc/localtime</code> 文件已经存在，建议先备份后再删除原文件。然后将新的时区文件复制到 <code>/etc/localtime</code>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<p><strong>指定新的时区</strong> </p>
+<p>要指定新的时区，将所需的时区名称写入 <code>/etc/timezone</code> 文件中，例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt;  /etc/timezone</span><br></pre></td></tr></table></figure>
+
+<p><strong>再次检查时区设置</strong> 运行以下命令以确保时区已成功更改：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">date -R</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Fri, 03 Jun 2022 16:54:47 +0800</span><br></pre></td></tr></table></figure>
+
+<p><strong>卸载tzdata依赖</strong> </p>
+<p>一旦时区配置文件已经被写入 <code>/usr/share/zoneinfo</code>，就可以卸载<strong>tzdata</strong>依赖库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apk del tzdata</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Alpine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
+    <url>/cn/CVE-2022-2068-OpenSSL/</url>
+    <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
+<p><img src="https://cdn.meiko.ink/img/image-20230428102017208.png" alt="image-20230428102017208"></p>
+<h2 id="修复方案：更新至最新版"><a href="#修复方案：更新至最新版" class="headerlink" title="修复方案：更新至最新版"></a>修复方案：更新至最新版</h2><p>1、检查系统中 OpenSSL 的版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version -a</span><br></pre></td></tr></table></figure>
+
+<p>2、下载 OpenSSL 的最新版本，您可以从 OpenSSL 官方网站（<a href="https://www.openssl.org/source/%EF%BC%89%E4%B8%8B%E8%BD%BD">https://www.openssl.org/source/）下载</a> OpenSSL 的最新版本，选择与您系统匹配的版本进行下载。</p>
+<p>3、编译并安装 OpenSSL，在下载完成后，您可以按照以下步骤编译并安装 OpenSSL：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf openssl-x.x.x.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-x.x.x</span><br><span class="line">./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>4、配置系统环境变量</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/openssl/lib</span><br></pre></td></tr></table></figure>
+
+<p>5、验证 OpenSSL 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+
+<p>完成以上步骤后，OpenSSL 版本将会得到升级，从而修复 CVE-2022-2068 漏洞。需要注意的是，在升级前应备份您的数据，以防意外数据丢失。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>CVE-2022-2068</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS 7 停止维护后如何更换可用yum 源</title>
+    <url>/cn/CentOS7-repo-new/</url>
+    <content><![CDATA[<h1 id="CentOS-7-停止维护后如何更换-yum-源"><a href="#CentOS-7-停止维护后如何更换-yum-源" class="headerlink" title="CentOS 7 停止维护后如何更换 yum 源"></a>CentOS 7 停止维护后如何更换 yum 源</h1><p>随着官方宣布 CentOS 7 停止维护，原有的官方 yum 源不再可用，导致在软件安装和更新过程中报错。为了解决这一问题，用户需要将系统中的 yum 源更换为其他可用的镜像源，如阿里云或华为云等。本文将介绍如何备份原来的 yum 源，并下载并配置新的镜像源。</p>
+<h2 id="手动更换-yum-源的步骤"><a href="#手动更换-yum-源的步骤" class="headerlink" title="手动更换 yum 源的步骤"></a>手动更换 yum 源的步骤</h2><h3 id="1-备份原有的-yum-源"><a href="#1-备份原有的-yum-源" class="headerlink" title="1. 备份原有的 yum 源"></a>1. 备份原有的 yum 源</h3><p>在更换源之前，务必备份当前系统中的所有 yum 源文件，以防万一。如果新源配置出现问题，可以还原到旧的源配置。运行以下命令备份现有的 <code>.repo</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /etc/yunback/</span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/*.repo /etc/yunback/</span><br></pre></td></tr></table></figure>
+
+<p>该命令将所有 <code>.repo</code> 文件移动到 <code>/etc/yunback/</code> 目录中，确保备份妥当。</p>
+<h3 id="2-下载新的-yum-源配置文件"><a href="#2-下载新的-yum-源配置文件" class="headerlink" title="2. 下载新的 yum 源配置文件"></a>2. 下载新的 yum 源配置文件</h3><p>您可以选择多个可信的第三方镜像源进行配置。这里我们介绍两个常用的镜像源：阿里云和华为云。</p>
+<h4 id="下载阿里云的-yum-源："><a href="#下载阿里云的-yum-源：" class="headerlink" title="下载阿里云的 yum 源："></a>下载阿里云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+
+<h4 id="或者下载华为云的-yum-源："><a href="#或者下载华为云的-yum-源：" class="headerlink" title="或者下载华为云的 yum 源："></a>或者下载华为云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo https://repo.huaweicloud.com/repository/conf/CentOS-7-anon.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-处理没有-wget-的情况"><a href="#3-处理没有-wget-的情况" class="headerlink" title="3. 处理没有 wget 的情况"></a>3. 处理没有 wget 的情况</h3><p>如果系统中未安装 <code>wget</code>，可以使用 <code>curl</code> 命令来下载镜像源配置文件。例如，要使用阿里云的 yum 源，可以运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://mirrors.aliyun.com/repo/Centos-7.repo -o /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-生成-yum-缓存"><a href="#4-生成-yum-缓存" class="headerlink" title="4. 生成 yum 缓存"></a>4. 生成 yum 缓存</h3><p>下载新的源文件后，执行以下命令生成缓存，使新源配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<p>此时系统会从新配置的镜像源中获取软件包列表和其他数据。完成后，您就可以正常使用 <code>yum</code> 命令进行软件安装和更新。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>由于 CentOS 7 的官方维护已经停止，用户需要手动更换 yum 源以确保系统能够继续正常更新和安装软件。如何备份原有的 yum 源，并手动下载配置新的镜像源，如阿里云和华为云。</p>
+<p>通过以上步骤，您的 CentOS 7 系统将能正常使用第三方镜像源进行软件管理。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装Node.js</title>
+    <url>/cn/CentOS-setup-Node.js/</url>
+    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3.解压源码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4.进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
+
+<p>5.配置脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>6.编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
+<p>7.部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>8.安装完成测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>则安装完成</p>
+<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>启用 devtoolset-10</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
+
+<p>验证 g++ 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
+
+<p>输出g++10.0则成功</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kali Uniscan-使用教程</title>
+    <url>/cn/Kali-Uniscan-jichu/</url>
+    <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
+<h2 id="安装-Uniscan"><a href="#安装-Uniscan" class="headerlink" title="安装 Uniscan"></a>安装 Uniscan</h2><p>Kali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：</p>
+<ol>
+<li><p>克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/poerschke/Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入 Uniscan 目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需的 Perl 模块：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">install Moose</span><br><span class="line">cpan install threads</span><br><span class="line">cpan install Thread::Queue</span><br><span class="line">cpan install LWP::UserAgent</span><br><span class="line">cpan install LWP::Protocol::https</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="使用-Uniscan-执行-Web-扫描"><a href="#使用-Uniscan-执行-Web-扫描" class="headerlink" title="使用 Uniscan 执行 Web 扫描"></a>使用 Uniscan 执行 Web 扫描</h2><p>以下是 Uniscan 的一些基本用法：</p>
+<ol>
+<li><p>显示帮助信息：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -h</span><br><span class="line">使用方法：uniscan [选项]</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  -u, --url &lt;url&gt;          目标 URL（例如：http://example.com/）</span><br><span class="line">  -h, --<span class="built_in">help</span>               显示帮助信息</span><br><span class="line">  -qd, --dir-scan          执行目录扫描</span><br><span class="line">  -qf, --file-scan         执行文件扫描</span><br><span class="line">  -qr, --rfi-scan          检查</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行目录扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qd</span><br></pre></td></tr></table></figure>
+
+<p><code>-u</code> 参数用于指定目标 URL，而 <code>-qd</code> 参数表示执行目录扫描。</p>
+</li>
+<li><p>执行文件扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qf</span><br></pre></td></tr></table></figure>
+
+<p><code>-qf</code> 参数表示执行文件扫描。</p>
+</li>
+<li><p>检查远程文件包含漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qr</span><br></pre></td></tr></table></figure>
+
+<p><code>-qr</code> 参数表示检查远程文件包含漏洞。</p>
+</li>
+<li><p>检查跨站脚本漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qx</span><br></pre></td></tr></table></figure>
+
+<p><code>-qx</code> 参数表示检查跨站脚本漏洞。</p>
+</li>
+<li><p>同时执行多种扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qdfrx</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将同时执行目录扫描、文件扫描、远程文件包含漏洞检查和跨站脚本漏洞检查。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu安装Docker和Docker-Compose</title>
+    <url>/cn/Ubuntu-Docker-Docker-Compose/</url>
+    <content><![CDATA[<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><ol>
+<li>卸载旧版本<br> 如果您之前安装过旧版本的 Docker，可以先卸载：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装必要的工具</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install apt-transport-https ca-certificates curl gnupg lsb-release</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>添加 Docker 官方 GPG key</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | <span class="built_in">sudo</span> gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>设置 Docker 安装源</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line"><span class="string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string"><span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>安装 Docker</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>添加当前用户到 Docker 用户组<br>为了避免每次使用 Docker 都需要 sudo，可以将当前用户添加到 Docker 用户组：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>测试 Docker 是否安装成功<br>运行以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，您应该会看到 Docker 运行 hello-world 容器，并输出以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br></pre></td></tr></table></figure>
+<h1 id="安装-Docker-Compose"><a href="#安装-Docker-Compose" class="headerlink" title="安装 Docker Compose"></a>安装 Docker Compose</h1><ol>
+<li>下载 Docker Compose</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，上述命令中的 2.17.2 是当前最新版本号，您可以根据需要自行更改。<br> 2. 添加执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试 Docker Compose 是否安装成功<br>运行以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，您应该会看到 Docker Compose 的版本号输出。</p>
+<p>至此，您已经成功安装了 Docker 和 Docker Compose。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos一键安装Docker和Docker-Compose</title>
+    <url>/cn/centos-setup-Docker-Docker-Compose/</url>
+    <content><![CDATA[<p>centos一键安装docker脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+<h1 id="安装-Docker-Compose"><a href="#安装-Docker-Compose" class="headerlink" title="安装 Docker Compose"></a>安装 Docker Compose</h1><ol>
+<li>下载 Docker Compose</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，上述命令中的 2.17.2 是当前最新版本号，您可以根据需要自行更改。<br> 2. 添加执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试 Docker Compose 是否安装成功<br>运行以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，您应该会看到 Docker Compose 的版本号输出。</p>
+<p>至此，您已经成功安装了 Docker 和 Docker Compose。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自建fpr服务器</title>
+    <url>/cn/fpr-server/</url>
+    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
+
+<p>一键卸载frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后,配置frps.ini并重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
+
+<p>配置参考</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
+
+<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>修改frpc.ini配置程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
+
+<p>启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
+
+<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
+
+<p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>添加以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
+
+<p>保存并重启</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>fpr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo迁移完成</title>
+    <url>/cn/hello-hexo/</url>
+    <content><![CDATA[<h1 id="完整迁移到HEXO"><a href="#完整迁移到HEXO" class="headerlink" title="完整迁移到HEXO"></a>完整迁移到HEXO</h1><h2 id="HEXO-GitHub-Actions-腾讯云COS-自动刷新CDN-完美自动化部署静态网站"><a href="#HEXO-GitHub-Actions-腾讯云COS-自动刷新CDN-完美自动化部署静态网站" class="headerlink" title="HEXO + GitHub Actions + 腾讯云COS  + 自动刷新CDN 完美自动化部署静态网站"></a>HEXO + GitHub Actions + 腾讯云COS  + 自动刷新CDN 完美自动化部署静态网站</h2><h2 id="还是花费了大量时间"><a href="#还是花费了大量时间" class="headerlink" title="还是花费了大量时间"></a>还是花费了大量时间</h2><h2 id="境外走netlify，境内走腾讯云cdn"><a href="#境外走netlify，境内走腾讯云cdn" class="headerlink" title="境外走netlify，境内走腾讯云cdn"></a>境外走netlify，境内走腾讯云cdn</h2>]]></content>
+      <tags>
+        <tag>hello</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自建KMS激活服务器</title>
+    <url>/cn/kms-server/</url>
+    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
+<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
+
+<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
+
+<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kms</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</title>
+    <url>/cn/pve-set-desk/</url>
+    <content><![CDATA[<p>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</p>
+<p>1，使用ssh链接到pve服务器，或者进入pve网页端shell</p>
+<p>输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /dev/disk/by-id/</span><br></pre></td></tr></table></figure>
+
+<p>列出PVE系统下所有的磁盘存储设备并查看磁盘ID序列号。</p>
+<p><img src="/img/pvecipan.png" alt="查看磁盘id"></p>
+<p>这里讲一下磁盘ID怎么找，你必需选择的是整个硬盘(物理硬盘)而不是分区，比如<code>sda</code>、<code>sdb</code>、<code>sdc</code>对应的id，而不是(<code>sda1</code>、<code>sda2</code>…)</p>
+<p><strong>注：</strong>ata、mmc等..表示接口方式，通常有ATA、SATA、SCS、NVME、eMMC和SASI等类型。IDE和SATA接口一般为“ata”，SCSI及SAS接口一般为”scsi“。</p>
+<p>将物理磁盘直通给PVE系统下虚拟机中</p>
+<p>需要在shell下通过CLI的方式来添加，使用的工具为qm(Qemu&#x2F;KVM虚拟机管理器)，通过命令 <code>set</code> 来设置物理磁盘到虚拟机中。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qm <span class="built_in">set</span> &lt;vm_id&gt; –&lt;disk_type&gt;[n] /dev/disk/by-id/&lt;<span class="built_in">type</span>&gt;-<span class="variable">$brand</span>-$model_<span class="variable">$serial_number</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注释：</strong></p>
+<p><code>vm_id </code>: 为创建虚拟机时指定的<code>VM ID</code>。</p>
+<p><code>&lt;disk_type&gt;[n]</code>： 磁盘的总线类型及其编号，总线类型可以选择IDE、SATA、VirtIO Block和SCSI类型，编号从0开始，最大值根据总线接口类型有所不同，IDE为3，SATA为5，VirTIO Block为15，SCSI为13。</p>
+<p><code>”/dev/disk/by-id/-$brand-$model_$serial_number”</code> ： 为磁盘ID的具体路径和名称。</p>
+<p><strong>按照我硬盘的参数举例：</strong></p>
+<p>如上方的硬盘数据 <code>ata-ST1000DM010-2EP102_W9A8GVKW</code> 为例，将此硬盘直通给<code>VM ID</code>编号为<code>108</code>的虚拟机下，总线类型接口为<code>sata1</code>（请根据PVE虚拟机下的总线编号设置）</p>
+<p>挂载命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qm <span class="built_in">set</span> 108 -sata1 /dev/disk/by-id/ata-ST1000DM010-2EP102_W9A8GVKW</span><br></pre></td></tr></table></figure>
+
+<p>硬盘直通完成后，返回</p>
+<p><img src="/img/pvediskok.png" alt="添加完成"></p>
+<p>即为成功，查看虚拟机硬件已经完成添加了</p>
+<p><img src="/img/pvediskover.png" alt="磁盘已添加"></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>pve</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为没有IPV6的服务器添加pv6教程</title>
+    <url>/cn/add-ipv6-address/</url>
+    <content><![CDATA[<p><em><strong>为没有IPV6的服务器添加pv6教程</strong></em></p>
+<p>以centos为例：</p>
+<p>输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl 6.ipinfo.io</span><br></pre></td></tr></table></figure>
+
+<p>查看是否有ipv6地址，如果没有则申请一个ipv6隧道</p>
+<p><img src="/img/sfyipv6.png" alt="查看是否有ipv6"></p>
+<p>申请地址<a href="https://tunnelbroker.net/register.php">https://tunnelbroker.net/register.php</a><br><img src="/img/tunnelbrokersqdz.png" alt="tunnelbroker申请地址"></p>
+<p>注册账户之后选择创建隧道</p>
+<p>创建完成后在centos中 打开ipv6功能</p>
+<p>编辑</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/centosopenipv6.png" alt="开启ipv6"></p>
+<p>将图中所示改为0,0代表开启。</p>
+<p>执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/sbin/sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p>使其生效</p>
+<p><img src="/img/sysctlsx.png" alt="使其生效"></p>
+<p>打开创建好的隧道代理详细信息</p>
+<p>选择Example Configurations，选择Linux-net-tools查看命令</p>
+<p><img src="/img/tunnelbrokertool.png" alt="查看操作命令"></p>
+<p>将命令复制下来</p>
+<p>创建一个ipv6.sh文件（用于开启自启ipv6），将命令保存到ipv6.sh中。添加可执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /root/ipv6.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/img/777ipv6.png" alt="给予权限"></p>
+<p>然后编辑文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>在最下方加入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh /root/ipv6.sh</span><br></pre></td></tr></table></figure>
+
+<p>保存退出。然后执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh /root/ipv6.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl 6.ipinfo.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/ipv6test.png" alt="完成测试"></p>
+<p>这样就能获取到ipv6地址了</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>ipv6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Docker 部署 Socks5 加密代理服务器</title>
+    <url>/cn/docker-socks5-authentication/</url>
+    <content><![CDATA[<h2 id="使用-Docker-部署-Socks5-加密代理服务器"><a href="#使用-Docker-部署-Socks5-加密代理服务器" class="headerlink" title="使用 Docker 部署 Socks5 加密代理服务器"></a>使用 Docker 部署 Socks5 加密代理服务器</h2><p>在现代网络中，代理服务器的使用越来越普遍，特别是对于需要跨网络访问的用户。本文将介绍如何使用 Docker 部署一个简单的 Socks5 代理服务器。我们将使用 <code>xkuma/socks5</code> 这个 Docker 镜像。</p>
+<h4 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h4><p>在开始之前，请确保你的系统已经安装了以下软件：</p>
+<ul>
+<li>Docker</li>
+<li>Docker Compose (可选)</li>
+</ul>
+<h4 id="第一步：拉取-Docker-镜像"><a href="#第一步：拉取-Docker-镜像" class="headerlink" title="第一步：拉取 Docker 镜像"></a>第一步：拉取 Docker 镜像</h4><p>首先，我们需要拉取 <code>xkuma/socks5</code> 镜像。在终端中运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：运行-Docker-容器"><a href="#第二步：运行-Docker-容器" class="headerlink" title="第二步：运行 Docker 容器"></a>第二步：运行 Docker 容器</h4><p>接下来，我们使用以下命令启动一个 Docker 容器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 你选择的端口:1080 -e PROXY_USER=你的用户名 -e PROXY_PASSWORD=你的密码 -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<p>让我们详细解释一下这个命令：</p>
+<ul>
+<li><code>docker run -d</code>: 以分离模式运行 Docker 容器。</li>
+<li><code>-p 你选择的端口:1080</code>: 将容器的 1080 端口映射到主机的端口。你可以选择任何未被占用的端口。</li>
+<li><code>-e PROXY_USER=你的用户名</code>: 设置代理服务器的用户名。</li>
+<li><code>-e PROXY_PASSWORD=你的密码</code>: 设置代理服务器的密码。</li>
+<li><code>-e PROXY_SERVER=0.0.0.0:1080</code>: 指定代理服务器地址和端口，这里默认使用 0.0.0.0 和 1080 端口。</li>
+<li><code>xkuma/socks5</code>: 使用的 Docker 镜像名称。</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>假设我们希望在主机的 2080 端口运行代理服务器，用户名为 <code>myuser</code>，密码为 <code>mypassword</code>，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 2080:1080 -e PROXY_USER=myuser -e PROXY_PASSWORD=mypassword -e PROXY_SERVER=0.0.0.0:1080 xkuma/socks5</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步：验证代理服务器"><a href="#第三步：验证代理服务器" class="headerlink" title="第三步：验证代理服务器"></a>第三步：验证代理服务器</h4><p>运行容器后，你可以通过配置浏览器或者其他应用的 Socks5 代理设置，验证代理服务器是否工作正常。代理地址为 <code>localhost</code>，端口为你在 <code>docker run</code> 命令中指定的端口（本例中为 2080）。</p>
+<h4 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h4><ul>
+<li><strong>端口被占用</strong>：如果出现端口被占用的错误，请选择一个未被占用的端口。</li>
+<li><strong>无法连接到代理</strong>：确保防火墙没有阻止相应端口的流量。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过以上步骤，已经成功地使用 Docker 部署了一个 Socks5 代理服务器。这个方法简单高效，适用于需要快速搭建代理服务的场景。</p>
+<p>如果你有任何问题或建议，请在下方留言，我们会尽快回复你。感谢阅读！</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://docs.docker.com/">Docker 官方文档</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>socks5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Docker快速部署OpenVPN服务器</title>
+    <url>/cn/Docker-OpenVPN-server/</url>
+    <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
+<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
+
+<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>OpenVPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</title>
+    <url>/cn/python-to-SOCKS5-for-local-HTTP/</url>
+    <content><![CDATA[<h1 id="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"><a href="#使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。" class="headerlink" title="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"></a>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</h1><p>为解决 <a href="https://chromewebstore.google.com/detail/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a> 无法连接带密码认证的 SOCKS5 服务器的问题，我们可以使用 Python 编写一个脚本来连接 SOCKS5 服务器，并在本地转发为 HTTP 服务器。</p>
+<ol>
+<li>配置 SOCKS5 代理服务器的连接信息。</li>
+<li>实现一个 HTTP 代理服务器，将请求通过 SOCKS5 代理进行转发。</li>
+<li>启动 HTTP 代理服务器，并在终端显示上传和下载数据量。</li>
+</ol>
+<p>以下是具体步骤和代码实现。</p>
+<h2 id="1-安装所需库"><a href="#1-安装所需库" class="headerlink" title="1. 安装所需库"></a>1. 安装所需库</h2><p>首先，请确保你已经安装了以下库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install requests pysocks</span><br></pre></td></tr></table></figure>
+
+<p>如果报错，请尝试备用安装环境库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install altgraph==0.17.4 anyio==4.3.0 appdirs==1.4.4 argon2-cffi==23.1.0 argon2-cffi-bindings==21.2.0 arrow==1.3.0 astroid==3.1.0 asttokens==2.4.1 async-lru==2.0.4 async-timeout==4.0.3 attrs==23.2.0 Babel==2.14.0 beautifulsoup4==4.12.3 bleach==6.1.0 bleak==0.22.1 bleak-winrt==1.2.0 certifi==2024.2.2 cffi==1.16.0 charset-normalizer==3.3.2 click==8.1.7 colorama==0.4.6 <span class="built_in">comm</span>==0.2.2 contourpy==1.2.0 cryptography==41.0.4 cycler==0.12.1 debugpy==1.8.1 decorator==5.1.1 defusedxml==0.7.1 dill==0.3.8 enum-compat==0.0.3 exceptiongroup==1.2.0 executing==2.0.1 fastjsonschema==2.19.1 fonttools==4.50.0 fqdn==1.5.1 fuzzywuzzy==0.18.0 h11==0.14.0 httpcore==1.0.4 httpx==0.27.0 idna==3.6 importlib_metadata==7.1.0 importlib_resources==6.3.1 ipykernel==6.29.3 ipython==8.18.1 ipywidgets==8.1.2 isoduration==20.11.0 isort==5.13.2 jedi==0.19.1 Jinja2==3.1.3 json5==0.9.24 jsonpointer==2.4 jsonschema==4.21.1 jsonschema-specifications==2023.12.1 jupyter==1.0.0 jupyter-console==6.6.3 jupyter-events==0.10.0 jupyter-lsp==2.2.4 jupyter_client==8.6.1 jupyter_core==5.7.2 jupyter_server==2.13.0 jupyter_server_terminals==0.5.3 jupyterlab==4.1.5 jupyterlab_pygments==0.3.0 jupyterlab_server==2.25.4 jupyterlab_widgets==3.0.10 keyboard==0.13.5 keyring==23.0.0 kiwisolver==1.4.5 Levenshtein==0.25.1 MarkupSafe==2.1.5 matplotlib==3.8.3 matplotlib-inline==0.1.6 mccabe==0.7.0 mistune==3.0.2 MouseInfo==0.1.3 nbclient==0.10.0 nbconvert==7.16.3 nbformat==5.10.3 nest-asyncio==1.6.0 notebook==7.1.2 notebook_shim==0.2.4 npyscreen==4.10.5 ntplib==0.4.0 numpy==1.26.4 opencv-python==4.9.0.80 overrides==7.7.0 packaging==24.0 pandas==1.1.5 pandocfilters==1.5.1 parso==0.8.3 pefile==2023.2.7 pillow==10.2.0 platformdirs==4.2.0 prometheus_client==0.20.0 prompt-toolkit==3.0.43 psutil==5.9.8 pure-eval==0.2.2 PyAutoGUI==0.9.54 PyBluez==0.30 pychrome==0.2.4 pycookiecheat==0.6.0 pycparser==2.21 pyee==11.1.0 pygatt==4.0.5 PyGetWindow==0.0.9 Pygments==2.17.2 pyinstaller==6.6.0 pyinstaller-hooks-contrib==2024.5 pylint==3.1.0 PyMsgBox==1.0.9 pynput==1.7.6 pyparsing==3.1.2 pyperclip==1.8.2 pypiwin32==223 pyppeteer==2.0.0 PyRect==0.2.0 PyScreeze==0.1.30 pyserial==3.5 PySocks==1.7.1 pytesseract==0.3.10 python-dateutil==2.9.0.post0 python-json-logger==2.0.7 python-Levenshtein==0.25.1 pytweening==1.2.0 pytz==2024.1 pywin32==306 pywin32-ctypes==0.2.2 pywinpty==2.0.13 PyYAML==6.0.1 pyzmq==25.1.2 qtconsole==5.5.1 QtPy==2.4.1 rapidfuzz==3.9.0 referencing==0.34.0 requests==2.31.0 rfc3339-validator==0.1.4 rfc3986-validator==0.1.1 rpds-py==0.18.0 Send2Trash==1.8.2 six==1.16.0 sniffio==1.3.1 soupsieve==2.5 stack-data==0.6.3 terminado==0.18.1 tinycss2==1.2.1 tomli==2.0.1 tomlkit==0.12.5 tornado==6.4 tqdm==4.66.4 traitlets==5.14.2 types-python-dateutil==2.9.0.20240316 typing_extensions==4.10.0 uri-template==1.3.0 urllib3==1.26.18 wcwidth==0.2.13 webcolors==1.13 webencodings==0.5.1 websocket-client==1.7.0 websockets==10.4 widgetsnbextension==4.0.10 zipp==3.18.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2. 创建配置文件"></a>2. 创建配置文件</h2><p>我们需要创建一个配置文件来保存SOCKS5代理的配置信息。创建一个名为 <code>socks5.ini</code> 的文件，内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[SOCKS5]</span></span><br><span class="line"><span class="attr">HOST</span>=your_socks5_proxy_host</span><br><span class="line"><span class="attr">PORT</span>=your_socks5_proxy_port</span><br><span class="line"><span class="attr">USERNAME</span>=your_username</span><br><span class="line"><span class="attr">PASSWORD</span>=your_password</span><br></pre></td></tr></table></figure>
+
+<p>请根据实际情况填写你的SOCKS5代理的主机、端口、用户名和密码。</p>
+<h2 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h2><p>以下是实现的完整代码，将其保存为 <code>socks5_http_proxy.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> socks</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取SOCKS5配置文件</span></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config.read(<span class="string">&#x27;socks5.ini&#x27;</span>)</span><br><span class="line"></span><br><span class="line">SOCKS5_PROXY_HOST = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;HOST&#x27;</span>]</span><br><span class="line">SOCKS5_PROXY_PORT = <span class="built_in">int</span>(config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PORT&#x27;</span>])</span><br><span class="line">SOCKS5_USERNAME = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;USERNAME&#x27;</span>]</span><br><span class="line">SOCKS5_PASSWORD = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PASSWORD&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局变量来跟踪数据传输量</span></span><br><span class="line">total_upload = <span class="number">0</span></span><br><span class="line">total_download = <span class="number">0</span></span><br><span class="line">current_upload = <span class="number">0</span></span><br><span class="line">current_download = <span class="number">0</span></span><br><span class="line">lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置SOCKS5代理</span></span><br><span class="line">socks.set_default_proxy(</span><br><span class="line">    socks.SOCKS5,</span><br><span class="line">    SOCKS5_PROXY_HOST,</span><br><span class="line">    SOCKS5_PROXY_PORT,</span><br><span class="line">    username=SOCKS5_USERNAME,</span><br><span class="line">    password=SOCKS5_PASSWORD</span><br><span class="line">)</span><br><span class="line">socket.socket = socks.socksocket</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProxyHTTPRequestHandler</span>(http.server.BaseHTTPRequestHandler):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_message</span>(<span class="params">self, <span class="built_in">format</span>, *args</span>):</span><br><span class="line">        <span class="keyword">return</span>  <span class="comment"># 禁用默认的日志记录</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_POST</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle_http_request</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">global</span> total_upload, total_download, current_upload, current_download</span><br><span class="line"></span><br><span class="line">        url = <span class="variable language_">self</span>.path</span><br><span class="line">        parsed_url = urlparse(url)</span><br><span class="line">        hostname = parsed_url.hostname</span><br><span class="line">        port = parsed_url.port <span class="keyword">or</span> (<span class="number">443</span> <span class="keyword">if</span> parsed_url.scheme == <span class="string">&#x27;https&#x27;</span> <span class="keyword">else</span> <span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            conn = socks.socksocket()</span><br><span class="line">            conn.connect((hostname, port))</span><br><span class="line"></span><br><span class="line">            <span class="variable language_">self</span>.send_response(<span class="number">200</span>)</span><br><span class="line">            <span class="variable language_">self</span>.end_headers()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;GET&#x27;</span>:</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span>?<span class="subst">&#123;parsed_url.query&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">                content_length = <span class="built_in">int</span>(<span class="variable language_">self</span>.headers[<span class="string">&#x27;Content-Length&#x27;</span>])</span><br><span class="line">                post_data = <span class="variable language_">self</span>.rfile.read(content_length)</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>) + post_data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_upload += content_length</span><br><span class="line">                    current_upload += content_length</span><br><span class="line"></span><br><span class="line">            response_data = <span class="string">b&quot;&quot;</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                data = conn.recv(<span class="number">8192</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                response_data += data</span><br><span class="line">                <span class="variable language_">self</span>.wfile.write(data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_download += <span class="built_in">len</span>(data)</span><br><span class="line">                    current_download += <span class="built_in">len</span>(data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.send_error(<span class="number">500</span>, <span class="built_in">str</span>(e).encode(<span class="string">&#x27;ascii&#x27;</span>, <span class="string">&#x27;replace&#x27;</span>).decode())</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_status</span>():</span><br><span class="line">    <span class="keyword">global</span> current_upload, current_download, total_upload, total_download</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">with</span> lock:</span><br><span class="line">            <span class="comment"># 转换当前上传和下载速率为 KB/s</span></span><br><span class="line">            current_upload_kb = current_upload / <span class="number">1024</span></span><br><span class="line">            current_download_kb = current_download / <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 转换总上传和下载数据量为 MB 或 GB</span></span><br><span class="line">            total_upload_mb = total_upload / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line">            total_download_mb = total_download / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_upload_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_download_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;\r当前上传: <span class="subst">&#123;current_upload_kb:<span class="number">.2</span>f&#125;</span> KB/s | 当前下载: <span class="subst">&#123;current_download_kb:<span class="number">.2</span>f&#125;</span> KB/s | 总上传: <span class="subst">&#123;total_upload_str&#125;</span> | 总下载: <span class="subst">&#123;total_download_str&#125;</span>&quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            current_upload = <span class="number">0</span></span><br><span class="line">            current_download = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">start_proxy_server</span>():</span><br><span class="line">    PORT = <span class="number">18888</span></span><br><span class="line">    httpd = socketserver.ThreadingTCPServer((<span class="string">&#x27;&#x27;</span>, PORT), ProxyHTTPRequestHandler)</span><br><span class="line">    threading.Thread(target=httpd.serve_forever, daemon=<span class="literal">True</span>).start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;本地HTTP代理服务器运行在端口 <span class="subst">&#123;PORT&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 启动状态显示线程</span></span><br><span class="line">    status_thread = threading.Thread(target=print_status)</span><br><span class="line">    status_thread.daemon = <span class="literal">True</span></span><br><span class="line">    status_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动代理服务器</span></span><br><span class="line">    start_proxy_server()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保持主线程运行</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-运行代理服务器"><a href="#4-运行代理服务器" class="headerlink" title="4. 运行代理服务器"></a>4. 运行代理服务器</h2><p>在终端运行代理服务器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python socks5_http_proxy.py</span><br></pre></td></tr></table></figure>
+
+<p>你会看到类似以下的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地HTTP代理服务器运行在端口 18888</span><br><span class="line">当前上传: 0.00 KB/s | 当前下载: 0.00 KB/s | 总上传: 0.00 MB | 总下载: 0.00 MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-使用代理服务器"><a href="#5-使用代理服务器" class="headerlink" title="5. 使用代理服务器"></a>5. 使用代理服务器</h2><p>在浏览器或其他支持代理配置的应用中，将代理设置为 <code>http://localhost:18888</code>。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>通过这篇教程，我们成功地创建了一个通过SOCKS5代理转发的HTTP代理服务器，并在本地端口监听。你可以根据需要进行扩展和修改，以满足特定的需求。如果你有任何问题或建议，欢迎在评论区留言。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>SOCKS5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在CentOS上安装Python 3.x 的教程</title>
+    <url>/cn/centos-setup-python3x/</url>
+    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
+<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
+<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
+<p>可以更改 URL，下载其他版本的 Python，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
+<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
+<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
+<p>执行配置脚本，指定安装路径和其他选项：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
+<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安卓7.1以上模拟器抓取HTTPS数据</title>
+    <url>/cn/android-https-data/</url>
+    <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
+<h4 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h4><ol>
+<li><strong>雷电模拟器</strong>（或者其他类似模拟器，如腾讯模拟器、夜神模拟器等）</li>
+<li><strong>Charles 抓包工具</strong><a href="https://www.lanzouw.com/iI2Uo21t2v7i">点击下载</a></li>
+<li><strong>DG 硬盘分区工具</strong><a href="https://www.lanzouw.com/idvOw21t2x3g">点击下载</a></li>
+</ol>
+<h4 id="步骤一：下载并安装Charles程序"><a href="#步骤一：下载并安装Charles程序" class="headerlink" title="步骤一：下载并安装Charles程序"></a>步骤一：下载并安装Charles程序</h4><ol>
+<li>下载Charles抓包工具。</li>
+<li>解压并安装Charles程序。</li>
+<li>启动Charles程序。</li>
+</ol>
+<h4 id="步骤二：配置Charles抓包设置"><a href="#步骤二：配置Charles抓包设置" class="headerlink" title="步骤二：配置Charles抓包设置"></a>步骤二：配置Charles抓包设置</h4><ol>
+<li>在Charles程序中，依次点击 <code>代理</code> -&gt; <code>SSL代理设置</code>。</li>
+<li>在弹出的窗口中，点击 <code>启用SSL代理</code> 复选框。</li>
+<li>点击 <code>添加</code> 按钮，输入 <code>*:443</code>，确保443端口的流量被代理。</li>
+</ol>
+<h4 id="步骤三：安装Charles根证书"><a href="#步骤三：安装Charles根证书" class="headerlink" title="步骤三：安装Charles根证书"></a>步骤三：安装Charles根证书</h4><ol>
+<li>在Charles程序中，点击 <code>帮助</code> -&gt; <code>SSL代理</code> -&gt; <code>安装Charles根证书</code>。</li>
+<li>在证书安装向导中，选择安装到 <code>受信任的根证书颁发机构</code>。</li>
+</ol>
+<h4 id="步骤四：配置安卓模拟器网络代理"><a href="#步骤四：配置安卓模拟器网络代理" class="headerlink" title="步骤四：配置安卓模拟器网络代理"></a>步骤四：配置安卓模拟器网络代理</h4><ol>
+<li>打开雷电模拟器。</li>
+<li>进入模拟器的 <code>Wi-Fi设置</code>，选择当前连接的Wi-Fi，点击 <code>修改网络</code>。</li>
+<li>勾选 <code>显示高级选项</code>，设置 <code>代理</code> 为 <code>手动</code>。</li>
+<li>代理地址填写你电脑的IP地址，端口填写Charles监听的端口（默认为8888）。</li>
+</ol>
+<h4 id="步骤五：在安卓模拟器中安装Charles证书"><a href="#步骤五：在安卓模拟器中安装Charles证书" class="headerlink" title="步骤五：在安卓模拟器中安装Charles证书"></a>步骤五：在安卓模拟器中安装Charles证书</h4><ol>
+<li>打开模拟器中的浏览器，访问 <code>http://chls.pro/ssl</code>。</li>
+<li>自动下载Charles证书，点击安装证书。</li>
+<li>系统会要求设置密码，设置密码后完成证书安装。</li>
+</ol>
+<h4 id="步骤六：获取并复制证书文件"><a href="#步骤六：获取并复制证书文件" class="headerlink" title="步骤六：获取并复制证书文件"></a>步骤六：获取并复制证书文件</h4><ol>
+<li>在模拟器中，使用文件管理器浏览到 <code>/data/misc/user/0/cacerts-added</code> 目录。</li>
+<li>找到一个以hash值命名的文件，这是刚刚安装的证书文件。</li>
+<li>将此文件复制到电脑桌面。</li>
+</ol>
+<h4 id="步骤七：将证书文件复制到系统目录"><a href="#步骤七：将证书文件复制到系统目录" class="headerlink" title="步骤七：将证书文件复制到系统目录"></a>步骤七：将证书文件复制到系统目录</h4><ol>
+<li>打开DG硬盘分区工具。</li>
+<li>使用DG工具打开模拟器的 <code>system.vmdk</code> 虚拟磁盘。</li>
+<li>浏览到 <code>/system/etc/security/cacerts/</code> 目录。</li>
+<li>将刚刚复制到桌面的hash文件（证书）复制到此目录。</li>
+<li>保存并关闭虚拟磁盘文件。</li>
+</ol>
+<h4 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h4><p>经过以上步骤设置后，你现在可以在Charles中抓取雷电模拟器中发出的HTTPS请求数据了。以下是一些优化建议：</p>
+<ul>
+<li>确保模拟器的网络设置正确，否则可能无法与Charles通信。</li>
+<li>确保Charles证书已正确安装，并被系统识别为受信任的根证书。</li>
+<li>遇到问题时，可以重新检查每一步骤是否正确执行。</li>
+</ul>
+<p>这样设置完毕后，你就能成功抓取到安卓模拟器的HTTPS流量包。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决PVE擦除磁盘时的错误提示 &quot;disk/partition &#39;/dev/sdc&#39; has a holder (500)</title>
+    <url>/cn/pve-error-disk-partition-500/</url>
+    <content><![CDATA[<h2 id="解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”"><a href="#解决-PVE-擦除磁盘时的错误提示-“disk-partition-‘-dev-sdc’-has-a-holder-500-”" class="headerlink" title="解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”"></a>解决 PVE 擦除磁盘时的错误提示 “disk&#x2F;partition ‘&#x2F;dev&#x2F;sdc’ has a holder (500)”</h2><p><img src="/img/pve5001.png" alt="disk/partition &#39;/dev/sdc&#39; has a holder (500)"></p>
+<p>根据图片可以看出 <code>/dev/sdb</code> 变成了 LVM，web控制台无法删除，使用 <code>dd</code> 命令格式化。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/dev/sdb</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5002.png" alt="格式化完成"></p>
+<p>如果等待格式化太久，可以运行命令后等待几秒钟直接 <code>Ctrl+C</code> 终止即可。</p>
+<p>然后需要重启 PVE 服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/pve5003.png" alt="重启服务器"></p>
+<p>重启完成之后就能进入 web 控制台擦除磁盘了</p>
+<p><img src="/img/pve5004.png" alt="擦除完成"></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>pve</tag>
+      </tags>
+  </entry>
+</search>
