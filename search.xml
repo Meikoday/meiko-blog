@@ -119,57 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS安装Node.js</title>
-    <url>/cn/CentOS-setup-Node.js/</url>
-    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
-
-<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3.解压源码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4.进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
-
-<p>5.配置脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
-
-<p>6.编译</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
-<p>7.部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>8.安装完成测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
-
-<p>则安装完成</p>
-<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>启用 devtoolset-10</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
-
-<p>验证 g++ 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
-
-<p>输出g++10.0则成功</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kali Uniscan-使用教程</title>
     <url>/cn/Kali-Uniscan-jichu/</url>
     <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
@@ -221,6 +170,57 @@
       </categories>
       <tags>
         <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装Node.js</title>
+    <url>/cn/CentOS-setup-Node.js/</url>
+    <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc make gcc-c++ openssl-devel wget</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码 可以在这里下载：<a href="https://registry.npmmirror.com/binary.html?path=node/">https://registry.npmmirror.com/binary.html?path=node/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://registry.npmmirror.com/-/binary/node/v21.1.0/node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3.解压源码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v21.1.0.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4.进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>  node-v21.1.0</span><br></pre></td></tr></table></figure>
+
+<p>5.配置脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
+<p>6.编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>如果提示版本过低，则安装g++10.0,安装步骤在页尾</p>
+<p>7.部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>8.安装完成测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>输出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>则安装完成</p>
+<p>如果g++版本过低，则安装 devtoolset-10运行g++10.0</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install centos-release-scl</span><br><span class="line"><span class="built_in">sudo</span> yum install devtoolset-10-gcc devtoolset-10-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>启用 devtoolset-10</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-10 bash</span><br></pre></td></tr></table></figure>
+
+<p>验证 g++ 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
+
+<p>输出g++10.0则成功</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
