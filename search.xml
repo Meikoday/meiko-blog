@@ -89,6 +89,36 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOS 7 停止维护后如何更换可用yum 源</title>
+    <url>/cn/CentOS7-repo-new/</url>
+    <content><![CDATA[<h1 id="CentOS-7-停止维护后如何更换-yum-源"><a href="#CentOS-7-停止维护后如何更换-yum-源" class="headerlink" title="CentOS 7 停止维护后如何更换 yum 源"></a>CentOS 7 停止维护后如何更换 yum 源</h1><p>随着官方宣布 CentOS 7 停止维护，原有的官方 yum 源不再可用，导致在软件安装和更新过程中报错。为了解决这一问题，用户需要将系统中的 yum 源更换为其他可用的镜像源，如阿里云或华为云等。本文将介绍如何备份原来的 yum 源，并下载并配置新的镜像源。</p>
+<h2 id="手动更换-yum-源的步骤"><a href="#手动更换-yum-源的步骤" class="headerlink" title="手动更换 yum 源的步骤"></a>手动更换 yum 源的步骤</h2><h3 id="1-备份原有的-yum-源"><a href="#1-备份原有的-yum-源" class="headerlink" title="1. 备份原有的 yum 源"></a>1. 备份原有的 yum 源</h3><p>在更换源之前，务必备份当前系统中的所有 yum 源文件，以防万一。如果新源配置出现问题，可以还原到旧的源配置。运行以下命令备份现有的 <code>.repo</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /etc/yunback/</span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/*.repo /etc/yunback/</span><br></pre></td></tr></table></figure>
+
+<p>该命令将所有 <code>.repo</code> 文件移动到 <code>/etc/yunback/</code> 目录中，确保备份妥当。</p>
+<h3 id="2-下载新的-yum-源配置文件"><a href="#2-下载新的-yum-源配置文件" class="headerlink" title="2. 下载新的 yum 源配置文件"></a>2. 下载新的 yum 源配置文件</h3><p>您可以选择多个可信的第三方镜像源进行配置。这里我们介绍两个常用的镜像源：阿里云和华为云。</p>
+<h4 id="下载阿里云的-yum-源："><a href="#下载阿里云的-yum-源：" class="headerlink" title="下载阿里云的 yum 源："></a>下载阿里云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+
+<h4 id="或者下载华为云的-yum-源："><a href="#或者下载华为云的-yum-源：" class="headerlink" title="或者下载华为云的 yum 源："></a>或者下载华为云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo https://repo.huaweicloud.com/repository/conf/CentOS-7-anon.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-处理没有-wget-的情况"><a href="#3-处理没有-wget-的情况" class="headerlink" title="3. 处理没有 wget 的情况"></a>3. 处理没有 wget 的情况</h3><p>如果系统中未安装 <code>wget</code>，可以使用 <code>curl</code> 命令来下载镜像源配置文件。例如，要使用阿里云的 yum 源，可以运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://mirrors.aliyun.com/repo/Centos-7.repo -o /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-生成-yum-缓存"><a href="#4-生成-yum-缓存" class="headerlink" title="4. 生成 yum 缓存"></a>4. 生成 yum 缓存</h3><p>下载新的源文件后，执行以下命令生成缓存，使新源配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<p>此时系统会从新配置的镜像源中获取软件包列表和其他数据。完成后，您就可以正常使用 <code>yum</code> 命令进行软件安装和更新。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>由于 CentOS 7 的官方维护已经停止，用户需要手动更换 yum 源以确保系统能够继续正常更新和安装软件。如何备份原有的 yum 源，并手动下载配置新的镜像源，如阿里云和华为云。</p>
+<p>通过以上步骤，您的 CentOS 7 系统将能正常使用第三方镜像源进行软件管理。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CentOS安装Node.js</title>
     <url>/cn/CentOS-setup-Node.js/</url>
     <content><![CDATA[<p>1.安装 gcc make openssl wget</p>
@@ -137,36 +167,6 @@
       <tags>
         <tag>centos</tag>
         <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS 7 停止维护后如何更换可用yum 源</title>
-    <url>/cn/CentOS7-repo-new/</url>
-    <content><![CDATA[<h1 id="CentOS-7-停止维护后如何更换-yum-源"><a href="#CentOS-7-停止维护后如何更换-yum-源" class="headerlink" title="CentOS 7 停止维护后如何更换 yum 源"></a>CentOS 7 停止维护后如何更换 yum 源</h1><p>随着官方宣布 CentOS 7 停止维护，原有的官方 yum 源不再可用，导致在软件安装和更新过程中报错。为了解决这一问题，用户需要将系统中的 yum 源更换为其他可用的镜像源，如阿里云或华为云等。本文将介绍如何备份原来的 yum 源，并下载并配置新的镜像源。</p>
-<h2 id="手动更换-yum-源的步骤"><a href="#手动更换-yum-源的步骤" class="headerlink" title="手动更换 yum 源的步骤"></a>手动更换 yum 源的步骤</h2><h3 id="1-备份原有的-yum-源"><a href="#1-备份原有的-yum-源" class="headerlink" title="1. 备份原有的 yum 源"></a>1. 备份原有的 yum 源</h3><p>在更换源之前，务必备份当前系统中的所有 yum 源文件，以防万一。如果新源配置出现问题，可以还原到旧的源配置。运行以下命令备份现有的 <code>.repo</code> 文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /etc/yunback/</span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/*.repo /etc/yunback/</span><br></pre></td></tr></table></figure>
-
-<p>该命令将所有 <code>.repo</code> 文件移动到 <code>/etc/yunback/</code> 目录中，确保备份妥当。</p>
-<h3 id="2-下载新的-yum-源配置文件"><a href="#2-下载新的-yum-源配置文件" class="headerlink" title="2. 下载新的 yum 源配置文件"></a>2. 下载新的 yum 源配置文件</h3><p>您可以选择多个可信的第三方镜像源进行配置。这里我们介绍两个常用的镜像源：阿里云和华为云。</p>
-<h4 id="下载阿里云的-yum-源："><a href="#下载阿里云的-yum-源：" class="headerlink" title="下载阿里云的 yum 源："></a>下载阿里云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
-
-<h4 id="或者下载华为云的-yum-源："><a href="#或者下载华为云的-yum-源：" class="headerlink" title="或者下载华为云的 yum 源："></a>或者下载华为云的 yum 源：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo https://repo.huaweicloud.com/repository/conf/CentOS-7-anon.repo</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-处理没有-wget-的情况"><a href="#3-处理没有-wget-的情况" class="headerlink" title="3. 处理没有 wget 的情况"></a>3. 处理没有 wget 的情况</h3><p>如果系统中未安装 <code>wget</code>，可以使用 <code>curl</code> 命令来下载镜像源配置文件。例如，要使用阿里云的 yum 源，可以运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://mirrors.aliyun.com/repo/Centos-7.repo -o /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-生成-yum-缓存"><a href="#4-生成-yum-缓存" class="headerlink" title="4. 生成 yum 缓存"></a>4. 生成 yum 缓存</h3><p>下载新的源文件后，执行以下命令生成缓存，使新源配置生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-
-<p>此时系统会从新配置的镜像源中获取软件包列表和其他数据。完成后，您就可以正常使用 <code>yum</code> 命令进行软件安装和更新。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>由于 CentOS 7 的官方维护已经停止，用户需要手动更换 yum 源以确保系统能够继续正常更新和安装软件。如何备份原有的 yum 源，并手动下载配置新的镜像源，如阿里云和华为云。</p>
-<p>通过以上步骤，您的 CentOS 7 系统将能正常使用第三方镜像源进行软件管理。</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
       </tags>
   </entry>
   <entry>
