@@ -625,6 +625,36 @@
       </tags>
   </entry>
   <entry>
+    <title>在CentOS上安装Python 3.x 的教程</title>
+    <url>/cn/centos-setup-python3x/</url>
+    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
+<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
+<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
+<p>可以更改 URL，下载其他版本的 Python，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
+<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
+<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
+<p>执行配置脚本，指定安装路径和其他选项：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
+<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安卓7.1以上模拟器抓取HTTPS数据</title>
     <url>/cn/android-https-data/</url>
     <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
@@ -706,36 +736,6 @@
       </categories>
       <tags>
         <tag>pve</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在CentOS上安装Python 3.x 的教程</title>
-    <url>/cn/centos-setup-python3x/</url>
-    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
-<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
-<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
-<p>可以更改 URL，下载其他版本的 Python，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
-<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
-<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
-<p>执行配置脚本，指定安装路径和其他选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
-<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
-<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>python</tag>
       </tags>
   </entry>
 </search>
