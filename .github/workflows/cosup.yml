@@ -1,0 +1,43 @@
+name: 上传文件到腾讯云cos存储并刷新cdn缓存
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  install-and-run:
+    runs-on: ubuntu-latest
+    environment: cos
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v2
+
+      - name: 克隆 coscmd 仓库
+        run: |
+          git clone https://github.com/Meikoday/coscmd.git
+
+      - name: 使用 pip 安装 coscmd
+        run: |
+          cd coscmd
+          pip install .
+
+      - name: 配置上传
+        run: |
+          coscmd config -a ${{ secrets.SECRET_ID }} -s ${{ secrets.SECRET_KEY }} -b ${{ secrets.BUCKET }} -r ${{ secrets.REGION }}
+ 
+      - name: 上传文件
+        run: |
+          coscmd upload -rfs --delete ./ / --ignore "./.git/*,./.github/*,./coscmd/*"
+
+      - name: 下载cdn刷新脚本
+        run: |
+          git clone https://github.com/Meikoday/tencentcloud-auto-tools
+
+      - name: 执行腾讯云CDN刷新
+        run: |
+          cd tencentcloud-auto-tools
+          python tencentcloud_PurgePathCache.py -id ${{ secrets.SECRET_ID }} -key ${{ secrets.SECRET_KEY }}

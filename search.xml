@@ -170,6 +170,60 @@
       </tags>
   </entry>
   <entry>
+    <title>Kali Uniscan-使用教程</title>
+    <url>/cn/Kali-Uniscan-jichu/</url>
+    <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
+<h2 id="安装-Uniscan"><a href="#安装-Uniscan" class="headerlink" title="安装 Uniscan"></a>安装 Uniscan</h2><p>Kali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：</p>
+<ol>
+<li><p>克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/poerschke/Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入 Uniscan 目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd Uniscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需的 Perl 模块：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">install Moose</span><br><span class="line">cpan install threads</span><br><span class="line">cpan install Thread::Queue</span><br><span class="line">cpan install LWP::UserAgent</span><br><span class="line">cpan install LWP::Protocol::https</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="使用-Uniscan-执行-Web-扫描"><a href="#使用-Uniscan-执行-Web-扫描" class="headerlink" title="使用 Uniscan 执行 Web 扫描"></a>使用 Uniscan 执行 Web 扫描</h2><p>以下是 Uniscan 的一些基本用法：</p>
+<ol>
+<li><p>显示帮助信息：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -h</span><br><span class="line">使用方法：uniscan [选项]</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  -u, --url &lt;url&gt;          目标 URL（例如：http://example.com/）</span><br><span class="line">  -h, --<span class="built_in">help</span>               显示帮助信息</span><br><span class="line">  -qd, --dir-scan          执行目录扫描</span><br><span class="line">  -qf, --file-scan         执行文件扫描</span><br><span class="line">  -qr, --rfi-scan          检查</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行目录扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qd</span><br></pre></td></tr></table></figure>
+
+<p><code>-u</code> 参数用于指定目标 URL，而 <code>-qd</code> 参数表示执行目录扫描。</p>
+</li>
+<li><p>执行文件扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qf</span><br></pre></td></tr></table></figure>
+
+<p><code>-qf</code> 参数表示执行文件扫描。</p>
+</li>
+<li><p>检查远程文件包含漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qr</span><br></pre></td></tr></table></figure>
+
+<p><code>-qr</code> 参数表示检查远程文件包含漏洞。</p>
+</li>
+<li><p>检查跨站脚本漏洞：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qx</span><br></pre></td></tr></table></figure>
+
+<p><code>-qx</code> 参数表示检查跨站脚本漏洞。</p>
+</li>
+<li><p>同时执行多种扫描：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qdfrx</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将同时执行目录扫描、文件扫描、远程文件包含漏洞检查和跨站脚本漏洞检查。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu安装Docker和Docker-Compose</title>
     <url>/cn/Ubuntu-Docker-Docker-Compose/</url>
     <content><![CDATA[<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><ol>
@@ -228,60 +282,6 @@
       <tags>
         <tag>Ubuntu</tag>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali Uniscan-使用教程</title>
-    <url>/cn/Kali-Uniscan-jichu/</url>
-    <content><![CDATA[<h1 id="Kali-Uniscan-使用教程"><a href="#Kali-Uniscan-使用教程" class="headerlink" title="Kali Uniscan - 使用教程"></a>Kali Uniscan - 使用教程</h1><p>Kali Uniscan 是一个基于 Perl 的简单强大的 Web 扫描器，用于评估 Web 应用程序的安全性。它具有多种功能，如目录扫描、文件扫描、远程文件包含、跨站脚本等。在本教程中，我们将详细介绍如何使用 Kali Uniscan 执行 Web 应用程序扫描。</p>
-<h2 id="安装-Uniscan"><a href="#安装-Uniscan" class="headerlink" title="安装 Uniscan"></a>安装 Uniscan</h2><p>Kali Linux 自带了 Uniscan，无需额外安装。如果您使用的是其他 Linux 发行版，可以按照以下步骤安装 Uniscan：</p>
-<ol>
-<li><p>克隆 Uniscan 的 GitHub 仓库，由于官方项目挂了，目前使用的镜像，请注意审查代码是否安全：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/poerschke/Uniscan</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入 Uniscan 目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd Uniscan</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装所需的 Perl 模块：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">install Moose</span><br><span class="line">cpan install threads</span><br><span class="line">cpan install Thread::Queue</span><br><span class="line">cpan install LWP::UserAgent</span><br><span class="line">cpan install LWP::Protocol::https</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="使用-Uniscan-执行-Web-扫描"><a href="#使用-Uniscan-执行-Web-扫描" class="headerlink" title="使用 Uniscan 执行 Web 扫描"></a>使用 Uniscan 执行 Web 扫描</h2><p>以下是 Uniscan 的一些基本用法：</p>
-<ol>
-<li><p>显示帮助信息：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -h</span><br><span class="line">使用方法：uniscan [选项]</span><br><span class="line"></span><br><span class="line">选项：</span><br><span class="line">  -u, --url &lt;url&gt;          目标 URL（例如：http://example.com/）</span><br><span class="line">  -h, --<span class="built_in">help</span>               显示帮助信息</span><br><span class="line">  -qd, --dir-scan          执行目录扫描</span><br><span class="line">  -qf, --file-scan         执行文件扫描</span><br><span class="line">  -qr, --rfi-scan          检查</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行目录扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qd</span><br></pre></td></tr></table></figure>
-
-<p><code>-u</code> 参数用于指定目标 URL，而 <code>-qd</code> 参数表示执行目录扫描。</p>
-</li>
-<li><p>执行文件扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qf</span><br></pre></td></tr></table></figure>
-
-<p><code>-qf</code> 参数表示执行文件扫描。</p>
-</li>
-<li><p>检查远程文件包含漏洞：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qr</span><br></pre></td></tr></table></figure>
-
-<p><code>-qr</code> 参数表示检查远程文件包含漏洞。</p>
-</li>
-<li><p>检查跨站脚本漏洞：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qx</span><br></pre></td></tr></table></figure>
-
-<p><code>-qx</code> 参数表示检查跨站脚本漏洞。</p>
-</li>
-<li><p>同时执行多种扫描：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uniscan -u http://example.com -qdfrx</span><br></pre></td></tr></table></figure>
-
-<p>上述命令将同时执行目录扫描、文件扫描、远程文件包含漏洞检查和跨站脚本漏洞检查。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>kali</tag>
       </tags>
   </entry>
   <entry>
@@ -367,6 +367,39 @@
       </tags>
   </entry>
   <entry>
+    <title>自建KMS激活服务器</title>
+    <url>/cn/kms-server/</url>
+    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
+<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
+
+<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
+
+<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>kms</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</title>
     <url>/cn/pve-set-desk/</url>
     <content><![CDATA[<p>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</p>
@@ -401,39 +434,6 @@
       </categories>
       <tags>
         <tag>pve</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自建KMS激活服务器</title>
-    <url>/cn/kms-server/</url>
-    <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
-<h1 id="下载vlmcsd"><a href="#下载vlmcsd" class="headerlink" title="下载vlmcsd"></a>下载vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Meikoday/kms/blob/main/binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf binaries.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h1 id="进入对应目录"><a href="#进入对应目录" class="headerlink" title="进入对应目录"></a>进入对应目录</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd binaries/Linux/intel/static</span><br></pre></td></tr></table></figure>
-
-<h1 id="将vlmcsd的二进制文件拷贝到-usr-sbin"><a href="#将vlmcsd的二进制文件拷贝到-usr-sbin" class="headerlink" title="将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin"></a>将vlmcsd的二进制文件拷贝到&#x2F;usr&#x2F;sbin</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp vlmcsd-x64-musl-static /usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行vlmcsd"><a href="#运行vlmcsd" class="headerlink" title="运行vlmcsd"></a>运行vlmcsd</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/sbin/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -apn|grep &#x27;vlmcsd&#x27;</span><br><span class="line">tcp        0      0 0.0.0.0:1688            0.0.0.0:*               LISTEN      2835/vlmcsd</span><br><span class="line">tcp6       0      0 :::1688                 :::*                    LISTEN      2835/vlmcsd</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=1688/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<h1 id="打开TCP1688端口"><a href="#打开TCP1688端口" class="headerlink" title="打开TCP1688端口"></a>打开TCP1688端口</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<h1 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;/usr/sbin/vlmcsd &gt; /dev/null 2&gt;&amp;1&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<h1 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vlmcsd -h</span><br></pre></td></tr></table></figure>
-
-<p>GitHub链接 <a href="https://github.com/Meikoday/kms">https://github.com/Meikoday/kms</a></p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>kms</tag>
       </tags>
   </entry>
   <entry>
@@ -625,36 +625,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在CentOS上安装Python 3.x 的教程</title>
-    <url>/cn/centos-setup-python3x/</url>
-    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
-<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
-<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
-<p>可以更改 URL，下载其他版本的 Python，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
-<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
-<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
-<p>执行配置脚本，指定安装路径和其他选项：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
-<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
-<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安卓7.1以上模拟器抓取HTTPS数据</title>
     <url>/cn/android-https-data/</url>
     <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
@@ -736,6 +706,36 @@
       </categories>
       <tags>
         <tag>pve</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在CentOS上安装Python 3.x 的教程</title>
+    <url>/cn/centos-setup-python3x/</url>
+    <content><![CDATA[<h1 id="在-CentOS-上安装-Python-3-x-的教程"><a href="#在-CentOS-上安装-Python-3-x-的教程" class="headerlink" title="在 CentOS 上安装 Python 3.x 的教程"></a>在 CentOS 上安装 Python 3.x 的教程</h1><p>在 CentOS 系统中手动安装 Python 3.x 版本是一个常见的需求。本文将详细介绍如何安装 Python 3.7.9，并提供灵活的方法以便用户可以选择其他版本，例如 3.8 或 3.9。</p>
+<h2 id="1-安装必要的依赖包"><a href="#1-安装必要的依赖包" class="headerlink" title="1. 安装必要的依赖包"></a>1. 安装必要的依赖包</h2><p>首先，更新系统并安装构建 Python 所需的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum -y install wget git zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel zlib1g-dev zlib*</span><br></pre></td></tr></table></figure>
+<p>##2. 下载 Python 源码<br>接下来，下载你需要安装的 Python 版本的源码包。这里以 Python 3.7.9 为例，你可以根据需要修改版本号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz</span><br></pre></td></tr></table></figure>
+<p>可以更改 URL，下载其他版本的 Python，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz</span><br></pre></td></tr></table></figure>
+<p>##3. 解压源码包<br>使用<code>tar</code>命令解压下载的源码包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvJf Python-3.7.9.tar.xz</span><br><span class="line"><span class="comment"># 修改为下载的文件名</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.8.10.tgz</span></span><br><span class="line"><span class="comment"># tar -xvJf Python-3.9.7.tgz</span></span><br></pre></td></tr></table></figure>
+<p>##4. 配置编译环境<br>创建一个目录用于安装 Python，并进入源码目录进行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/local/python3</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.9</span><br><span class="line"><span class="comment"># 修改为下载的文件夹名称</span></span><br><span class="line"><span class="comment"># cd Python-3.8.10</span></span><br><span class="line"><span class="comment"># cd Python-3.9.7</span></span><br></pre></td></tr></table></figure>
+<p>执行配置脚本，指定安装路径和其他选项：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/python3 --enable-optimizations --with-ssl</span><br></pre></td></tr></table></figure>
+<p>##. 编译与安装<br>使用<code>make</code>命令编译源码，然后使用<code>make install</code>安装 Python：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>##6. 创建软链接<br>为了方便使用新安装的 Python 和 pip，创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/python3 /usr/bin/python3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/python3/bin/pip3 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<p>##7. 验证安装<br>检查 Python 和 pip 的版本，确认安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>python</tag>
       </tags>
   </entry>
 </search>
