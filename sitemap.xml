@@ -244,13 +244,6 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/kali/</loc>
-    <lastmod>2025-01-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.meiko.ink/tags/Ubuntu/</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -259,6 +252,13 @@
   
   <url>
     <loc>https://www.meiko.ink/tags/Docker/</loc>
+    <lastmod>2025-01-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.meiko.ink/tags/kali/</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -279,14 +279,14 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/kms/</loc>
+    <loc>https://www.meiko.ink/tags/pve/</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/pve/</loc>
+    <loc>https://www.meiko.ink/tags/kms/</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
