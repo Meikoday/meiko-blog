@@ -437,6 +437,33 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu24.04新版更换国内源</title>
+    <url>/cn/ubuntu2404replacesource/</url>
+    <content><![CDATA[<h1 id="Ubuntu-24-04-更换源教程"><a href="#Ubuntu-24-04-更换源教程" class="headerlink" title="Ubuntu 24.04 更换源教程"></a>Ubuntu 24.04 更换源教程</h1><p>Ubuntu 24.04 版本更换源的方式有所变化，不再使用 <code>sources.list</code> 文件，而是改为使用 <code>/etc/apt/sources.list.d/ubuntu.sources</code> 配置文件。以下是更换为国内源的方式。</p>
+<h2 id="一、源文件位置"><a href="#一、源文件位置" class="headerlink" title="一、源文件位置"></a>一、源文件位置</h2><p>Ubuntu 24.04 采用新的源地址配置文件。升级到 24.04 之后，系统会使用以下文件来配置源：<code>/etc/apt/sources.list.d/ubuntu.sources</code></p>
+<h2 id="二、开始更换源"><a href="#二、开始更换源" class="headerlink" title="二、开始更换源"></a>二、开始更换源</h2><h3 id="1-备份源配置文件"><a href="#1-备份源配置文件" class="headerlink" title="1. 备份源配置文件"></a>1. 备份源配置文件</h3><p>在进行任何更改之前，建议先备份当前的源配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用命令直接更换源"><a href="#2-使用命令直接更换源" class="headerlink" title="2. 使用命令直接更换源"></a>2. 使用命令直接更换源</h3><p>可以使用 <code>curl</code> 命令来直接更换源，以下命令将会下载源文件并替换掉原来的配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl www.meiko.ink/sh/ubuntu.source &gt; /etc/apt/sources.list.d/ubuntu.sources</span><br></pre></td></tr></table></figure>
+<h3 id="3-手动编辑源配置文件"><a href="#3-手动编辑源配置文件" class="headerlink" title="3. 手动编辑源配置文件"></a>3. 手动编辑源配置文件</h3><p>手动编辑源配置文件，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/apt/sources.list.d/ubuntu.sources</span><br></pre></td></tr></table></figure>
+<h3 id="4-添加中科大源"><a href="#4-添加中科大源" class="headerlink" title="4. 添加中科大源"></a>4. 添加中科大源</h3><p>你可以手动将中科大的源添加到 <code>ubuntu.sources</code> 文件中。源配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.ustc.edu.cn/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+<h3 id="5-更新缓存"><a href="#5-更新缓存" class="headerlink" title="5. 更新缓存"></a>5. 更新缓存</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+<h2 id="三、其他常见镜像源"><a href="#三、其他常见镜像源" class="headerlink" title="三、其他常见镜像源"></a>三、其他常见镜像源</h2><p>以下几个常见的镜像源：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+<h2 id="清华源"><a href="#清华源" class="headerlink" title="清华源"></a>清华源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+<h2 id="阿里云源"><a href="#阿里云源" class="headerlink" title="阿里云源"></a>阿里云源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.aliyun.com/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+<h2 id="网易源"><a href="#网易源" class="headerlink" title="网易源"></a>网易源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.163.com/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+<h2 id="成功更换了-Ubuntu-24-04-的源。如果遇到任何问题，可以随时恢复到备份的配置文件。"><a href="#成功更换了-Ubuntu-24-04-的源。如果遇到任何问题，可以随时恢复到备份的配置文件。" class="headerlink" title="成功更换了 Ubuntu 24.04 的源。如果遇到任何问题，可以随时恢复到备份的配置文件。"></a>成功更换了 <code>Ubuntu 24.04</code> 的源。如果遇到任何问题，可以随时恢复到备份的配置文件。</h2>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为没有IPV6的服务器添加pv6教程</title>
     <url>/cn/add-ipv6-address/</url>
     <content><![CDATA[<p><em><strong>为没有IPV6的服务器添加pv6教程</strong></em></p>
