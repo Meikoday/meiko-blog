@@ -400,12 +400,11 @@
       </tags>
   </entry>
   <entry>
-    <title>ollamaDeepSeek离线安装</title>
+    <title>ollama-DeepSeek模型离线安装</title>
     <url>/cn/ollama-DeepSeek-offline-mod/</url>
-    <content><![CDATA[<h1 id="Ollama-安装及使用指南"><a href="#Ollama-安装及使用指南" class="headerlink" title="Ollama 安装及使用指南"></a>Ollama 安装及使用指南</h1><p>Ollama 是一款支持本地运行 AI 模型的工具，适用于 macOS、Windows、Linux 以及 Docker 容器。其安装、使用及模型下载都非常简单。</p>
+    <content><![CDATA[<p>Ollama 是一款支持本地运行 AI 模型的工具，适用于 macOS、Windows、Linux 以及 Docker 容器。其安装、使用及模型下载都非常简单。</p>
 <p>官方网站：<a href="https://ollama.com/">Ollama</a></p>
-<p>如果下载过慢，可以使用整合包（包含 Ollama 主程序和离线模型文件）：</p>
-<ul>
+<h1 id="如果下载过慢，可以使用整合包（包含-Ollama-主程序和离线模型文件）："><a href="#如果下载过慢，可以使用整合包（包含-Ollama-主程序和离线模型文件）：" class="headerlink" title="如果下载过慢，可以使用整合包（包含 Ollama 主程序和离线模型文件）："></a>如果下载过慢，可以使用整合包（包含 Ollama 主程序和离线模型文件）：</h1><ul>
 <li><a href="https://pan.quark.cn/s/d01a923dda9b">整合包下载地址</a></li>
 </ul>
 <hr>
