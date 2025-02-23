@@ -311,6 +311,68 @@
       </tags>
   </entry>
   <entry>
+    <title>docker搭建teamspeak3服务器</title>
+    <url>/cn/docker-setup-teamspeak3forserver/</url>
+    <content><![CDATA[<h1 id="Docker-搭建-TeamSpeak-3-服务器教程"><a href="#Docker-搭建-TeamSpeak-3-服务器教程" class="headerlink" title="Docker 搭建 TeamSpeak 3 服务器教程"></a>Docker 搭建 TeamSpeak 3 服务器教程</h1><h2 id="为什么选择-TeamSpeak-3？"><a href="#为什么选择-TeamSpeak-3？" class="headerlink" title="为什么选择 TeamSpeak 3？"></a>为什么选择 TeamSpeak 3？</h2><p>TeamSpeak 3（TS3）是一款高性能的语音聊天软件，类似于 YY 语音。但 YY 客户端功能繁杂，占用大量 CPU 资源。因此，通过自建 TS3 服务器，可以显著降低资源占用，提升语音通话体验。</p>
+<hr>
+<h2 id="1-创建-TS3-服务器目录"><a href="#1-创建-TS3-服务器目录" class="headerlink" title="1. 创建 TS3 服务器目录"></a>1. 创建 TS3 服务器目录</h2><p>在服务器上创建存放 TS3 数据的文件夹：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/teamspeak</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-使用-Docker-安装-TeamSpeak-3-服务器"><a href="#2-使用-Docker-安装-TeamSpeak-3-服务器" class="headerlink" title="2. 使用 Docker 安装 TeamSpeak 3 服务器"></a>2. 使用 Docker 安装 TeamSpeak 3 服务器</h2><p>运行以下 Docker 命令，拉取并安装 TS3 服务器镜像：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name teamspeak \</span><br><span class="line">  -v ~/teamspeak:/var/ts3server \</span><br><span class="line">  -p 9987:9987/udp \</span><br><span class="line">  -p 10011:10011 \</span><br><span class="line">  -p 30033:30033 \</span><br><span class="line">  -e TS3SERVER_LICENSE=accept \</span><br><span class="line">  --restart=always \</span><br><span class="line">  teamspeak</span><br></pre></td></tr></table></figure>
+
+<p>此命令的作用：</p>
+<ul>
+<li><code>-d</code>：后台运行容器。</li>
+<li><code>--name teamspeak</code>：容器名称设为 <code>teamspeak</code>。</li>
+<li><code>-v ~/teamspeak:/var/ts3server</code>：挂载数据目录，确保数据持久化。</li>
+<li><code>-p 9987:9987/udp</code>：开放 TS3 语音服务端口。</li>
+<li><code>-p 10011:10011</code>：开放 TS3 查询端口。</li>
+<li><code>-p 30033:30033</code>：开放 TS3 文件传输端口。</li>
+<li><code>-e TS3SERVER_LICENSE=accept</code>：接受 TS3 服务器使用协议。</li>
+<li><code>--restart=always</code>：确保容器异常退出后自动重启。</li>
+</ul>
+<hr>
+<h2 id="3-获取-TS3-服务器账号信息"><a href="#3-获取-TS3-服务器账号信息" class="headerlink" title="3. 获取 TS3 服务器账号信息"></a>3. 获取 TS3 服务器账号信息</h2><p>安装完成后，使用以下命令查看 TS3 服务器的 <strong>账号、密码、API Key 和 Token</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker logs --<span class="built_in">tail</span>=100 teamspeak</span><br></pre></td></tr></table></figure>
+
+<p>输出示例（可能包含以下内容）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ServerAdmin loginname: admin</span><br><span class="line">ServerAdmin password: XXXXXX</span><br><span class="line">API Key: XXXXXX</span><br><span class="line">Token: XXXXXX</span><br></pre></td></tr></table></figure>
+
+<p>建议将这些信息 <strong>复制并保存到文档中</strong>，以备后续使用。</p>
+<blockquote>
+<p><img src="/img/tes3serverapt.png" alt="server截图"></p>
+</blockquote>
+<hr>
+<h2 id="4-下载并配置-TeamSpeak-3-客户端"><a href="#4-下载并配置-TeamSpeak-3-客户端" class="headerlink" title="4. 下载并配置 TeamSpeak 3 客户端"></a>4. 下载并配置 TeamSpeak 3 客户端</h2><h3 id="4-1-下载-TS3-客户端"><a href="#4-1-下载-TS3-客户端" class="headerlink" title="4.1 下载 TS3 客户端"></a>4.1 下载 TS3 客户端</h3><p>点击以下链接下载 <strong>TeamSpeak 3 客户端</strong>：</p>
+<ul>
+<li><a href="https://www.teamspeak.com/zh-CN/downloads/#ts3client">TS3 客户端下载</a></li>
+<li><a href="https://github.com/jitingcn/TS3-Translation_zh-CN/releases">TS3 客户端汉化包下载</a></li>
+</ul>
+<h3 id="4-2-连接-TS3-服务器"><a href="#4-2-连接-TS3-服务器" class="headerlink" title="4.2 连接 TS3 服务器"></a>4.2 连接 TS3 服务器</h3><ol>
+<li>启动 TeamSpeak 3 客户端。</li>
+<li>选择 <strong>连接至服务器</strong>。</li>
+<li>输入 <strong>服务器 IP 地址</strong>（即你的 VPS 或服务器 IP）。</li>
+<li>输入 <strong>获取的 Token</strong> 进行身份验证。</li>
+<li>登录成功后，即可使用 TS3 语音功能。</li>
+</ol>
+<hr>
+<h2 id="5-重要提示"><a href="#5-重要提示" class="headerlink" title="5. 重要提示"></a>5. 重要提示</h2><ul>
+<li><strong>务必使用 TS3 版本</strong>，<strong>TS6 的 CPU 占用较高</strong>，可能影响客户端性能。</li>
+<li><strong>建议设置防火墙规则</strong>，仅允许必要端口访问，以增强安全性。</li>
+</ul>
+<hr>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>ts3</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自建fpr服务器</title>
     <url>/cn/fpr-server/</url>
     <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
