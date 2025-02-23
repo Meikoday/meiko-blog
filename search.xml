@@ -400,6 +400,119 @@
       </tags>
   </entry>
   <entry>
+    <title>ollamaDeepSeek离线安装</title>
+    <url>/cn/ollama-DeepSeek-offline-mod/</url>
+    <content><![CDATA[<h1 id="Ollama-安装及使用指南"><a href="#Ollama-安装及使用指南" class="headerlink" title="Ollama 安装及使用指南"></a>Ollama 安装及使用指南</h1><p>Ollama 是一款支持本地运行 AI 模型的工具，适用于 macOS、Windows、Linux 以及 Docker 容器。其安装、使用及模型下载都非常简单。</p>
+<p>官方网站：<a href="https://ollama.com/">Ollama</a></p>
+<p>如果下载过慢，可以使用整合包（包含 Ollama 主程序和离线模型文件）：</p>
+<ul>
+<li><a href="https://pan.quark.cn/s/d01a923dda9b">整合包下载地址</a></li>
+</ul>
+<hr>
+<h2 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h2><p>Ollama 对硬件的基础要求较低，但不同规模的模型对资源的需求不同。基本建议如下：</p>
+<table>
+<thead>
+<tr>
+<th>模型参数</th>
+<th>模型大小</th>
+<th>建议 CPU</th>
+<th>建议内存</th>
+<th>建议显存</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1.5B</strong></td>
+<td>1.1GB</td>
+<td>4 核</td>
+<td>4~8GB</td>
+<td>4GB</td>
+<td>轻量级，普通文本处理</td>
+</tr>
+<tr>
+<td><strong>7B</strong></td>
+<td>4.7GB</td>
+<td>8 核</td>
+<td>16GB</td>
+<td>14GB</td>
+<td>硬件要求适中，性能较好</td>
+</tr>
+<tr>
+<td><strong>8B</strong></td>
+<td>4.9GB</td>
+<td>8 核</td>
+<td>16GB</td>
+<td>14GB</td>
+<td>略强于 7B，精度更高</td>
+</tr>
+<tr>
+<td><strong>14B</strong></td>
+<td>9GB</td>
+<td>12 核</td>
+<td>32GB</td>
+<td>26GB</td>
+<td>适合复杂任务，如数学推理、代码生成</td>
+</tr>
+<tr>
+<td><strong>32B</strong></td>
+<td>20GB</td>
+<td>16 核</td>
+<td>64GB</td>
+<td>48GB</td>
+<td>高精度任务</td>
+</tr>
+<tr>
+<td><strong>70B</strong></td>
+<td>43GB</td>
+<td>32 核</td>
+<td>128GB</td>
+<td>140GB</td>
+<td>大规模计算和高复杂度任务</td>
+</tr>
+<tr>
+<td><strong>671B</strong></td>
+<td>404GB</td>
+<td>64 核</td>
+<td>512GB</td>
+<td>1342GB</td>
+<td>超大规模，性能卓越</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="修改-Ollama-默认模型存储位置"><a href="#修改-Ollama-默认模型存储位置" class="headerlink" title="修改 Ollama 默认模型存储位置"></a>修改 Ollama 默认模型存储位置</h2><p>Ollama 默认存储模型的路径如下：</p>
+<ul>
+<li><strong>Windows</strong>：<code>C:\Users\&lt;username&gt;\.ollama\models</code></li>
+</ul>
+<p>如果磁盘空间不足，可以修改环境变量 <code>OLLAMA_MODELS</code> 指定新的存储路径。例如：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Windows 下执行命令（CMD）</span></span><br><span class="line">setx OLLAMA_MODELS D:\data\ollama\models</span><br></pre></td></tr></table></figure>
+
+<p>将云盘下载的模型解压至该目录后，运行 <code>ollama list</code> 即可查看已安装的模型。</p>
+<hr>
+<h2 id="Ollama-常用命令"><a href="#Ollama-常用命令" class="headerlink" title="Ollama 常用命令"></a>Ollama 常用命令</h2><p>Ollama 提供了丰富的 CLI（命令行）工具，便于管理和运行模型。</p>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ollama --<span class="built_in">help</span>            <span class="comment"># 查看帮助信息</span></span><br><span class="line">ollama serve             <span class="comment"># 启动 Ollama 服务</span></span><br><span class="line">ollama list              <span class="comment"># 列出所有已安装模型</span></span><br><span class="line">ollama ps                <span class="comment"># 列出所有正在运行的模型</span></span><br><span class="line">ollama show &lt;model&gt;      <span class="comment"># 查看模型详细信息</span></span><br><span class="line">ollama run &lt;model&gt;       <span class="comment"># 运行模型（若不存在则自动下载）</span></span><br><span class="line">ollama stop &lt;model&gt;      <span class="comment"># 停止运行的模型</span></span><br><span class="line">ollama <span class="built_in">rm</span> &lt;model&gt;        <span class="comment"># 删除指定模型</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="模型管理"><a href="#模型管理" class="headerlink" title="模型管理"></a>模型管理</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ollama pull &lt;model&gt;      <span class="comment"># 下载指定模型</span></span><br><span class="line">ollama push &lt;model&gt;      <span class="comment"># 推送模型到远程仓库</span></span><br><span class="line">ollama <span class="built_in">cp</span> &lt;old&gt; &lt;new&gt;    <span class="comment"># 复制模型</span></span><br><span class="line">ollama create &lt;model&gt; -f Modelfile  <span class="comment"># 从 Modelfile 创建新模型</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="开启局域网访问-Ollama-服务"><a href="#开启局域网访问-Ollama-服务" class="headerlink" title="开启局域网访问 Ollama 服务"></a>开启局域网访问 Ollama 服务</h2><p>默认情况下，Ollama API 仅允许本机访问。如果需要局域网其他设备访问，需要修改 <code>OLLAMA_HOST</code> 和 <code>OLLAMA_ORIGINS</code> 环境变量。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Windows（CMD）设置</span></span><br><span class="line">setx OLLAMA_HOST 0.0.0.0:11434</span><br><span class="line">setx OLLAMA_ORIGINS *</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://ollama.com/">Ollama 官方网站</a></li>
+<li><a href="https://lzw.me/a/ollama-deepseek-open-webui.html">Ollama + DeepSeek + Open WebUI 部署教程</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>ollama</tag>
+        <tag>deepseek</tag>
+        <tag>ai</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</title>
     <url>/cn/pve-set-desk/</url>
     <content><![CDATA[<p>Proxmox VE(Proxmox Virtual Environment)PVE系统设置硬盘直通</p>
