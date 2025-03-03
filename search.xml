@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker 一键搭建 wg-easy 组网神器</title>
+    <url>/cn/docker-ins-wg-easy/</url>
+    <content><![CDATA[<h1 id="Docker-搭建-wg-easy-教程"><a href="#Docker-搭建-wg-easy-教程" class="headerlink" title="Docker 搭建 wg-easy 教程"></a>Docker 搭建 wg-easy 教程</h1><h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><p>确保已经安装了 Docker。如果尚未安装，可以使用以下命令安装：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.docker.com | sh</span><br></pre></td></tr></table></figure>
+
+<p>或者访问 <a href="https://www.meiko.ink/cn/centos-setup-docker-docker-compose/">安装教程</a> 获取详细步骤。</p>
+<p>也可以直接访问 <a href="https://www.docker.com/get-started">Docker 官网</a> 了解安装方法。</p>
+<h2 id="2-设置管理面板密码"><a href="#2-设置管理面板密码" class="headerlink" title="2. 设置管理面板密码"></a>2. 设置管理面板密码</h2><p>运行以下命令生成密码哈希值：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --<span class="built_in">rm</span> -it ghcr.io/wg-easy/wg-easy wgpw <span class="string">&#x27;YOUR_PASSWORD&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>YOUR_PASSWORD</code> 替换为您的自定义密码。执行命令后，会返回类似如下的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PASSWORD_HASH=&#x27;$2b$12$coPqCsPtcFO.Ab99xylBNOW4.Iu7OOA2/ZIboHN6/oyxca3MWo7fW&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>复制 <code>PASSWORD_HASH</code> 后面的哈希值（不包括引号），后续配置容器时会用到。</p>
+<h2 id="3-运行-wg-easy-容器"><a href="#3-运行-wg-easy-容器" class="headerlink" title="3. 运行 wg-easy 容器"></a>3. 运行 wg-easy 容器</h2><p>运行以下命令来启动 <code>wg-easy</code> 容器：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --detach \</span><br><span class="line">  --name wg-easy \</span><br><span class="line">  --<span class="built_in">env</span> LANG=chs \</span><br><span class="line">  --<span class="built_in">env</span> WG_HOST=www.meiko.ink \</span><br><span class="line">  --<span class="built_in">env</span> PASSWORD_HASH=<span class="string">&#x27;\$2b\$12\$coPqCsPtcFO.Ab99xylBNOW4.Iu7OOA2/ZIboHN6/oyxca3MWo7fW&#x27;</span> \</span><br><span class="line">  --<span class="built_in">env</span> PORT=51821 \</span><br><span class="line">  --<span class="built_in">env</span> WG_PORT=51820 \</span><br><span class="line">  --volume ~/.wg-easy:/etc/wireguard \</span><br><span class="line">  --publish 51820:51820/udp \</span><br><span class="line">  --publish 51821:51821/tcp \</span><br><span class="line">  --cap-add NET_ADMIN \</span><br><span class="line">  --cap-add SYS_MODULE \</span><br><span class="line">  --sysctl <span class="string">&#x27;net.ipv4.conf.all.src_valid_mark=1&#x27;</span> \</span><br><span class="line">  --sysctl <span class="string">&#x27;net.ipv4.ip_forward=1&#x27;</span> \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  ghcr.io/wg-easy/wg-easy</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明</strong>：</p>
+<ul>
+<li><code>--detach</code>：后台运行容器。</li>
+<li><code>--name wg-easy</code>：容器名称。</li>
+<li><code>--env LANG=chs</code>：设置语言环境为中文。</li>
+<li><code>--env WG_HOST=www.meiko.ink</code>：设置 WireGuard 服务器地址。或者域名。</li>
+<li><code>--env PASSWORD_HASH=...</code>：管理员密码哈希值。</li>
+<li><code>--env PORT=51821</code>：管理端口。</li>
+<li><code>--env WG_PORT=51820</code>：WireGuard 服务端口。</li>
+<li><code>--volume ~/.wg-easy:/etc/wireguard</code>：挂载配置目录。</li>
+<li><code>--publish 51820:51820/udp</code>：映射 WireGuard 端口。</li>
+<li><code>--publish 51821:51821/tcp</code>：映射管理界面端口。</li>
+<li><code>--cap-add NET_ADMIN</code> 和 <code>--cap-add SYS_MODULE</code>：增加网络管理权限。</li>
+<li><code>--sysctl</code> 选项用于配置 IP 转发和网络设置。</li>
+<li><code>--restart unless-stopped</code>：保证容器自动重启。</li>
+</ul>
+<h2 id="4-访问管理界面"><a href="#4-访问管理界面" class="headerlink" title="4. 访问管理界面"></a>4. 访问管理界面</h2><p>启动容器后，打开浏览器，访问以下地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://&lt;您的VPS地址&gt;:51821</span><br></pre></td></tr></table></figure>
+
+<p>输入您之前设置的管理员密码即可登录管理界面。</p>
+<h2 id="5-配置-WireGuard"><a href="#5-配置-WireGuard" class="headerlink" title="5. 配置 WireGuard"></a>5. 配置 WireGuard</h2><p>在管理界面中，您可以轻松创建 WireGuard 客户端，下载 <code>.conf</code> 配置文件并导入到客户端。或者扫描二维码添加。<br><img src="/img/wg-eastwebimg.png" alt="web页面示例"></p>
+]]></content>
+      <categories>
+        <category>服务器与运维</category>
+      </categories>
+      <tags>
+        <tag>wg-easy</tag>
+        <tag>VPN</tag>
+        <tag>组网神器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自建KMS激活服务器</title>
     <url>/cn/kms-server/</url>
     <content><![CDATA[<h1 id="自建KMS激活服务器"><a href="#自建KMS激活服务器" class="headerlink" title="自建KMS激活服务器"></a>自建KMS激活服务器</h1><p>搭建环境：CentOS8x64。知识转载于网络仅用于学习</p>
