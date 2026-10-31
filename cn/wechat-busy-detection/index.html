@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>微信是怎么判断「对方正在通话中」的 | 小陈点滴记忆</title><meta name="author" content="Meiko"><meta name="copyright" content="Meiko"><meta name="description" content="提供 Linux教程、Docker教程、Ubuntu教程、CentOS教程、WireGuard VPN、VPS搭建、服务器运维和故障排查等实用技术文章。"><meta name="keywords" content="Linux教程,Docker教程,服务器运维,Ubuntu教程,CentOS教程,WireGuard VPN,Docker部署,VPS搭建,VPN搭建,网络安全,故障排查"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前几天想解决一件小事：不想被微信电话打扰，但又不想点「拒接」——拒接之后对方看到的是「已拒绝」，太生硬；我想要的是「忙线」，让对方以为我正占着线在打电话。 顺着这个需求逆向了一晚上，发现微信判断「本机是否在通话中」的方式，比想象中简单，也比想象中有趣。中间还因为两个自己挖的坑，把微信搞崩过两次。  测试环境：Android 17 &#x2F; 澎湃 OS 4.0，root + LSPosed，微信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信是怎么判断「对方正在通话中」的">
+<meta property="og:url" content="https://www.meiko.ink/cn/wechat-busy-detection/index.html">
+<meta property="og:site_name" content="小陈点滴记忆">
+<meta property="og:description" content="前几天想解决一件小事：不想被微信电话打扰，但又不想点「拒接」——拒接之后对方看到的是「已拒绝」，太生硬；我想要的是「忙线」，让对方以为我正占着线在打电话。 顺着这个需求逆向了一晚上，发现微信判断「本机是否在通话中」的方式，比想象中简单，也比想象中有趣。中间还因为两个自己挖的坑，把微信搞崩过两次。  测试环境：Android 17 &#x2F; 澎湃 OS 4.0，root + LSPosed，微信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.meiko.ink/img/meiko.webp">
+<meta property="article:published_time" content="2026-10-31T11:50:00.000Z">
+<meta property="article:modified_time" content="2026-10-31T11:57:30.451Z">
+<meta property="article:author" content="Meiko">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="逆向">
+<meta property="article:tag" content="Xposed">
+<meta property="article:tag" content="LSPosed">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.meiko.ink/img/meiko.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.meiko.ink/cn/wechat-busy-detection/index.html"><link rel="preconnect"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="oKMqShdxR_Z7DXSOVfYEpTBjzcejhVSAaJTTe3xK06E"/><meta name="baidu-site-verification" content="codeva-H0l7pZwKwR"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-LP0GNCKNCB"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-LP0GNCKNCB')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-LP0GNCKNCB', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信是怎么判断「对方正在通话中」的',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/meiko.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">小陈点滴记忆</span></a><a class="nav-page-title" href="/"><span class="site-name">微信是怎么判断「对方正在通话中」的</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">微信是怎么判断「对方正在通话中」的</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-10-31T11:50:00.000Z" title="发表于 2026-10-31 19:50:00">2026-10-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-10-31T11:57:30.451Z" title="更新于 2026-10-31 19:57:30">2026-10-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/">移动安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>前几天想解决一件小事：不想被微信电话打扰，但又不想点「拒接」——拒接之后对方看到的是「已拒绝」，<br>太生硬；我想要的是「忙线」，让对方以为我正占着线在打电话。</p>
+<p>顺着这个需求逆向了一晚上，发现微信判断「本机是否在通话中」的方式，比想象中简单，也比想象中有趣。<br>中间还因为两个自己挖的坑，把微信搞崩过两次。</p>
+<blockquote>
+<p>测试环境：Android 17 &#x2F; 澎湃 OS 4.0，root + LSPosed，微信 8.0.76（versionCode 3140）。<br>本文只讨论本机客户端行为，不含任何微信代码，也不分发修改过的安装包。</p>
+</blockquote>
+<h2 id="先说结论"><a href="#先说结论" class="headerlink" title="先说结论"></a>先说结论</h2><ol>
+<li>微信判断「本机在不在通话」，<strong>不查自己的状态机</strong>，而是问系统：<br><code>AudioManager.getMode() == 2</code>（MODE_IN_CALL）。没有电话状态权限、或 targetSdk ≤ 30 时，<br>退化成 <code>TelephonyManager.getCallState()</code> 等于 2（OFFHOOK）或 1（RINGING）。</li>
+<li>「忙线」和「拒接」是<strong>两条不同的信令</strong>：忙线走 <code>/voipack</code> 且状态 3，拒接走 <code>/voipanswer</code> 且 answer&#x3D;2。</li>
+<li>8.0.76 的实际来电链路跑在 native &#x2F; 独立服务里，Java 层挂不到；但只要接管它对<strong>框架接口</strong>的询问，<br>它自己就会走进忙线分支。</li>
+</ol>
+<h2 id="「忙线」不是「拒接」"><a href="#「忙线」不是「拒接」" class="headerlink" title="「忙线」不是「拒接」"></a>「忙线」不是「拒接」</h2><p>最初的直觉是：找到微信拒绝来电的方法，把参数改掉就行。这个直觉只对了一半。</p>
+<p>拒接走的是一条 CGI：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/cgi-bin/micromsg-bin/voipanswer   answer = 1 接听 / 2 拒接</span><br></pre></td></tr></table></figure>
+
+<p>而「电话占线」走的是另一条：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/cgi-bin/micromsg-bin/voipack      ackStatus = 3</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，<strong>忙线是 ack 通道的 3，不是 answer 通道的 2</strong>。这也解释了我最开始一个想不通的现象：<br>把 answer 改成 3、4 试了一圈，对方看到的依然是「已拒绝」——改错了通道，怎么改都不对。</p>
+<p>在 8.0.76 的来电处理方法 <code>h2.h()</code>（内部叫 doTaskCallin）里，这段逻辑是现成的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (phoneStatusWatcher.isCalling()) &#123;</span><br><span class="line">    sendAck(roomId, roomKey, <span class="comment">/* ackStatus = */</span> <span class="number">3</span>);</span><br><span class="line">    log(<span class="string">&quot;doTaskCallin invite ignor because telephone busy&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;   <span class="comment">// 直接返回，不进入通话界面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>微信自己就有「电话占线」这支分支，只等一个条件：它认为手机正在打电话。</p>
+<p>顺便说一句混淆。微信用 R8 把外层类名全改成了 <code>h2</code>、<code>c0</code>、<code>d3</code> 这种，但<strong>内部类的名字会保留</strong>，<br>比如 <code>NewVoipIncomingCallManager$voipListener$1</code>，从它的 <code>this$0</code> 字段类型就能反推出被改名的真身。<br>这是读混淆代码时最好用的一个路标，比逐个方法猜快得多。</p>
+<h2 id="它到底怎么问系统"><a href="#它到底怎么问系统" class="headerlink" title="它到底怎么问系统"></a>它到底怎么问系统</h2><p>那个 <code>isCalling()</code> 是微信自带的 <code>PhoneStatusWatcher</code>。整段逻辑翻译过来是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isCalling</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!hasPermission(READ_PHONE_STATE) || targetSdkVersion &lt;= <span class="number">30</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> telephonyManager.getCallState();</span><br><span class="line">        <span class="keyword">return</span> s == OFFHOOK (<span class="number">2</span>) || s == RINGING (<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> audioManager.getMode() == <span class="number">2</span>;   <span class="comment">// 只认 MODE_IN_CALL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个细节很关键：</p>
+<ul>
+<li><strong>它只认 2</strong>。<code>MODE_IN_COMMUNICATION</code>（3）不算数。而第三方 App 最多只能把音频模式设成 3，<br>所以「写个 App 伪装通话中」这条路，在不 root 的前提下根本走不通。</li>
+<li><code>MODE_IN_CALL</code> 只有电话应用&#x2F;系统能设，<code>TelephonyManager</code> 的通话状态也只有电话栈能改——<br>系统状态不是普通应用能伪造的。想伪造，必须拿到 root 级别的注入能力。</li>
+</ul>
+<h2 id="三次失败的尝试"><a href="#三次失败的尝试" class="headerlink" title="三次失败的尝试"></a>三次失败的尝试</h2><p>既然 <code>h2.h</code> 里有现成的分支，直接在那里让它以为占线不就行了？实际测试非常打脸：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在 <code>h2.h</code> 里让 <code>isCalling()</code> 返回 true</td>
+<td>来电时<strong>一行日志都没有</strong>，8.0.76 根本不走这条 Java 路径</td>
+</tr>
+<tr>
+<td>追加 hook 来电管理器 <code>c0</code>、<code>d3</code> 的各个方法</td>
+<td>点「拒绝」依然全静默</td>
+</tr>
+<tr>
+<td>hook 新版 Flutter 通话插件 <code>u13.t</code>、<code>v13.m</code></td>
+<td>依然静默</td>
+</tr>
+</tbody></table>
+<p>转机来自一条通知的调用栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NotificationItem.a</span><br><span class="line">  └─ notification.a.a</span><br><span class="line">       └─ notification.x.m</span><br><span class="line">            └─ VoipForegroundService$$c.invoke</span><br></pre></td></tr></table></figure>
+
+<p>原来来电界面<strong>根本不是 Activity，而是一条带「接听&#x2F;拒绝」按钮的通知横幅</strong>，发通知的是 voip 的前台服务。<br>响铃、拒绝这些动作跑在 native &#x2F; 服务层，Java 侧没有可下手的判断点。</p>
+<p>这也顺便解释了两个我一直觉得奇怪的现象：为什么 <code>Activity.onCreate</code> 里从来没见过来电界面，<br>为什么音频模式从头到尾都是 0——因为整个通话控制压根不在我们以为的那一层。</p>
+<h2 id="换个方向：不去找入口，接管「被问」"><a href="#换个方向：不去找入口，接管「被问」" class="headerlink" title="换个方向：不去找入口，接管「被问」"></a>换个方向：不去找入口，接管「被问」</h2><p>既然业务逻辑在 native 里，那就别再追它了。它总要通过 Java 框架知道自己「在通话中」——<br>与其干预它怎么处理来电，不如直接接管它对环境的查询。</p>
+<p>在微信进程内挂三个钩子，回答「在通话中」：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hook(AudioManager.class, <span class="string">&quot;getMode&quot;</span>,          () -&gt; <span class="number">2</span>);   <span class="comment">// MODE_IN_CALL</span></span><br><span class="line">hook(TelephonyManager.class, <span class="string">&quot;getCallState&quot;</span>, () -&gt; <span class="number">2</span>);   <span class="comment">// OFFHOOK</span></span><br><span class="line">hook(PhoneStatusWatcher.class, <span class="string">&quot;kj&quot;</span>,         () -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>结果是决定性的：朋友再打进来，他手机上直接显示 <strong>「忙线未接听」</strong>，本机安静，不响铃不弹横幅。</p>
+<p>而模块的计数器显示了一个有意思的事实：<code>AudioManager.getMode</code> 和 <code>TelephonyManager.getCallState</code><br>被询问了多次，而微信自己的 <code>PhoneStatusWatcher</code> <strong>命中 0 次</strong>。</p>
+<p>也就是说，<strong>微信压根不经过自己的工具类，native 层直接问框架。</strong><br>前面费劲找到的那个 <code>l5.kj()</code>，在这个版本里只是一段没人调用的遗留代码——<br>如果我一直盯着「微信自己的工具类」，可能到现在还在改那个永远不执行的判断。</p>
+<h2 id="两个把自己坑进去的细节"><a href="#两个把自己坑进去的细节" class="headerlink" title="两个把自己坑进去的细节"></a>两个把自己坑进去的细节</h2><p>这一夜最大的收获其实不是上面那个结论，而是两次把微信搞闪退。</p>
+<p><strong>第一次</strong>，我把调试日志直接打在类加载器的回调里：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 看起来无害，实际上是自杀</span></span><br><span class="line">ClassLoader.loadClass → 记录日志 → 日志组件要加载类 → 再次触发 loadClass → …</span><br></pre></td></tr></table></figure>
+
+<p>结果是 <code>StackOverflowError</code>，微信启动即崩。</p>
+<p><strong>第二次</strong>，学乖了一点，但还是在钩子里读了配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">XposedBridge.hookAllMethods(AudioManager.class, <span class="string">&quot;getMode&quot;</span>, <span class="keyword">new</span> <span class="title class_">XC_MethodHook</span>() &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (readConfigFromProvider().enabled) &#123;   <span class="comment">// 这里会走 binder、会加载类</span></span><br><span class="line">            param.setResult(<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>getMode()</code> 在音频初始化时被高频调用，而读配置本身又要加载类、走 ContentProvider，<br>于是再次递归，微信又崩了一次。</p>
+<p>正确的写法只有一句话：<strong>钩子体里只做一件事</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">boolean</span> ENABLED;          <span class="comment">// 后台线程刷新，钩子只读</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">AtomicInteger</span> <span class="variable">HITS</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span> <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!ENABLED) <span class="keyword">return</span>;                          <span class="comment">// 不读配置、不打日志、不加载类</span></span><br><span class="line">    HITS.incrementAndGet();</span><br><span class="line">    param.setResult(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>日志、配置、计数汇总全部交给一个后台线程，每几秒刷一次。钩子越薄，越不容易把宿主搞死。</p>
+<h2 id="这条路的边界"><a href="#这条路的边界" class="headerlink" title="这条路的边界"></a>这条路的边界</h2><p><strong>能做到：</strong></p>
+<ul>
+<li>所有微信来电按「电话占线」回绝，对方看到忙线；</li>
+<li>系统电话、短信、其它 App 完全不受影响——钩子只在微信进程内生效；</li>
+<li>开关热切换，不用重启微信。</li>
+</ul>
+<p><strong>做不到：</strong></p>
+<ul>
+<li>伪造一个<strong>真实</strong>的通话会话。服务端看到的仍然是「没有会话」，所以这是「让微信按占线处理」，<br>而不是「让对方真的以为你在通话」。</li>
+<li>只对某一个联系人生效。判断发生在会话建立之前，那里没有联系人信息。</li>
+<li>零副作用。微信会认为自己确实在通话，期间你主动外呼可能被它自己拦下，语音消息播放也可能被暂停。</li>
+</ul>
+<h2 id="一点合规提醒"><a href="#一点合规提醒" class="headerlink" title="一点合规提醒"></a>一点合规提醒</h2><p>这套东西只改本机客户端行为：不伪造身份、不篡改数据包、不碰服务端。风险主要不在技术层面，而在：</p>
+<ul>
+<li>违反微信《软件许可及服务协议》（明确禁止外挂 &#x2F; 第三方工具干扰功能）→ 封号；</li>
+<li>平台举报下架；</li>
+<li>商业化、批量操控才会显著抬高民事乃至刑事风险。</li>
+</ul>
+<hr>
+<p><em>仅记录本机客户端的行为分析与实验验证，请勿用于违反服务条款的用途。</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.meiko.ink">Meiko</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.meiko.ink/cn/wechat-busy-detection/">https://www.meiko.ink/cn/wechat-busy-detection/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://www.meiko.ink" target="_blank">小陈点滴记忆</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/%E9%80%86%E5%90%91/">逆向</a><a class="post-meta__tags" href="/tags/Xposed/">Xposed</a><a class="post-meta__tags" href="/tags/LSPosed/">LSPosed</a></div><div class="post-share"><div class="social-share" data-image="/img/meiko.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/cn/docker-ins-wg-easy/" title="Docker部署wg-easy教程：一键搭建WireGuard VPN服务器和Web管理界面"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Docker部署wg-easy教程：一键搭建WireGuard VPN服务器和Web管理界面</div></div><div class="info-2"><div class="info-item-1">Docker 部署 wg-easy 教程：一键搭建 WireGuard VPN 服务器如果你希望在 VPS 或 Linux 服务器上快速搭建一套稳定、安全、易管理的 WireGuard VPN，那么 wg-easy 是一个非常适合的选择。它将复杂的 WireGuard 配置封装成一个网页管理界面，支持新建客户端、下载配置、扫码导入和连接状态查看，适合个人使用、家庭网络、远程办公和开发环境。 本文将从零开始，详细介绍如何用 Docker 部署 wg-easy，完成服务器启动、端口开放、Web 管理界面登录以及客户端接入配置。 1. 什么是 wg-easy？wg-easy 是一款基于 WireGuard 的 Web 管理工具，目标是让复杂的 VPN 部署变得更简单。它的主要特点包括：  适合 Docker 一键部署 用网页界面管理服务器和客户端 支持客户端二维码和配置文件导入 适合轻量级 VPN 方案和远程访问场景 帮你避开手工编写大量 WireGuard 配置文件  如果你想要的是“快速搭建 VPN，但又不想手动处理繁琐的配置”，wg-easy 非常适合。 2....</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/cn/android-https-data/" title="安卓7.1以上模拟器抓取HTTPS数据"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-14</div><div class="info-item-2">安卓7.1以上模拟器抓取HTTPS数据</div></div><div class="info-2"><div class="info-item-1">安卓7.1以上模拟器抓取HTTPS数据由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试 工具准备 雷电模拟器（或者其他类似模拟器，如腾讯模拟器、夜神模拟器等） Charles 抓包工具点击下载 DG 硬盘分区工具点击下载  步骤一：下载并安装Charles程序 下载Charles抓包工具。 解压并安装Charles程序。 启动Charles程序。  步骤二：配置Charles抓包设置 在Charles程序中，依次点击 代理 -&gt; SSL代理设置。 在弹出的窗口中，点击 启用SSL代理 复选框。 点击 添加 按钮，输入 *:443，确保443端口的流量被代理。  步骤三：安装Charles根证书 在Charles程序中，点击 帮助 -&gt; SSL代理 -&gt; 安装Charles根证书。 在证书安装向导中，选择安装到 受信任的根证书颁发机构。  步骤四：配置安卓模拟器网络代理 打开雷电模拟器。 进入模拟器的...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/meiko.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Meiko</div><div class="author-info-description">提供 Linux教程、Docker教程、Ubuntu教程、CentOS教程、WireGuard VPN、VPS搭建、服务器运维和故障排查等实用技术文章。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Meikoday"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:admin@meiko.ink" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">WEICOME</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E8%AF%B4%E7%BB%93%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">先说结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8C%E5%BF%99%E7%BA%BF%E3%80%8D%E4%B8%8D%E6%98%AF%E3%80%8C%E6%8B%92%E6%8E%A5%E3%80%8D"><span class="toc-number">2.</span> <span class="toc-text">「忙线」不是「拒接」</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E9%97%AE%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">它到底怎么问系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%B0%9D%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">三次失败的尝试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E4%B8%AA%E6%96%B9%E5%90%91%EF%BC%9A%E4%B8%8D%E5%8E%BB%E6%89%BE%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%8E%A5%E7%AE%A1%E3%80%8C%E8%A2%AB%E9%97%AE%E3%80%8D"><span class="toc-number">5.</span> <span class="toc-text">换个方向：不去找入口，接管「被问」</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E6%8A%8A%E8%87%AA%E5%B7%B1%E5%9D%91%E8%BF%9B%E5%8E%BB%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-number">6.</span> <span class="toc-text">两个把自己坑进去的细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%9D%A1%E8%B7%AF%E7%9A%84%E8%BE%B9%E7%95%8C"><span class="toc-number">7.</span> <span class="toc-text">这条路的边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%82%B9%E5%90%88%E8%A7%84%E6%8F%90%E9%86%92"><span class="toc-number">8.</span> <span class="toc-text">一点合规提醒</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/wechat-busy-detection" title="微信是怎么判断「对方正在通话中」的">微信是怎么判断「对方正在通话中」的</a><time datetime="2026-10-31T11:50:00.000Z" title="发表于 2026-10-31 19:50:00">2026-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/docker-ins-wg-easy" title="Docker部署wg-easy教程：一键搭建WireGuard VPN服务器和Web管理界面">Docker部署wg-easy教程：一键搭建WireGuard VPN服务器和Web管理界面</a><time datetime="2025-03-02T07:58:57.000Z" title="发表于 2025-03-02 15:58:57">2025-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/ollama-DeepSeek-offline-mod" title="ollama-DeepSeek模型离线安装">ollama-DeepSeek模型离线安装</a><time datetime="2025-02-23T01:37:11.000Z" title="发表于 2025-02-23 09:37:11">2025-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/docker-setup-teamspeak3forserver" title="docker搭建teamspeak3服务器">docker搭建teamspeak3服务器</a><time datetime="2025-02-15T02:23:59.000Z" title="发表于 2025-02-15 10:23:59">2025-02-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/cn/ubuntu2404replacesource" title="Ubuntu 24.04 更换国内源教程：ubuntu.sources 配置方法">Ubuntu 24.04 更换国内源教程：ubuntu.sources 配置方法</a><time datetime="2025-01-28T05:58:00.000Z" title="发表于 2025-01-28 13:58:00">2025-01-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #0062be, #925696, #cc426e, #fb0347);"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2026 By Meiko</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><img class="icp-icon"><span>蜀ICP备18036396号-2</span></a><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"Jyka4amc5HZ5aSmE",ck:"Jyka4amc5HZ5aSmE",screenRecord:true})</script><script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "jt9atw20sj");</script></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="/pluginsSrc/instant.page/instantpage.js" type="module"></script><script src="/pluginsSrc/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://waline-blog.meiko.ink/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('/pluginsSrc/@waline/client/dist/waline.css')
+        .then(() => import('/pluginsSrc/@waline/client/dist/waline.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="/pluginsSrc/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="/pluginsSrc/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: true,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

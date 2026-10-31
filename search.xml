@@ -333,6 +333,46 @@
       </tags>
   </entry>
   <entry>
+    <title>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</title>
+    <url>/cn/python-to-SOCKS5-for-local-HTTP/</url>
+    <content><![CDATA[<h1 id="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"><a href="#使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。" class="headerlink" title="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"></a>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</h1><p>为解决 <a href="https://chromewebstore.google.com/detail/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a> 无法连接带密码认证的 SOCKS5 服务器的问题，我们可以使用 Python 编写一个脚本来连接 SOCKS5 服务器，并在本地转发为 HTTP 服务器。</p>
+<ol>
+<li>配置 SOCKS5 代理服务器的连接信息。</li>
+<li>实现一个 HTTP 代理服务器，将请求通过 SOCKS5 代理进行转发。</li>
+<li>启动 HTTP 代理服务器，并在终端显示上传和下载数据量。</li>
+</ol>
+<p>以下是具体步骤和代码实现。</p>
+<h2 id="1-安装所需库"><a href="#1-安装所需库" class="headerlink" title="1. 安装所需库"></a>1. 安装所需库</h2><p>首先，请确保你已经安装了以下库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install requests pysocks</span><br></pre></td></tr></table></figure>
+
+<p>如果报错，请尝试备用安装环境库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install altgraph==0.17.4 anyio==4.3.0 appdirs==1.4.4 argon2-cffi==23.1.0 argon2-cffi-bindings==21.2.0 arrow==1.3.0 astroid==3.1.0 asttokens==2.4.1 async-lru==2.0.4 async-timeout==4.0.3 attrs==23.2.0 Babel==2.14.0 beautifulsoup4==4.12.3 bleach==6.1.0 bleak==0.22.1 bleak-winrt==1.2.0 certifi==2024.2.2 cffi==1.16.0 charset-normalizer==3.3.2 click==8.1.7 colorama==0.4.6 <span class="built_in">comm</span>==0.2.2 contourpy==1.2.0 cryptography==41.0.4 cycler==0.12.1 debugpy==1.8.1 decorator==5.1.1 defusedxml==0.7.1 dill==0.3.8 enum-compat==0.0.3 exceptiongroup==1.2.0 executing==2.0.1 fastjsonschema==2.19.1 fonttools==4.50.0 fqdn==1.5.1 fuzzywuzzy==0.18.0 h11==0.14.0 httpcore==1.0.4 httpx==0.27.0 idna==3.6 importlib_metadata==7.1.0 importlib_resources==6.3.1 ipykernel==6.29.3 ipython==8.18.1 ipywidgets==8.1.2 isoduration==20.11.0 isort==5.13.2 jedi==0.19.1 Jinja2==3.1.3 json5==0.9.24 jsonpointer==2.4 jsonschema==4.21.1 jsonschema-specifications==2023.12.1 jupyter==1.0.0 jupyter-console==6.6.3 jupyter-events==0.10.0 jupyter-lsp==2.2.4 jupyter_client==8.6.1 jupyter_core==5.7.2 jupyter_server==2.13.0 jupyter_server_terminals==0.5.3 jupyterlab==4.1.5 jupyterlab_pygments==0.3.0 jupyterlab_server==2.25.4 jupyterlab_widgets==3.0.10 keyboard==0.13.5 keyring==23.0.0 kiwisolver==1.4.5 Levenshtein==0.25.1 MarkupSafe==2.1.5 matplotlib==3.8.3 matplotlib-inline==0.1.6 mccabe==0.7.0 mistune==3.0.2 MouseInfo==0.1.3 nbclient==0.10.0 nbconvert==7.16.3 nbformat==5.10.3 nest-asyncio==1.6.0 notebook==7.1.2 notebook_shim==0.2.4 npyscreen==4.10.5 ntplib==0.4.0 numpy==1.26.4 opencv-python==4.9.0.80 overrides==7.7.0 packaging==24.0 pandas==1.1.5 pandocfilters==1.5.1 parso==0.8.3 pefile==2023.2.7 pillow==10.2.0 platformdirs==4.2.0 prometheus_client==0.20.0 prompt-toolkit==3.0.43 psutil==5.9.8 pure-eval==0.2.2 PyAutoGUI==0.9.54 PyBluez==0.30 pychrome==0.2.4 pycookiecheat==0.6.0 pycparser==2.21 pyee==11.1.0 pygatt==4.0.5 PyGetWindow==0.0.9 Pygments==2.17.2 pyinstaller==6.6.0 pyinstaller-hooks-contrib==2024.5 pylint==3.1.0 PyMsgBox==1.0.9 pynput==1.7.6 pyparsing==3.1.2 pyperclip==1.8.2 pypiwin32==223 pyppeteer==2.0.0 PyRect==0.2.0 PyScreeze==0.1.30 pyserial==3.5 PySocks==1.7.1 pytesseract==0.3.10 python-dateutil==2.9.0.post0 python-json-logger==2.0.7 python-Levenshtein==0.25.1 pytweening==1.2.0 pytz==2024.1 pywin32==306 pywin32-ctypes==0.2.2 pywinpty==2.0.13 PyYAML==6.0.1 pyzmq==25.1.2 qtconsole==5.5.1 QtPy==2.4.1 rapidfuzz==3.9.0 referencing==0.34.0 requests==2.31.0 rfc3339-validator==0.1.4 rfc3986-validator==0.1.1 rpds-py==0.18.0 Send2Trash==1.8.2 six==1.16.0 sniffio==1.3.1 soupsieve==2.5 stack-data==0.6.3 terminado==0.18.1 tinycss2==1.2.1 tomli==2.0.1 tomlkit==0.12.5 tornado==6.4 tqdm==4.66.4 traitlets==5.14.2 types-python-dateutil==2.9.0.20240316 typing_extensions==4.10.0 uri-template==1.3.0 urllib3==1.26.18 wcwidth==0.2.13 webcolors==1.13 webencodings==0.5.1 websocket-client==1.7.0 websockets==10.4 widgetsnbextension==4.0.10 zipp==3.18.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2. 创建配置文件"></a>2. 创建配置文件</h2><p>我们需要创建一个配置文件来保存SOCKS5代理的配置信息。创建一个名为 <code>socks5.ini</code> 的文件，内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[SOCKS5]</span></span><br><span class="line"><span class="attr">HOST</span>=your_socks5_proxy_host</span><br><span class="line"><span class="attr">PORT</span>=your_socks5_proxy_port</span><br><span class="line"><span class="attr">USERNAME</span>=your_username</span><br><span class="line"><span class="attr">PASSWORD</span>=your_password</span><br></pre></td></tr></table></figure>
+
+<p>请根据实际情况填写你的SOCKS5代理的主机、端口、用户名和密码。</p>
+<h2 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h2><p>以下是实现的完整代码，将其保存为 <code>socks5_http_proxy.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> socks</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取SOCKS5配置文件</span></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config.read(<span class="string">&#x27;socks5.ini&#x27;</span>)</span><br><span class="line"></span><br><span class="line">SOCKS5_PROXY_HOST = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;HOST&#x27;</span>]</span><br><span class="line">SOCKS5_PROXY_PORT = <span class="built_in">int</span>(config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PORT&#x27;</span>])</span><br><span class="line">SOCKS5_USERNAME = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;USERNAME&#x27;</span>]</span><br><span class="line">SOCKS5_PASSWORD = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PASSWORD&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局变量来跟踪数据传输量</span></span><br><span class="line">total_upload = <span class="number">0</span></span><br><span class="line">total_download = <span class="number">0</span></span><br><span class="line">current_upload = <span class="number">0</span></span><br><span class="line">current_download = <span class="number">0</span></span><br><span class="line">lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置SOCKS5代理</span></span><br><span class="line">socks.set_default_proxy(</span><br><span class="line">    socks.SOCKS5,</span><br><span class="line">    SOCKS5_PROXY_HOST,</span><br><span class="line">    SOCKS5_PROXY_PORT,</span><br><span class="line">    username=SOCKS5_USERNAME,</span><br><span class="line">    password=SOCKS5_PASSWORD</span><br><span class="line">)</span><br><span class="line">socket.socket = socks.socksocket</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProxyHTTPRequestHandler</span>(http.server.BaseHTTPRequestHandler):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_message</span>(<span class="params">self, <span class="built_in">format</span>, *args</span>):</span><br><span class="line">        <span class="keyword">return</span>  <span class="comment"># 禁用默认的日志记录</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_POST</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle_http_request</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">global</span> total_upload, total_download, current_upload, current_download</span><br><span class="line"></span><br><span class="line">        url = <span class="variable language_">self</span>.path</span><br><span class="line">        parsed_url = urlparse(url)</span><br><span class="line">        hostname = parsed_url.hostname</span><br><span class="line">        port = parsed_url.port <span class="keyword">or</span> (<span class="number">443</span> <span class="keyword">if</span> parsed_url.scheme == <span class="string">&#x27;https&#x27;</span> <span class="keyword">else</span> <span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            conn = socks.socksocket()</span><br><span class="line">            conn.connect((hostname, port))</span><br><span class="line"></span><br><span class="line">            <span class="variable language_">self</span>.send_response(<span class="number">200</span>)</span><br><span class="line">            <span class="variable language_">self</span>.end_headers()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;GET&#x27;</span>:</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span>?<span class="subst">&#123;parsed_url.query&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">                content_length = <span class="built_in">int</span>(<span class="variable language_">self</span>.headers[<span class="string">&#x27;Content-Length&#x27;</span>])</span><br><span class="line">                post_data = <span class="variable language_">self</span>.rfile.read(content_length)</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>) + post_data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_upload += content_length</span><br><span class="line">                    current_upload += content_length</span><br><span class="line"></span><br><span class="line">            response_data = <span class="string">b&quot;&quot;</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                data = conn.recv(<span class="number">8192</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                response_data += data</span><br><span class="line">                <span class="variable language_">self</span>.wfile.write(data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_download += <span class="built_in">len</span>(data)</span><br><span class="line">                    current_download += <span class="built_in">len</span>(data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.send_error(<span class="number">500</span>, <span class="built_in">str</span>(e).encode(<span class="string">&#x27;ascii&#x27;</span>, <span class="string">&#x27;replace&#x27;</span>).decode())</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_status</span>():</span><br><span class="line">    <span class="keyword">global</span> current_upload, current_download, total_upload, total_download</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">with</span> lock:</span><br><span class="line">            <span class="comment"># 转换当前上传和下载速率为 KB/s</span></span><br><span class="line">            current_upload_kb = current_upload / <span class="number">1024</span></span><br><span class="line">            current_download_kb = current_download / <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 转换总上传和下载数据量为 MB 或 GB</span></span><br><span class="line">            total_upload_mb = total_upload / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line">            total_download_mb = total_download / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_upload_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_download_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;\r当前上传: <span class="subst">&#123;current_upload_kb:<span class="number">.2</span>f&#125;</span> KB/s | 当前下载: <span class="subst">&#123;current_download_kb:<span class="number">.2</span>f&#125;</span> KB/s | 总上传: <span class="subst">&#123;total_upload_str&#125;</span> | 总下载: <span class="subst">&#123;total_download_str&#125;</span>&quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            current_upload = <span class="number">0</span></span><br><span class="line">            current_download = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">start_proxy_server</span>():</span><br><span class="line">    PORT = <span class="number">18888</span></span><br><span class="line">    httpd = socketserver.ThreadingTCPServer((<span class="string">&#x27;&#x27;</span>, PORT), ProxyHTTPRequestHandler)</span><br><span class="line">    threading.Thread(target=httpd.serve_forever, daemon=<span class="literal">True</span>).start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;本地HTTP代理服务器运行在端口 <span class="subst">&#123;PORT&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 启动状态显示线程</span></span><br><span class="line">    status_thread = threading.Thread(target=print_status)</span><br><span class="line">    status_thread.daemon = <span class="literal">True</span></span><br><span class="line">    status_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动代理服务器</span></span><br><span class="line">    start_proxy_server()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保持主线程运行</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-运行代理服务器"><a href="#4-运行代理服务器" class="headerlink" title="4. 运行代理服务器"></a>4. 运行代理服务器</h2><p>在终端运行代理服务器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python socks5_http_proxy.py</span><br></pre></td></tr></table></figure>
+
+<p>你会看到类似以下的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地HTTP代理服务器运行在端口 18888</span><br><span class="line">当前上传: 0.00 KB/s | 当前下载: 0.00 KB/s | 总上传: 0.00 MB | 总下载: 0.00 MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-使用代理服务器"><a href="#5-使用代理服务器" class="headerlink" title="5. 使用代理服务器"></a>5. 使用代理服务器</h2><p>在浏览器或其他支持代理配置的应用中，将代理设置为 <code>http://localhost:18888</code>。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>通过这篇教程，我们成功地创建了一个通过SOCKS5代理转发的HTTP代理服务器，并在本地端口监听。你可以根据需要进行扩展和修改，以满足特定的需求。如果你有任何问题或建议，欢迎在评论区留言。</p>
+]]></content>
+      <categories>
+        <category>服务器与运维</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>SOCKS5</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安卓7.1以上模拟器抓取HTTPS数据</title>
     <url>/cn/android-https-data/</url>
     <content><![CDATA[<h3 id="安卓7-1以上模拟器抓取HTTPS数据"><a href="#安卓7-1以上模拟器抓取HTTPS数据" class="headerlink" title="安卓7.1以上模拟器抓取HTTPS数据"></a>安卓7.1以上模拟器抓取HTTPS数据</h3><p>由于安卓7.1以上无法抓取到https的包，主要原因是证书问题，证书需要安装到系统目录下而不是用户目录下，这样才能抓取https包，所以使用这种方法可以成功抓取到https的包。大家可以试试</p>
@@ -391,46 +431,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</title>
-    <url>/cn/python-to-SOCKS5-for-local-HTTP/</url>
-    <content><![CDATA[<h1 id="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"><a href="#使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。" class="headerlink" title="使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。"></a>使用Python连接SOCKS5认证代理服务器，并在本地端口转发为HTTP代理的脚本。</h1><p>为解决 <a href="https://chromewebstore.google.com/detail/padekgcemlokbadohgkifijomclgjgif">Proxy SwitchyOmega</a> 无法连接带密码认证的 SOCKS5 服务器的问题，我们可以使用 Python 编写一个脚本来连接 SOCKS5 服务器，并在本地转发为 HTTP 服务器。</p>
-<ol>
-<li>配置 SOCKS5 代理服务器的连接信息。</li>
-<li>实现一个 HTTP 代理服务器，将请求通过 SOCKS5 代理进行转发。</li>
-<li>启动 HTTP 代理服务器，并在终端显示上传和下载数据量。</li>
-</ol>
-<p>以下是具体步骤和代码实现。</p>
-<h2 id="1-安装所需库"><a href="#1-安装所需库" class="headerlink" title="1. 安装所需库"></a>1. 安装所需库</h2><p>首先，请确保你已经安装了以下库：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install requests pysocks</span><br></pre></td></tr></table></figure>
-
-<p>如果报错，请尝试备用安装环境库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install altgraph==0.17.4 anyio==4.3.0 appdirs==1.4.4 argon2-cffi==23.1.0 argon2-cffi-bindings==21.2.0 arrow==1.3.0 astroid==3.1.0 asttokens==2.4.1 async-lru==2.0.4 async-timeout==4.0.3 attrs==23.2.0 Babel==2.14.0 beautifulsoup4==4.12.3 bleach==6.1.0 bleak==0.22.1 bleak-winrt==1.2.0 certifi==2024.2.2 cffi==1.16.0 charset-normalizer==3.3.2 click==8.1.7 colorama==0.4.6 <span class="built_in">comm</span>==0.2.2 contourpy==1.2.0 cryptography==41.0.4 cycler==0.12.1 debugpy==1.8.1 decorator==5.1.1 defusedxml==0.7.1 dill==0.3.8 enum-compat==0.0.3 exceptiongroup==1.2.0 executing==2.0.1 fastjsonschema==2.19.1 fonttools==4.50.0 fqdn==1.5.1 fuzzywuzzy==0.18.0 h11==0.14.0 httpcore==1.0.4 httpx==0.27.0 idna==3.6 importlib_metadata==7.1.0 importlib_resources==6.3.1 ipykernel==6.29.3 ipython==8.18.1 ipywidgets==8.1.2 isoduration==20.11.0 isort==5.13.2 jedi==0.19.1 Jinja2==3.1.3 json5==0.9.24 jsonpointer==2.4 jsonschema==4.21.1 jsonschema-specifications==2023.12.1 jupyter==1.0.0 jupyter-console==6.6.3 jupyter-events==0.10.0 jupyter-lsp==2.2.4 jupyter_client==8.6.1 jupyter_core==5.7.2 jupyter_server==2.13.0 jupyter_server_terminals==0.5.3 jupyterlab==4.1.5 jupyterlab_pygments==0.3.0 jupyterlab_server==2.25.4 jupyterlab_widgets==3.0.10 keyboard==0.13.5 keyring==23.0.0 kiwisolver==1.4.5 Levenshtein==0.25.1 MarkupSafe==2.1.5 matplotlib==3.8.3 matplotlib-inline==0.1.6 mccabe==0.7.0 mistune==3.0.2 MouseInfo==0.1.3 nbclient==0.10.0 nbconvert==7.16.3 nbformat==5.10.3 nest-asyncio==1.6.0 notebook==7.1.2 notebook_shim==0.2.4 npyscreen==4.10.5 ntplib==0.4.0 numpy==1.26.4 opencv-python==4.9.0.80 overrides==7.7.0 packaging==24.0 pandas==1.1.5 pandocfilters==1.5.1 parso==0.8.3 pefile==2023.2.7 pillow==10.2.0 platformdirs==4.2.0 prometheus_client==0.20.0 prompt-toolkit==3.0.43 psutil==5.9.8 pure-eval==0.2.2 PyAutoGUI==0.9.54 PyBluez==0.30 pychrome==0.2.4 pycookiecheat==0.6.0 pycparser==2.21 pyee==11.1.0 pygatt==4.0.5 PyGetWindow==0.0.9 Pygments==2.17.2 pyinstaller==6.6.0 pyinstaller-hooks-contrib==2024.5 pylint==3.1.0 PyMsgBox==1.0.9 pynput==1.7.6 pyparsing==3.1.2 pyperclip==1.8.2 pypiwin32==223 pyppeteer==2.0.0 PyRect==0.2.0 PyScreeze==0.1.30 pyserial==3.5 PySocks==1.7.1 pytesseract==0.3.10 python-dateutil==2.9.0.post0 python-json-logger==2.0.7 python-Levenshtein==0.25.1 pytweening==1.2.0 pytz==2024.1 pywin32==306 pywin32-ctypes==0.2.2 pywinpty==2.0.13 PyYAML==6.0.1 pyzmq==25.1.2 qtconsole==5.5.1 QtPy==2.4.1 rapidfuzz==3.9.0 referencing==0.34.0 requests==2.31.0 rfc3339-validator==0.1.4 rfc3986-validator==0.1.1 rpds-py==0.18.0 Send2Trash==1.8.2 six==1.16.0 sniffio==1.3.1 soupsieve==2.5 stack-data==0.6.3 terminado==0.18.1 tinycss2==1.2.1 tomli==2.0.1 tomlkit==0.12.5 tornado==6.4 tqdm==4.66.4 traitlets==5.14.2 types-python-dateutil==2.9.0.20240316 typing_extensions==4.10.0 uri-template==1.3.0 urllib3==1.26.18 wcwidth==0.2.13 webcolors==1.13 webencodings==0.5.1 websocket-client==1.7.0 websockets==10.4 widgetsnbextension==4.0.10 zipp==3.18.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2. 创建配置文件"></a>2. 创建配置文件</h2><p>我们需要创建一个配置文件来保存SOCKS5代理的配置信息。创建一个名为 <code>socks5.ini</code> 的文件，内容如下：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[SOCKS5]</span></span><br><span class="line"><span class="attr">HOST</span>=your_socks5_proxy_host</span><br><span class="line"><span class="attr">PORT</span>=your_socks5_proxy_port</span><br><span class="line"><span class="attr">USERNAME</span>=your_username</span><br><span class="line"><span class="attr">PASSWORD</span>=your_password</span><br></pre></td></tr></table></figure>
-
-<p>请根据实际情况填写你的SOCKS5代理的主机、端口、用户名和密码。</p>
-<h2 id="3-编写代码"><a href="#3-编写代码" class="headerlink" title="3. 编写代码"></a>3. 编写代码</h2><p>以下是实现的完整代码，将其保存为 <code>socks5_http_proxy.py</code>：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> socks</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取SOCKS5配置文件</span></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config.read(<span class="string">&#x27;socks5.ini&#x27;</span>)</span><br><span class="line"></span><br><span class="line">SOCKS5_PROXY_HOST = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;HOST&#x27;</span>]</span><br><span class="line">SOCKS5_PROXY_PORT = <span class="built_in">int</span>(config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PORT&#x27;</span>])</span><br><span class="line">SOCKS5_USERNAME = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;USERNAME&#x27;</span>]</span><br><span class="line">SOCKS5_PASSWORD = config[<span class="string">&#x27;SOCKS5&#x27;</span>][<span class="string">&#x27;PASSWORD&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局变量来跟踪数据传输量</span></span><br><span class="line">total_upload = <span class="number">0</span></span><br><span class="line">total_download = <span class="number">0</span></span><br><span class="line">current_upload = <span class="number">0</span></span><br><span class="line">current_download = <span class="number">0</span></span><br><span class="line">lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置SOCKS5代理</span></span><br><span class="line">socks.set_default_proxy(</span><br><span class="line">    socks.SOCKS5,</span><br><span class="line">    SOCKS5_PROXY_HOST,</span><br><span class="line">    SOCKS5_PROXY_PORT,</span><br><span class="line">    username=SOCKS5_USERNAME,</span><br><span class="line">    password=SOCKS5_PASSWORD</span><br><span class="line">)</span><br><span class="line">socket.socket = socks.socksocket</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProxyHTTPRequestHandler</span>(http.server.BaseHTTPRequestHandler):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_message</span>(<span class="params">self, <span class="built_in">format</span>, *args</span>):</span><br><span class="line">        <span class="keyword">return</span>  <span class="comment"># 禁用默认的日志记录</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_POST</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.handle_http_request()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">handle_http_request</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">global</span> total_upload, total_download, current_upload, current_download</span><br><span class="line"></span><br><span class="line">        url = <span class="variable language_">self</span>.path</span><br><span class="line">        parsed_url = urlparse(url)</span><br><span class="line">        hostname = parsed_url.hostname</span><br><span class="line">        port = parsed_url.port <span class="keyword">or</span> (<span class="number">443</span> <span class="keyword">if</span> parsed_url.scheme == <span class="string">&#x27;https&#x27;</span> <span class="keyword">else</span> <span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            conn = socks.socksocket()</span><br><span class="line">            conn.connect((hostname, port))</span><br><span class="line"></span><br><span class="line">            <span class="variable language_">self</span>.send_response(<span class="number">200</span>)</span><br><span class="line">            <span class="variable language_">self</span>.end_headers()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;GET&#x27;</span>:</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span>?<span class="subst">&#123;parsed_url.query&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> <span class="variable language_">self</span>.command == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">                content_length = <span class="built_in">int</span>(<span class="variable language_">self</span>.headers[<span class="string">&#x27;Content-Length&#x27;</span>])</span><br><span class="line">                post_data = <span class="variable language_">self</span>.rfile.read(content_length)</span><br><span class="line">                request_line = <span class="string">f&quot;<span class="subst">&#123;self.command&#125;</span> <span class="subst">&#123;parsed_url.path&#125;</span> HTTP/1.1\r\n&quot;</span></span><br><span class="line">                headers = <span class="string">&quot;\r\n&quot;</span>.join([<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>: <span class="subst">&#123;v&#125;</span>&quot;</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="variable language_">self</span>.headers.items()])</span><br><span class="line">                conn.sendall((request_line + headers + <span class="string">&quot;\r\n\r\n&quot;</span>).encode(<span class="string">&#x27;utf-8&#x27;</span>) + post_data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_upload += content_length</span><br><span class="line">                    current_upload += content_length</span><br><span class="line"></span><br><span class="line">            response_data = <span class="string">b&quot;&quot;</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                data = conn.recv(<span class="number">8192</span>)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                response_data += data</span><br><span class="line">                <span class="variable language_">self</span>.wfile.write(data)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> lock:</span><br><span class="line">                    total_download += <span class="built_in">len</span>(data)</span><br><span class="line">                    current_download += <span class="built_in">len</span>(data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.send_error(<span class="number">500</span>, <span class="built_in">str</span>(e).encode(<span class="string">&#x27;ascii&#x27;</span>, <span class="string">&#x27;replace&#x27;</span>).decode())</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            conn.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_status</span>():</span><br><span class="line">    <span class="keyword">global</span> current_upload, current_download, total_upload, total_download</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">with</span> lock:</span><br><span class="line">            <span class="comment"># 转换当前上传和下载速率为 KB/s</span></span><br><span class="line">            current_upload_kb = current_upload / <span class="number">1024</span></span><br><span class="line">            current_download_kb = current_download / <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 转换总上传和下载数据量为 MB 或 GB</span></span><br><span class="line">            total_upload_mb = total_upload / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line">            total_download_mb = total_download / (<span class="number">1024</span> * <span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_upload_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_upload_str = <span class="string">f&quot;<span class="subst">&#123;total_upload_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> total_download_mb &gt;= <span class="number">1024</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb / <span class="number">1024</span>:<span class="number">.2</span>f&#125;</span> GB&quot;</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                total_download_str = <span class="string">f&quot;<span class="subst">&#123;total_download_mb:<span class="number">.2</span>f&#125;</span> MB&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;\r当前上传: <span class="subst">&#123;current_upload_kb:<span class="number">.2</span>f&#125;</span> KB/s | 当前下载: <span class="subst">&#123;current_download_kb:<span class="number">.2</span>f&#125;</span> KB/s | 总上传: <span class="subst">&#123;total_upload_str&#125;</span> | 总下载: <span class="subst">&#123;total_download_str&#125;</span>&quot;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            current_upload = <span class="number">0</span></span><br><span class="line">            current_download = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">start_proxy_server</span>():</span><br><span class="line">    PORT = <span class="number">18888</span></span><br><span class="line">    httpd = socketserver.ThreadingTCPServer((<span class="string">&#x27;&#x27;</span>, PORT), ProxyHTTPRequestHandler)</span><br><span class="line">    threading.Thread(target=httpd.serve_forever, daemon=<span class="literal">True</span>).start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;本地HTTP代理服务器运行在端口 <span class="subst">&#123;PORT&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 启动状态显示线程</span></span><br><span class="line">    status_thread = threading.Thread(target=print_status)</span><br><span class="line">    status_thread.daemon = <span class="literal">True</span></span><br><span class="line">    status_thread.start()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 启动代理服务器</span></span><br><span class="line">    start_proxy_server()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保持主线程运行</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-运行代理服务器"><a href="#4-运行代理服务器" class="headerlink" title="4. 运行代理服务器"></a>4. 运行代理服务器</h2><p>在终端运行代理服务器：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python socks5_http_proxy.py</span><br></pre></td></tr></table></figure>
-
-<p>你会看到类似以下的输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">本地HTTP代理服务器运行在端口 18888</span><br><span class="line">当前上传: 0.00 KB/s | 当前下载: 0.00 KB/s | 总上传: 0.00 MB | 总下载: 0.00 MB</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-使用代理服务器"><a href="#5-使用代理服务器" class="headerlink" title="5. 使用代理服务器"></a>5. 使用代理服务器</h2><p>在浏览器或其他支持代理配置的应用中，将代理设置为 <code>http://localhost:18888</code>。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>通过这篇教程，我们成功地创建了一个通过SOCKS5代理转发的HTTP代理服务器，并在本地端口监听。你可以根据需要进行扩展和修改，以满足特定的需求。如果你有任何问题或建议，欢迎在评论区留言。</p>
-]]></content>
-      <categories>
-        <category>服务器与运维</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>SOCKS5</tag>
       </tags>
   </entry>
   <entry>
@@ -510,21 +510,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo迁移完成</title>
-    <url>/cn/hello-hexo/</url>
-    <content><![CDATA[<h1 id="完整迁移到HEXO"><a href="#完整迁移到HEXO" class="headerlink" title="完整迁移到HEXO"></a>完整迁移到HEXO</h1><h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
-<li><strong>HEXO</strong> + <strong>GitHub Actions自动刷新CDN</strong> + <strong>腾讯云COS</strong></li>
-<li>境外使用 <strong>Netlify</strong>，境内使用 <strong>腾讯云CDN</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hello</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CentOS 7 停止维护后如何更换可用yum 源</title>
     <url>/cn/CentOS7-repo-new/</url>
     <content><![CDATA[<h1 id="CentOS-7-停止维护后如何更换-yum-源"><a href="#CentOS-7-停止维护后如何更换-yum-源" class="headerlink" title="CentOS 7 停止维护后如何更换 yum 源"></a>CentOS 7 停止维护后如何更换 yum 源</h1><p>随着官方宣布 CentOS 7 停止维护，原有的官方 yum 源不再可用，导致在软件安装和更新过程中报错。为了解决这一问题，用户需要将系统中的 yum 源更换为其他可用的镜像源，如阿里云或华为云等。本文将介绍如何备份原来的 yum 源，并下载并配置新的镜像源。</p>
@@ -552,54 +537,6 @@
       </categories>
       <tags>
         <tag>centos</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自建fpr服务器</title>
-    <url>/cn/fpr-server/</url>
-    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
-
-<p>一键卸载frp服务端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后,配置frps.ini并重启服务</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
-
-<p>配置参考</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
-
-<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>修改frpc.ini配置程序</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
-
-<p>启动客户端</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
-
-<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
-
-<p>添加可执行权限</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>添加以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
-
-<p>保存并重启</p>
-]]></content>
-      <categories>
-        <category>服务器与运维</category>
-      </categories>
-      <tags>
-        <tag>fpr</tag>
       </tags>
   </entry>
   <entry>
@@ -654,6 +591,69 @@
       </categories>
       <tags>
         <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo迁移完成</title>
+    <url>/cn/hello-hexo/</url>
+    <content><![CDATA[<h1 id="完整迁移到HEXO"><a href="#完整迁移到HEXO" class="headerlink" title="完整迁移到HEXO"></a>完整迁移到HEXO</h1><h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
+<li><strong>HEXO</strong> + <strong>GitHub Actions自动刷新CDN</strong> + <strong>腾讯云COS</strong></li>
+<li>境外使用 <strong>Netlify</strong>，境内使用 <strong>腾讯云CDN</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hello</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自建fpr服务器</title>
+    <url>/cn/fpr-server/</url>
+    <content><![CDATA[<p>此脚本已测试centos7、centos8，其他系统可自行测试。<br><strong>服务端fpr安装</strong><br>一键安装frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp.sh &amp;&amp; chmod +x frp.sh &amp;&amp; ./frp.sh</span><br></pre></td></tr></table></figure>
+
+<p>一键卸载frp服务端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.ovo.red/sh/frp_uninstall.sh &amp;&amp; chmod +x frp_uninstall.sh &amp;&amp; ./frp_uninstall.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后,配置frps.ini并重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /usr/local/frp/frps.ini</span><br><span class="line"># 修改 frps.ini </span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启 frps 服务</span><br></pre></td></tr></table></figure>
+
+<p>配置参考</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">bind_udp_port = 7001</span><br><span class="line">kcp_bind_port = 7000</span><br><span class="line">vhost_http_port = 80</span><br><span class="line">vhost_https_port = 443</span><br><span class="line">dashboard_addr = 0.0.0.0</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = admin         # 这里设置为管理面板配置的密码</span><br><span class="line">log_file = ./frps.log</span><br><span class="line">log_level = info</span><br><span class="line">log_max_days = 3</span><br><span class="line">disable_log_color = false</span><br><span class="line">token = 12345678              # 这里设置为客户端配置的token</span><br><span class="line">allow_ports = 2000-3000,3001,3003,4000-50000</span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br><span class="line">subdomain_host = frps.com</span><br><span class="line">tcp_mux = true</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gofrp.org/docs/">frp官方完整文档说明</a><br><a href="https://github.com/fatedier/frp/blob/master/conf/frps_full.ini">官方完整配置文件说明</a><br>frps使用说明</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl start frps</span><br><span class="line"># 启动frps</span><br><span class="line">sudo systemctl enable frps</span><br><span class="line"># 服务器开机自动启动frps</span><br><span class="line">sudo systemctl status frps</span><br><span class="line"># 查看状态</span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"># 重启frps</span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"># 停止frps</span><br></pre></td></tr></table></figure>
+
+<p>检查服务器端安装情况<br>如果开启了服务端的管理面板，可以在浏览器输入<a href="http://服务器ip/">http:&#x2F;&#x2F;服务器IP</a>:7500来查看 frps 服务状态<br>linux客户端<br>下载客户端程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir frpc</span><br><span class="line">cd frpc</span><br><span class="line">wget https://www.ovo.red/sh/frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf frpc.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>修改frpc.ini配置程序</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 你的服务器ip</span><br><span class="line">server_port = 7000</span><br><span class="line">token = 123456   #token密码</span><br><span class="line">[项目]</span><br><span class="line">type = tcp   #协议</span><br><span class="line">local_ip = 127.0.0.1  #内网ip</span><br><span class="line">local_port = 22  #内网端口</span><br><span class="line">remote_port = 2025  #穿透端口</span><br><span class="line">use_encryption = false #是否开启加密</span><br><span class="line">use_compression = false #是否打开压缩</span><br></pre></td></tr></table></figure>
+
+<p>启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./frpc</span><br></pre></td></tr></table></figure>
+
+<p>添加开启自启 nona &#x2F;etc&#x2F;rc.local</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash                                                                                                                                                                  </span><br><span class="line">nohup /frpC/frpc -c /frpC/frpc.ini &gt;/dev/null 2&gt;&amp;1 &amp;  </span><br></pre></td></tr></table></figure>
+
+<p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br><span class="line">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service</span><br><span class="line">nano /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>添加以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target  </span><br><span class="line">Alias=rc-local.service </span><br></pre></td></tr></table></figure>
+
+<p>保存并重启</p>
+]]></content>
+      <categories>
+        <category>服务器与运维</category>
+      </categories>
+      <tags>
+        <tag>fpr</tag>
       </tags>
   </entry>
   <entry>
@@ -831,6 +831,117 @@
       </tags>
   </entry>
   <entry>
+    <title>微信是怎么判断「对方正在通话中」的</title>
+    <url>/cn/wechat-busy-detection/</url>
+    <content><![CDATA[<p>前几天想解决一件小事：不想被微信电话打扰，但又不想点「拒接」——拒接之后对方看到的是「已拒绝」，<br>太生硬；我想要的是「忙线」，让对方以为我正占着线在打电话。</p>
+<p>顺着这个需求逆向了一晚上，发现微信判断「本机是否在通话中」的方式，比想象中简单，也比想象中有趣。<br>中间还因为两个自己挖的坑，把微信搞崩过两次。</p>
+<blockquote>
+<p>测试环境：Android 17 &#x2F; 澎湃 OS 4.0，root + LSPosed，微信 8.0.76（versionCode 3140）。<br>本文只讨论本机客户端行为，不含任何微信代码，也不分发修改过的安装包。</p>
+</blockquote>
+<h2 id="先说结论"><a href="#先说结论" class="headerlink" title="先说结论"></a>先说结论</h2><ol>
+<li>微信判断「本机在不在通话」，<strong>不查自己的状态机</strong>，而是问系统：<br><code>AudioManager.getMode() == 2</code>（MODE_IN_CALL）。没有电话状态权限、或 targetSdk ≤ 30 时，<br>退化成 <code>TelephonyManager.getCallState()</code> 等于 2（OFFHOOK）或 1（RINGING）。</li>
+<li>「忙线」和「拒接」是<strong>两条不同的信令</strong>：忙线走 <code>/voipack</code> 且状态 3，拒接走 <code>/voipanswer</code> 且 answer&#x3D;2。</li>
+<li>8.0.76 的实际来电链路跑在 native &#x2F; 独立服务里，Java 层挂不到；但只要接管它对<strong>框架接口</strong>的询问，<br>它自己就会走进忙线分支。</li>
+</ol>
+<h2 id="「忙线」不是「拒接」"><a href="#「忙线」不是「拒接」" class="headerlink" title="「忙线」不是「拒接」"></a>「忙线」不是「拒接」</h2><p>最初的直觉是：找到微信拒绝来电的方法，把参数改掉就行。这个直觉只对了一半。</p>
+<p>拒接走的是一条 CGI：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/cgi-bin/micromsg-bin/voipanswer   answer = 1 接听 / 2 拒接</span><br></pre></td></tr></table></figure>
+
+<p>而「电话占线」走的是另一条：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/cgi-bin/micromsg-bin/voipack      ackStatus = 3</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，<strong>忙线是 ack 通道的 3，不是 answer 通道的 2</strong>。这也解释了我最开始一个想不通的现象：<br>把 answer 改成 3、4 试了一圈，对方看到的依然是「已拒绝」——改错了通道，怎么改都不对。</p>
+<p>在 8.0.76 的来电处理方法 <code>h2.h()</code>（内部叫 doTaskCallin）里，这段逻辑是现成的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (phoneStatusWatcher.isCalling()) &#123;</span><br><span class="line">    sendAck(roomId, roomKey, <span class="comment">/* ackStatus = */</span> <span class="number">3</span>);</span><br><span class="line">    log(<span class="string">&quot;doTaskCallin invite ignor because telephone busy&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;   <span class="comment">// 直接返回，不进入通话界面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>微信自己就有「电话占线」这支分支，只等一个条件：它认为手机正在打电话。</p>
+<p>顺便说一句混淆。微信用 R8 把外层类名全改成了 <code>h2</code>、<code>c0</code>、<code>d3</code> 这种，但<strong>内部类的名字会保留</strong>，<br>比如 <code>NewVoipIncomingCallManager$voipListener$1</code>，从它的 <code>this$0</code> 字段类型就能反推出被改名的真身。<br>这是读混淆代码时最好用的一个路标，比逐个方法猜快得多。</p>
+<h2 id="它到底怎么问系统"><a href="#它到底怎么问系统" class="headerlink" title="它到底怎么问系统"></a>它到底怎么问系统</h2><p>那个 <code>isCalling()</code> 是微信自带的 <code>PhoneStatusWatcher</code>。整段逻辑翻译过来是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isCalling</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!hasPermission(READ_PHONE_STATE) || targetSdkVersion &lt;= <span class="number">30</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> telephonyManager.getCallState();</span><br><span class="line">        <span class="keyword">return</span> s == OFFHOOK (<span class="number">2</span>) || s == RINGING (<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> audioManager.getMode() == <span class="number">2</span>;   <span class="comment">// 只认 MODE_IN_CALL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个细节很关键：</p>
+<ul>
+<li><strong>它只认 2</strong>。<code>MODE_IN_COMMUNICATION</code>（3）不算数。而第三方 App 最多只能把音频模式设成 3，<br>所以「写个 App 伪装通话中」这条路，在不 root 的前提下根本走不通。</li>
+<li><code>MODE_IN_CALL</code> 只有电话应用&#x2F;系统能设，<code>TelephonyManager</code> 的通话状态也只有电话栈能改——<br>系统状态不是普通应用能伪造的。想伪造，必须拿到 root 级别的注入能力。</li>
+</ul>
+<h2 id="三次失败的尝试"><a href="#三次失败的尝试" class="headerlink" title="三次失败的尝试"></a>三次失败的尝试</h2><p>既然 <code>h2.h</code> 里有现成的分支，直接在那里让它以为占线不就行了？实际测试非常打脸：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在 <code>h2.h</code> 里让 <code>isCalling()</code> 返回 true</td>
+<td>来电时<strong>一行日志都没有</strong>，8.0.76 根本不走这条 Java 路径</td>
+</tr>
+<tr>
+<td>追加 hook 来电管理器 <code>c0</code>、<code>d3</code> 的各个方法</td>
+<td>点「拒绝」依然全静默</td>
+</tr>
+<tr>
+<td>hook 新版 Flutter 通话插件 <code>u13.t</code>、<code>v13.m</code></td>
+<td>依然静默</td>
+</tr>
+</tbody></table>
+<p>转机来自一条通知的调用栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NotificationItem.a</span><br><span class="line">  └─ notification.a.a</span><br><span class="line">       └─ notification.x.m</span><br><span class="line">            └─ VoipForegroundService$$c.invoke</span><br></pre></td></tr></table></figure>
+
+<p>原来来电界面<strong>根本不是 Activity，而是一条带「接听&#x2F;拒绝」按钮的通知横幅</strong>，发通知的是 voip 的前台服务。<br>响铃、拒绝这些动作跑在 native &#x2F; 服务层，Java 侧没有可下手的判断点。</p>
+<p>这也顺便解释了两个我一直觉得奇怪的现象：为什么 <code>Activity.onCreate</code> 里从来没见过来电界面，<br>为什么音频模式从头到尾都是 0——因为整个通话控制压根不在我们以为的那一层。</p>
+<h2 id="换个方向：不去找入口，接管「被问」"><a href="#换个方向：不去找入口，接管「被问」" class="headerlink" title="换个方向：不去找入口，接管「被问」"></a>换个方向：不去找入口，接管「被问」</h2><p>既然业务逻辑在 native 里，那就别再追它了。它总要通过 Java 框架知道自己「在通话中」——<br>与其干预它怎么处理来电，不如直接接管它对环境的查询。</p>
+<p>在微信进程内挂三个钩子，回答「在通话中」：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">hook(AudioManager.class, <span class="string">&quot;getMode&quot;</span>,          () -&gt; <span class="number">2</span>);   <span class="comment">// MODE_IN_CALL</span></span><br><span class="line">hook(TelephonyManager.class, <span class="string">&quot;getCallState&quot;</span>, () -&gt; <span class="number">2</span>);   <span class="comment">// OFFHOOK</span></span><br><span class="line">hook(PhoneStatusWatcher.class, <span class="string">&quot;kj&quot;</span>,         () -&gt; <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>结果是决定性的：朋友再打进来，他手机上直接显示 <strong>「忙线未接听」</strong>，本机安静，不响铃不弹横幅。</p>
+<p>而模块的计数器显示了一个有意思的事实：<code>AudioManager.getMode</code> 和 <code>TelephonyManager.getCallState</code><br>被询问了多次，而微信自己的 <code>PhoneStatusWatcher</code> <strong>命中 0 次</strong>。</p>
+<p>也就是说，<strong>微信压根不经过自己的工具类，native 层直接问框架。</strong><br>前面费劲找到的那个 <code>l5.kj()</code>，在这个版本里只是一段没人调用的遗留代码——<br>如果我一直盯着「微信自己的工具类」，可能到现在还在改那个永远不执行的判断。</p>
+<h2 id="两个把自己坑进去的细节"><a href="#两个把自己坑进去的细节" class="headerlink" title="两个把自己坑进去的细节"></a>两个把自己坑进去的细节</h2><p>这一夜最大的收获其实不是上面那个结论，而是两次把微信搞闪退。</p>
+<p><strong>第一次</strong>，我把调试日志直接打在类加载器的回调里：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 看起来无害，实际上是自杀</span></span><br><span class="line">ClassLoader.loadClass → 记录日志 → 日志组件要加载类 → 再次触发 loadClass → …</span><br></pre></td></tr></table></figure>
+
+<p>结果是 <code>StackOverflowError</code>，微信启动即崩。</p>
+<p><strong>第二次</strong>，学乖了一点，但还是在钩子里读了配置：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">XposedBridge.hookAllMethods(AudioManager.class, <span class="string">&quot;getMode&quot;</span>, <span class="keyword">new</span> <span class="title class_">XC_MethodHook</span>() &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (readConfigFromProvider().enabled) &#123;   <span class="comment">// 这里会走 binder、会加载类</span></span><br><span class="line">            param.setResult(<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>getMode()</code> 在音频初始化时被高频调用，而读配置本身又要加载类、走 ContentProvider，<br>于是再次递归，微信又崩了一次。</p>
+<p>正确的写法只有一句话：<strong>钩子体里只做一件事</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">boolean</span> ENABLED;          <span class="comment">// 后台线程刷新，钩子只读</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">AtomicInteger</span> <span class="variable">HITS</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span> <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!ENABLED) <span class="keyword">return</span>;                          <span class="comment">// 不读配置、不打日志、不加载类</span></span><br><span class="line">    HITS.incrementAndGet();</span><br><span class="line">    param.setResult(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>日志、配置、计数汇总全部交给一个后台线程，每几秒刷一次。钩子越薄，越不容易把宿主搞死。</p>
+<h2 id="这条路的边界"><a href="#这条路的边界" class="headerlink" title="这条路的边界"></a>这条路的边界</h2><p><strong>能做到：</strong></p>
+<ul>
+<li>所有微信来电按「电话占线」回绝，对方看到忙线；</li>
+<li>系统电话、短信、其它 App 完全不受影响——钩子只在微信进程内生效；</li>
+<li>开关热切换，不用重启微信。</li>
+</ul>
+<p><strong>做不到：</strong></p>
+<ul>
+<li>伪造一个<strong>真实</strong>的通话会话。服务端看到的仍然是「没有会话」，所以这是「让微信按占线处理」，<br>而不是「让对方真的以为你在通话」。</li>
+<li>只对某一个联系人生效。判断发生在会话建立之前，那里没有联系人信息。</li>
+<li>零副作用。微信会认为自己确实在通话，期间你主动外呼可能被它自己拦下，语音消息播放也可能被暂停。</li>
+</ul>
+<h2 id="一点合规提醒"><a href="#一点合规提醒" class="headerlink" title="一点合规提醒"></a>一点合规提醒</h2><p>这套东西只改本机客户端行为：不伪造身份、不篡改数据包、不碰服务端。风险主要不在技术层面，而在：</p>
+<ul>
+<li>违反微信《软件许可及服务协议》（明确禁止外挂 &#x2F; 第三方工具干扰功能）→ 封号；</li>
+<li>平台举报下架；</li>
+<li>商业化、批量操控才会显著抬高民事乃至刑事风险。</li>
+</ul>
+<hr>
+<p><em>仅记录本机客户端的行为分析与实验验证，请勿用于违反服务条款的用途。</em></p>
+]]></content>
+      <categories>
+        <category>移动安全</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>逆向</tag>
+        <tag>Xposed</tag>
+        <tag>LSPosed</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows10错误代码0x0000011b共享打印机无法连接</title>
     <url>/cn/0000011b-okay/</url>
     <content><![CDATA[<p>##Windows10系统错误0x0000011b共享打印机无法连接</p>
@@ -906,54 +1017,6 @@
       <tags>
         <tag>Docker</tag>
         <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Docker快速部署OpenVPN服务器</title>
-    <url>/cn/Docker-OpenVPN-server/</url>
-    <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
-<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
-
-<p>复制</p>
-<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
-
-<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
-]]></content>
-      <categories>
-        <category>服务器与运维</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-        <tag>OpenVPN</tag>
       </tags>
   </entry>
   <entry>
@@ -1037,6 +1100,81 @@
       </tags>
   </entry>
   <entry>
+    <title>使用Docker快速部署OpenVPN服务器</title>
+    <url>/cn/Docker-OpenVPN-server/</url>
+    <content><![CDATA[<p>本文将向您展示如何使用Docker快速部署OpenVPN服务器。请按照以下步骤操作：</p>
+<h1 id="拉取openvpn镜像"><a href="#拉取openvpn镜像" class="headerlink" title="拉取openvpn镜像"></a>拉取openvpn镜像</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -pv /data/openvpn/conf</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h1><p><em>1.1.1.1是本机的</em>公网IP</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_genconfig -u udp://1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成密钥文件"><a href="#生成密钥文件" class="headerlink" title="生成密钥文件"></a>生成密钥文件</h1><p><em>要求输入私钥密码</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 ovpn_initpki</span><br><span class="line">	Enter PEM pass phrase: 123456										<span class="comment"># 输入私钥密码</span></span><br><span class="line">	Verifying - Enter PEM pass phrase: 123456							<span class="comment"># 重新输入一次密码</span></span><br><span class="line">	Common Name (eg: your user,host,or server name) [Easy-RSA CA]: 		<span class="comment"># 输入一个CA名称。可以不用输入，直接回车</span></span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的私钥密码，完成后在输入一次</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h1><p><em>chenji改成其他名字</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full chenji nopass</span><br><span class="line">	Enter pass phrase <span class="keyword">for</span> /etc/openvpn/pki/private/ca.key: 123456		<span class="comment"># 输入刚才设置的密码</span></span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="导出客户端配置"><a href="#导出客户端配置" class="headerlink" title="导出客户端配置"></a>导出客户端配置</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient chenji &gt; /data/openvpn/conf/chenji.ovpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="启动openvpn"><a href="#启动openvpn" class="headerlink" title="启动openvpn"></a>启动openvpn</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name openvpn -v /data/openvpn:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN chenji1506/openvpn:2.4.8</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="openvpn用户管理"><a href="#openvpn用户管理" class="headerlink" title="openvpn用户管理"></a>openvpn用户管理</h1><h2 id="添加用户脚本"><a href="#添加用户脚本" class="headerlink" title="添加用户脚本"></a>添加用户脚本</h2><p><em>vim add_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;please your username: &quot;</span> NAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa build-client-full <span class="variable">$NAME</span> nopass</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> chenji1506/openvpn:2.4.8 ovpn_getclient <span class="variable">$NAME</span> &gt; /data/openvpn/conf/<span class="string">&quot;<span class="variable">$NAME</span>&quot;</span>.ovpn</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h2 id="删除用户脚本"><a href="#删除用户脚本" class="headerlink" title="删除用户脚本"></a>删除用户脚本</h2><p><em>vim del_user.sh</em></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;Delete username: &quot;</span> DNAME</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa revoke <span class="variable">$DNAME</span></span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 easyrsa gen-crl</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/reqs/<span class="string">&quot;DNAME&quot;</span>.req</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/private/<span class="string">&quot;DNAME&quot;</span>.key</span><br><span class="line">docker run -v /data/openvpn:/etc/openvpn --<span class="built_in">rm</span> -it chenji1506/openvpn:2.4.8 <span class="built_in">rm</span> -f /etc/openvpn/pki/issued/<span class="string">&quot;DNAME&quot;</span>.crt</span><br><span class="line">docker restart openvpn</span><br></pre></td></tr></table></figure>
+
+<p>复制</p>
+<h1 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./add_user.sh	<span class="comment"># 输入要添加的用户名，回车后输入刚才创建的私钥密码</span></span><br></pre></td></tr></table></figure>
+
+<p><em>创建的证书在&#x2F;data&#x2F;openvpn&#x2F;conf&#x2F;目录下</em></p>
+]]></content>
+      <categories>
+        <category>服务器与运维</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>OpenVPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
+    <url>/cn/CVE-2022-2068-OpenSSL/</url>
+    <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
+<p><img src="https://cdn.meiko.ink/img/image-20230428102017208.png" alt="image-20230428102017208"></p>
+<h2 id="修复方案：更新至最新版"><a href="#修复方案：更新至最新版" class="headerlink" title="修复方案：更新至最新版"></a>修复方案：更新至最新版</h2><p>1、检查系统中 OpenSSL 的版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version -a</span><br></pre></td></tr></table></figure>
+
+<p>2、下载 OpenSSL 的最新版本，您可以从 OpenSSL 官方网站（<a href="https://www.openssl.org/source/%EF%BC%89%E4%B8%8B%E8%BD%BD">https://www.openssl.org/source/）下载</a> OpenSSL 的最新版本，选择与您系统匹配的版本进行下载。</p>
+<p>3、编译并安装 OpenSSL，在下载完成后，您可以按照以下步骤编译并安装 OpenSSL：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf openssl-x.x.x.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-x.x.x</span><br><span class="line">./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>4、配置系统环境变量</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/openssl/lib</span><br></pre></td></tr></table></figure>
+
+<p>5、验证 OpenSSL 版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
+
+<p>完成以上步骤后，OpenSSL 版本将会得到升级，从而修复 CVE-2022-2068 漏洞。需要注意的是，在升级前应备份您的数据，以防意外数据丢失。</p>
+]]></content>
+      <categories>
+        <category>网络安全与渗透</category>
+      </categories>
+      <tags>
+        <tag>CVE-2022-2068</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PVE 擦除磁盘报错 has a holder (500) 的解决方法</title>
     <url>/cn/pve-error-disk-partition-500/</url>
     <content><![CDATA[<h1 id="PVE-擦除磁盘报错-has-a-holder-500-的解决方法"><a href="#PVE-擦除磁盘报错-has-a-holder-500-的解决方法" class="headerlink" title="PVE 擦除磁盘报错 has a holder (500) 的解决方法"></a>PVE 擦除磁盘报错 <code>has a holder (500)</code> 的解决方法</h1><p>在 Proxmox VE（PVE）Web 管理界面擦除磁盘时，如果看到下面的错误：</p>
@@ -1082,33 +1220,6 @@
       </categories>
       <tags>
         <tag>pve</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CVE-2022-2068-OpenSSL任意命令执行漏洞修复</title>
-    <url>/cn/CVE-2022-2068-OpenSSL/</url>
-    <content><![CDATA[<p>问题描述：CVE-2022-2068是 OpenSSL 中的一个安全漏洞，存在于 OpenSSL 1.1.1版本中，该漏洞可能会允许攻击者利用特定条件下的内存泄漏漏洞，导致信息泄露或服务拒绝攻击。</p>
-<p><img src="https://cdn.meiko.ink/img/image-20230428102017208.png" alt="image-20230428102017208"></p>
-<h2 id="修复方案：更新至最新版"><a href="#修复方案：更新至最新版" class="headerlink" title="修复方案：更新至最新版"></a>修复方案：更新至最新版</h2><p>1、检查系统中 OpenSSL 的版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version -a</span><br></pre></td></tr></table></figure>
-
-<p>2、下载 OpenSSL 的最新版本，您可以从 OpenSSL 官方网站（<a href="https://www.openssl.org/source/%EF%BC%89%E4%B8%8B%E8%BD%BD">https://www.openssl.org/source/）下载</a> OpenSSL 的最新版本，选择与您系统匹配的版本进行下载。</p>
-<p>3、编译并安装 OpenSSL，在下载完成后，您可以按照以下步骤编译并安装 OpenSSL：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf openssl-x.x.x.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-x.x.x</span><br><span class="line">./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>4、配置系统环境变量</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl/bin</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/openssl/lib</span><br></pre></td></tr></table></figure>
-
-<p>5、验证 OpenSSL 版本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl version</span><br></pre></td></tr></table></figure>
-
-<p>完成以上步骤后，OpenSSL 版本将会得到升级，从而修复 CVE-2022-2068 漏洞。需要注意的是，在升级前应备份您的数据，以防意外数据丢失。</p>
-]]></content>
-      <categories>
-        <category>网络安全与渗透</category>
-      </categories>
-      <tags>
-        <tag>CVE-2022-2068</tag>
       </tags>
   </entry>
   <entry>
