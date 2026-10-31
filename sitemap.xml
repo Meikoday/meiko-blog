@@ -254,6 +254,13 @@
 
   
   <url>
+    <loc>https://www.meiko.ink/tags/kms/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.meiko.ink/tags/wg-easy/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -289,27 +296,6 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/kms/</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.meiko.ink/tags/Alpine/</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.meiko.ink/tags/ipv6/</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.meiko.ink/tags/centos/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -318,6 +304,20 @@
   
   <url>
     <loc>https://www.meiko.ink/tags/nodejs/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.meiko.ink/tags/Android/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.meiko.ink/tags/Alpine/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -338,7 +338,7 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/Android/</loc>
+    <loc>https://www.meiko.ink/tags/ipv6/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -359,13 +359,6 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/ubuntu/</loc>
-    <lastmod>2026-10-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.meiko.ink/tags/hello/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -373,14 +366,14 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/fpr/</loc>
+    <loc>https://www.meiko.ink/tags/ubuntu/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/tags/ts3/</loc>
+    <loc>https://www.meiko.ink/tags/fpr/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -402,6 +395,13 @@
   
   <url>
     <loc>https://www.meiko.ink/tags/ai/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.meiko.ink/tags/ts3/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -480,14 +480,14 @@
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E4%B8%8E%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/</loc>
+    <loc>https://www.meiko.ink/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B8%8E%E6%B8%97%E9%80%8F/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.meiko.ink/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B8%8E%E6%B8%97%E9%80%8F/</loc>
+    <loc>https://www.meiko.ink/categories/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96%E4%B8%8E%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
